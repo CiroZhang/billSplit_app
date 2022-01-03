@@ -22,21 +22,56 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="190dp"
-                android:layout_height="167dp"
-                android:layout_marginTop="73dp"
-                android:layout_marginStart="110dp"
-                android:background="@drawable/ic_launcher_background"
-                android:visibility="visible"/>
+                <TextView
+                    android:layout_width="177dp"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="120dp"
+                    android:textAlignment="center"
+                    android:text="App Name"
+                    android:fontFamily="@font/avenir_semi_bold"
+                    android:textColor="@color/black"
+                    android:textSize="34sp"/>
 
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="21dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="163dp"
-                android:textAlignment="center"
-                android:text="App Name" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginStart="18dp"
+                        android:background="@drawable/scan_bill_unclicked"
+                        android:visibility="visible"/>
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginStart="18dp"
+                        android:background="@drawable/scan_bill_clicked"
+                        android:visibility="invisible"/>
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginStart="214dp"
+                        android:background="@drawable/enter_manually_unclicked"
+                        android:visibility="visible"/>
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginStart="214dp"
+                        android:background="@drawable/enter_manually_clicked"
+                        android:visibility="invisible"/>
+
+                </RelativeLayout>
+
 
             </LinearLayout>
 
@@ -48,14 +83,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="21dp"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="42dp"
-                    android:text="Number of people in party" />
+                    android:text="Number of people in party"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/avenir_medium"
+                    android:textColor="@color/black"/>
 
                 <ImageView
                     android:layout_width="132dp"
                     android:layout_height="44dp"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="42dp"
                     android:layout_marginTop="29dp"
                     android:background="@drawable/rounded_rectangle1" />
 
@@ -69,18 +107,37 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="21dp"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="42dp"
-                    android:text="Total cost of the meal" />
+                    android:text="Total cost of the meal"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/avenir_medium"
+                    android:textColor="@color/black"/>
 
                 <ImageView
                     android:layout_width="132dp"
                     android:layout_height="44dp"
-                    android:layout_marginStart="60dp"
+                    android:layout_marginStart="80dp"
                     android:layout_marginTop="29dp"
                     android:background="@drawable/rounded_rectangle1" />
 
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="255dp"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/avenir_book"
+                    android:text="* Without tax and tip"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,9 +147,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="21dp"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="17dp"
                     android:layout_marginTop="42dp"
-                    android:text="Province/Territory" />
+                    android:text="Province/Territory"
+                    android:fontFamily="@font/avenir_medium"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
 
                 <ImageView
                     android:layout_width="347dp"
@@ -111,8 +171,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="21dp"
-                    android:layout_marginStart="213dp"
+                    android:layout_marginStart="227dp"
                     android:layout_marginTop="14dp"
+                    android:fontFamily="@font/avenir_book"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
                     android:text="GST:       %    PST:        %" />
 
             </LinearLayout>
@@ -128,8 +191,9 @@
                     android:layout_marginStart="65dp"
                     android:layout_marginTop="76dp"
                     android:text="How do you want to split the bill?"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/avenir_book"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <Button
                     android:layout_width="347dp"
