@@ -41,10 +41,10 @@
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
                         android:layout_marginStart="18dp"
+                        android:layout_marginTop="24dp"
                         android:background="@drawable/scan_bill_unclicked"
-                        android:visibility="visible"/>
+                        android:visibility="visible" />
 
                     <ImageButton
                         android:layout_width="wrap_content"
@@ -57,18 +57,18 @@
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
                         android:layout_marginStart="214dp"
+                        android:layout_marginTop="24dp"
                         android:background="@drawable/enter_manually_unclicked"
-                        android:visibility="visible"/>
+                        android:visibility="visible" />
 
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
                         android:layout_marginStart="214dp"
+                        android:layout_marginTop="24dp"
                         android:background="@drawable/enter_manually_clicked"
-                        android:visibility="invisible"/>
+                        android:visibility="invisible" />
 
                 </RelativeLayout>
 
