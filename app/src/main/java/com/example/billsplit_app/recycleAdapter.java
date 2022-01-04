@@ -22,13 +22,9 @@ public class recycleAdapter extends RecyclerView.Adapter<recycleAdapter.myViewHo
         private TextView name_str;
         public myViewHolder(final View view) {
             super(view);
-            name_str = view.findViewById(R.id.opportunity_name);
+            name_str = view.findViewById(R.id.user_name);
         }
-
-
-
     }
-
 
     @NonNull
     @Override
@@ -41,7 +37,6 @@ public class recycleAdapter extends RecyclerView.Adapter<recycleAdapter.myViewHo
     public void onBindViewHolder(@NonNull recycleAdapter.myViewHolder holder, int position) {
         String name = userLists.get(position).getUsername();
         holder.name_str.setText(name);
-
     }
 
     @Override
