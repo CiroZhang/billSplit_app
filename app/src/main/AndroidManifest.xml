@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BillSplit_app">
         <activity
+            android:name=".WelcomeScreen"
+            android:exported="false" />
+        <activity
+            android:name=".IndividualBillScreen"
+            android:exported="false"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
