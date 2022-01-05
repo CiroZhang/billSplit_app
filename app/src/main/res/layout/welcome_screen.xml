@@ -84,11 +84,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="21dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="42dp"
+                    android:layout_marginTop="38dp"
                     android:text="Number of people in party"
                     android:textSize="16sp"
                     android:fontFamily="@font/avenir_medium"
                     android:textColor="@color/black"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                 <ImageView
                     android:layout_width="132dp"
@@ -96,6 +100,19 @@
                     android:layout_marginStart="42dp"
                     android:layout_marginTop="29dp"
                     android:background="@drawable/rounded_rectangle1" />
+
+                <EditText
+                    android:id="@+id/age_edit_text"
+                    android:layout_width="115dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="31dp"
+                    android:background="@android:color/transparent"
+                    android:textDirection="rtl"
+                    android:fontFamily="@font/avenir_book"
+                    android:textSize="16sp" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 

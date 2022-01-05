@@ -11,19 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class ProfileView_adapter extends RecyclerView.Adapter<ProfileView_adapter.ProfileView_viewHolder>{
+public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder>{
 
     private Context context;
     private ArrayList<User> userList;
 
-    public ProfileView_adapter(@NonNull Context context, @NonNull ArrayList<User> userList){
+    public ProfileAdapter(@NonNull Context context, @NonNull ArrayList<User> userList){
         this.context = context;
         this.userList = userList;
     }
 
-    public class ProfileView_viewHolder extends RecyclerView.ViewHolder{
+    public class ProfileViewHolder extends RecyclerView.ViewHolder{
         private TextView name_str;
-        public ProfileView_viewHolder(@NonNull View itemView) {
+        public ProfileViewHolder(@NonNull View itemView) {
             super(itemView);
             name_str = itemView.findViewById(R.id.user_name);
         }
@@ -31,13 +31,13 @@ public class ProfileView_adapter extends RecyclerView.Adapter<ProfileView_adapte
 
     @NonNull
     @Override
-    public ProfileView_adapter.ProfileView_viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(R.layout.item_profile, parent,false);
-        return new ProfileView_adapter.ProfileView_viewHolder(itemView);
+        return new ProfileViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProfileView_viewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProfileViewHolder holder, int position) {
         String name = userList.get(position).getUsername();
         holder.name_str.setText(name);
     }

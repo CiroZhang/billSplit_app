@@ -5,16 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 public class IndividualBillScreen extends AppCompatActivity {
 
-    ProfileView_adapter ProfileViewAdapter;
+    ProfileAdapter ProfileViewAdapter;
     RecyclerView ProfileRecyclerView;
 
     @Override
@@ -42,7 +39,7 @@ public class IndividualBillScreen extends AppCompatActivity {
 
     void setupRecyclerView() {
         ProfileRecyclerView = findViewById(R.id.profile_list_view);
-        ProfileViewAdapter = new ProfileView_adapter(this,MainActivity.usersList);
+        ProfileViewAdapter = new ProfileAdapter(this,MainActivity.usersList);
         ProfileRecyclerView.setAdapter(ProfileViewAdapter);
         ProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
     }
