@@ -13,11 +13,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public static ArrayList<User> usersList = new ArrayList<>();
+    public static ArrayList<Dish> dishList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        usersList.add(new User("Me"));
 
         setContentView(R.layout.individual_bill_screen);
         open_bill_screen();
