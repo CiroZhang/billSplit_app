@@ -235,6 +235,7 @@
                     android:textSize="18sp" />
 
                 <Button
+                    android:id="@+id/individual_split_button"
                     android:layout_width="347dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="32dp"
