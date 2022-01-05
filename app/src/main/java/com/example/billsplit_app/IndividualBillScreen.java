@@ -8,8 +8,13 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 public class IndividualBillScreen extends AppCompatActivity {
 
@@ -27,11 +32,11 @@ public class IndividualBillScreen extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View v) {
+                ShowPopup(v);
                 User newUser = new User("Bob");
                 MainActivity.usersList.add(newUser);
                 System.out.println(newUser.getUsername());
                 ProfileViewAdapter.notifyDataSetChanged();
-                openAlertScreen(IndividualBillScreen.this);
             }
         });
 
@@ -47,13 +52,31 @@ public class IndividualBillScreen extends AppCompatActivity {
         ProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
     }
 
-    private void openAlertScreen(Context context) {
-        new AlertDialog.Builder(context)
-                .setTitle("Cannot Add To Cart!")
-                .setMessage("Please select a dish size before adding to cart!")
-                .setPositiveButton("ok", null)
-//                .setIcon(R.drawable.close_icon)
-                .show();
+    public void ShowPopup(View view) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.add_profile_popup, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
     }
 
     // for opening screens later on

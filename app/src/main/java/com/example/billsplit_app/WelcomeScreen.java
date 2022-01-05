@@ -39,8 +39,6 @@ EditText editCostText;
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationSpin.setAdapter(myAdapter);
 
-
-
     }
 
     private void open_individual_split_screen() {

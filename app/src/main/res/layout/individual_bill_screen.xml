@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#ffffff"
+    android:background="#f6f6f6"
     tools:context=".MainActivity">
 
     <ScrollView
@@ -36,8 +36,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="24dp"
-                        android:background="@drawable/back_button"
-                        android:visibility="visible" />
+                        android:background="@drawable/back_button" />
 
                     <TextView
                         android:layout_width="100dp"
