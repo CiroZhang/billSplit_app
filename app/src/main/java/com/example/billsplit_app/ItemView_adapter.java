@@ -22,7 +22,7 @@ public class ItemView_adapter extends RecyclerView.Adapter<ItemView_adapter.Item
         private TextView name_str;
         public ItemView_viewHolder(final View view) {
             super(view);
-            name_str = view.findViewById(R.id.user_name);
+            name_str = view.findViewById(R.id.profile_user_name);
         }
     }
 

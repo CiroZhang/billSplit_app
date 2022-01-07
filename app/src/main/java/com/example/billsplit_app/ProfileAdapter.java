@@ -25,7 +25,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
         private TextView name_str;
         public ProfileViewHolder(@NonNull View itemView) {
             super(itemView);
-            name_str = itemView.findViewById(R.id.user_name);
+            name_str = itemView.findViewById(R.id.profile_user_name);
         }
     }
 
