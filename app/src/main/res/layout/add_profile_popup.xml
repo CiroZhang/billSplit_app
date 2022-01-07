@@ -65,6 +65,7 @@
             app:layout_constraintTop_toTopOf="@id/popup_background" />
 
         <Button
+            android:id="@+id/add_profile_name_submit_button"
             android:layout_width="259dp"
             android:layout_height="52dp"
             android:layout_marginTop="159dp"

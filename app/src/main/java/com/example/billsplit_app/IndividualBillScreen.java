@@ -12,6 +12,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -20,6 +22,8 @@ public class IndividualBillScreen extends AppCompatActivity {
 
     ProfileAdapter ProfileViewAdapter;
     RecyclerView ProfileRecyclerView;
+    EditText addProfileNameEditText;
+    Button addProfileNameSubmitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +33,11 @@ public class IndividualBillScreen extends AppCompatActivity {
         ImageButton addUserButton = findViewById(R.id.add_user_button);
 
         addUserButton.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View v) {
                 ShowPopup(v);
-                User newUser = new User("Bob");
-                MainActivity.usersList.add(newUser);
-                System.out.println(newUser.getUsername());
-                ProfileViewAdapter.notifyDataSetChanged();
+                addProfileNameEditText = findViewById(R.id.add_profile_name_edit_text);
+                addProfileNameSubmitButton = findViewById(R.id.add_profile_name_submit_button);
             }
         });
 
@@ -54,27 +55,32 @@ public class IndividualBillScreen extends AppCompatActivity {
 
     public void ShowPopup(View view) {
 
-        // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)
                 getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.add_profile_popup, null);
 
-        // create the popup window
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.MATCH_PARENT;
-        boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
 
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
-        // dismiss the popup window when touched
         popupView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 popupWindow.dismiss();
                 return true;
+            }
+        });
+
+        addProfileNameSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onClick(View v) {
+                User newUser = new User(addProfileNameEditText.getText().toString());
+                MainActivity.usersList.add(newUser);
+                System.out.println(newUser.getUsername());
+                ProfileViewAdapter.notifyDataSetChanged();
             }
         });
     }
