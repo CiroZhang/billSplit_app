@@ -12,7 +12,7 @@
             android:id="@+id/popup_background"
             android:layout_width="379dp"
             android:layout_height="240dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="200dp"
             android:background="@drawable/rectangle2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

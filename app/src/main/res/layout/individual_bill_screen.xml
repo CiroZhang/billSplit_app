@@ -133,8 +133,9 @@
                     android:id="@+id/dish_list_view"
                     android:layout_width="match_parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_height="96dp"
-                    android:layout_marginTop="12dp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical"/>
 
             </LinearLayout>
 
@@ -151,6 +152,7 @@
                     android:background="@drawable/add_button" />
 
                 <TextView
+                    android:id="@+id/add_dish_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="47.5dp"
