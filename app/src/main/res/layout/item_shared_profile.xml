@@ -37,7 +37,7 @@
             android:layout_height="20dp"
             android:layout_marginStart="43dp"
             android:layout_marginTop="44dp"
-            android:background="@drawable/checkmark" 
+            android:background="@drawable/checkmark"
             android:visibility="invisible"/>
 
         <TextView
