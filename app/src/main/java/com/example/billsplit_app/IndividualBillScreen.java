@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,6 +23,9 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class IndividualBillScreen extends AppCompatActivity {
 
     ProfileAdapter ProfileViewAdapter;
@@ -28,9 +33,13 @@ public class IndividualBillScreen extends AppCompatActivity {
     ItemView_adapter ItemViewAdapter;
     RecyclerView ItemRecyclerView;
     Boolean popupShown = false;
+
     ImageView transparentBackground;
     ImageView profileTransparentBackground;
+    ArrayList<String> color_list = new ArrayList<>(Arrays.asList("#00b17b","#d6b508","#136da9","#8d0e1d"));
+    Drawable user_circle;
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +50,7 @@ public class IndividualBillScreen extends AppCompatActivity {
 
         ImageButton addUserButton = findViewById(R.id.add_user_button);
         TextView addDishButton = findViewById(R.id.add_dish_button);
-
+        user_circle = getDrawable(R.drawable.circle1);
         addUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +113,10 @@ public class IndividualBillScreen extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View v) {
+                String color = get_color();
+                System.out.println(color);
+                user_circle.setTint(Color.parseColor(color));
+
                 MainActivity.usersList.add(new User(addProfileNameEditText.getText().toString()));
                 ProfileViewAdapter.notifyDataSetChanged();
                 popupWindow.dismiss();
@@ -122,6 +135,12 @@ public class IndividualBillScreen extends AppCompatActivity {
             view1.setVisibility(View.GONE);
 //            view2.setVisibility(View.GONE);
         }
+    }
+    public String get_color(){
+        String current = color_list.get(0);
+        color_list.remove(0);
+        color_list.add(current);
+        return current;
     }
 
     // for opening screens later on
