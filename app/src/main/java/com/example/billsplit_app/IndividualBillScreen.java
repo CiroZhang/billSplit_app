@@ -30,7 +30,7 @@ public class IndividualBillScreen extends AppCompatActivity {
 
     ProfileAdapter ProfileViewAdapter;
     RecyclerView ProfileRecyclerView;
-    ItemView_adapter ItemViewAdapter;
+    ItemAdapter ItemViewAdapter;
     RecyclerView ItemRecyclerView;
     Boolean popupShown = false;
 
@@ -78,7 +78,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         ProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
         ItemRecyclerView = findViewById(R.id.dish_list_view);
-        ItemViewAdapter = new ItemView_adapter(MainActivity.dishList);
+        ItemViewAdapter = new ItemAdapter(MainActivity.dishList);
         ItemRecyclerView.setAdapter(ItemViewAdapter);
         ItemRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
