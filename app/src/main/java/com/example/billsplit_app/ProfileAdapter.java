@@ -26,12 +26,14 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
     public class ProfileViewHolder extends RecyclerView.ViewHolder{
         private TextView name_str;
         private ImageView profile_background;
+        private ImageView profileTransparentBackground;
         private TextView profile_short_user_name;
 
         public ProfileViewHolder(@NonNull View itemView) {
             super(itemView);
             name_str = itemView.findViewById(R.id.profile_user_name);
             profile_background = itemView.findViewById(R.id.profile_background);
+            profileTransparentBackground = itemView.findViewById(R.id.profile_transparent_background);
             profile_short_user_name = itemView.findViewById(R.id.profile_short_user_name);
         }
     }

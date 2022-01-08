@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/transparent_background"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
     </RelativeLayout>
 
@@ -52,7 +52,7 @@
                         android:background="@drawable/back_button" />
 
                     <TextView
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="25dp"
                         android:layout_marginStart="160dp"
                         android:layout_marginTop="24dp"
@@ -65,7 +65,7 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:layout_width="63dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="37dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="176dp"

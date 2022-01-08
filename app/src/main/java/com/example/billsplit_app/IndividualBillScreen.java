@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -26,11 +27,15 @@ public class IndividualBillScreen extends AppCompatActivity {
     RecyclerView ProfileRecyclerView;
     ItemView_adapter ItemViewAdapter;
     RecyclerView ItemRecyclerView;
+    Boolean popupShown = false;
+    ImageView transparentBackground;
+    ImageView profileTransparentBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.individual_bill_screen);
+        transparentBackground = findViewById(R.id.transparent_background);
 
 //        MainActivity.dishList.add(new Dish("Dish 1","00.00"));
 
@@ -41,6 +46,7 @@ public class IndividualBillScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ShowPopup(v);
+                CheckPopup(transparentBackground, profileTransparentBackground);
             }
         });
         addDishButton.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +59,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         });
 
         setupRecyclerView();
+        profileTransparentBackground = findViewById(R.id.profile_transparent_background);
     }
 
     void setupRecyclerView() {
@@ -65,11 +72,14 @@ public class IndividualBillScreen extends AppCompatActivity {
         ItemViewAdapter = new ItemView_adapter(MainActivity.dishList);
         ItemRecyclerView.setAdapter(ItemViewAdapter);
         ItemRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+
     }
 
     public void ShowPopup(View view) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.add_profile_popup, null,false);
+        popupShown = true;
+        CheckPopup(transparentBackground, profileTransparentBackground);
 
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -81,6 +91,8 @@ public class IndividualBillScreen extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 popupWindow.dismiss();
+                popupShown = false;
+                CheckPopup(transparentBackground, profileTransparentBackground);
                 return true;
             }
         });
@@ -95,8 +107,21 @@ public class IndividualBillScreen extends AppCompatActivity {
                 MainActivity.usersList.add(new User(addProfileNameEditText.getText().toString()));
                 ProfileViewAdapter.notifyDataSetChanged();
                 popupWindow.dismiss();
+                popupShown = false;
+                CheckPopup(transparentBackground, profileTransparentBackground);
             }
         });
+    }
+
+    public void CheckPopup(ImageView view1, ImageView view2) {
+        if (popupShown) {
+            view1.setVisibility(View.VISIBLE);
+//            view2.setVisibility(View.VISIBLE);
+        }
+        else {
+            view1.setVisibility(View.GONE);
+//            view2.setVisibility(View.GONE);
+        }
     }
 
     // for opening screens later on
