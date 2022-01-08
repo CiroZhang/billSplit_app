@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.FileWriter;
+import java.io.IOError;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ItemView_adapter extends RecyclerView.Adapter<ItemView_adapter.ItemView_viewHolder>{
@@ -20,9 +23,12 @@ public class ItemView_adapter extends RecyclerView.Adapter<ItemView_adapter.Item
     }
     public class ItemView_viewHolder extends RecyclerView.ViewHolder{
         private TextView name_str;
+        private TextView price_str;
+
         public ItemView_viewHolder(final View view) {
             super(view);
-            name_str = view.findViewById(R.id.user_name);
+            name_str = view.findViewById(R.id.dish_name);
+            price_str = view.findViewById(R.id.dish_price);
         }
     }
 
@@ -38,6 +44,7 @@ public class ItemView_adapter extends RecyclerView.Adapter<ItemView_adapter.Item
         String name = dishList.get(position).getName();
         String price = dishList.get(position).getPrice();
         holder.name_str.setText(name);
+        holder.price_str.setText(price);
     }
 
     @Override

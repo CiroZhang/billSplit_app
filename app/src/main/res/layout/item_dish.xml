@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="#FFffffff">
+    android:background="#FFf6f6f6">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -20,7 +20,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/delete_button" />
 
-        <TextView
+        <EditText
             android:id="@+id/dish_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +30,8 @@
             android:textAlignment="center"
             android:text="Dish 1"
             android:textColor="#FF000000"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:background="@android:color/transparent"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -45,14 +46,14 @@
                 android:background="@drawable/rounded_rectangle4" />
 
             <TextView
-                android:id="@+id/price_text"
+                android:id="@+id/dish_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="190dp"
                 android:layout_marginTop="17dp"
                 android:fontFamily="@font/avenir_book"
-                android:textAlignment="center"
                 android:text="$00.00"
+                android:textAlignment="center"
                 android:textColor="#FF000000"
                 android:textSize="16sp" />
 
@@ -73,40 +74,44 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/shared_with_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="52dp"
             android:layout_marginTop="76dp"
             android:fontFamily="@font/avenir_book"
-            android:textAlignment="center"
             android:text="Shared with"
+            android:textAlignment="center"
             android:textColor="#FF000000"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/shared_profile_list_view"
             android:layout_width="match_parent"
             android:layout_height="96dp"
             android:layout_marginStart="53dp"
-            android:layout_marginTop="135dp" />
+            android:layout_marginTop="135dp"
+            android:orientation="horizontal"
+            android:visibility="visible" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="270dp"
-            android:fontFamily="@font/avenir_book"
-            android:textAlignment="center"
-            android:text="Alcoholic"
-            android:textColor="#FF000000"
-            android:textSize="16sp" />
-
-        <ImageView
+        <ImageButton
             android:id="@+id/alcohol_image"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="347dp"
+            android:layout_width="139dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="136dp"
             android:layout_marginTop="268dp"
-            android:background="@drawable/alcohol_image" />
+            android:background="@drawable/alcohol"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/alcohol_image_checked"
+            android:layout_width="139dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="136dp"
+            android:layout_marginTop="268dp"
+            android:background="@drawable/alcohol_checked"
+            android:visibility="invisible" />
 
     </RelativeLayout>
 

@@ -18,13 +18,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.individual_bill_screen);
-        open_bill_screen();
-    }
-
-    private void open_bill_screen() {
-        Intent open_form1_screen = new Intent(this, IndividualBillScreen.class);
-        startActivity(open_form1_screen);
+        setContentView(R.layout.activity_main);
     }
 }

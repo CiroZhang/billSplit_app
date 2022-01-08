@@ -1,9 +1,11 @@
 package com.example.billsplit_app;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,9 +25,14 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
 
     public class ProfileViewHolder extends RecyclerView.ViewHolder{
         private TextView name_str;
+        private ImageView profile_background;
+        private TextView profile_short_user_name;
+
         public ProfileViewHolder(@NonNull View itemView) {
             super(itemView);
-            name_str = itemView.findViewById(R.id.user_name);
+            name_str = itemView.findViewById(R.id.profile_user_name);
+            profile_background = itemView.findViewById(R.id.profile_background);
+            profile_short_user_name = itemView.findViewById(R.id.profile_short_user_name);
         }
     }
 

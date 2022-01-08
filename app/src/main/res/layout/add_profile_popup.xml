@@ -12,7 +12,7 @@
             android:id="@+id/popup_background"
             android:layout_width="379dp"
             android:layout_height="240dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="200dp"
             android:background="@drawable/rectangle2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
             app:layout_constraintTop_toTopOf="@id/popup_background" />
 
         <EditText
-            android:id="@+id/profile_edit_text"
+            android:id="@+id/add_profile_name_edit_text"
             android:layout_width="115dp"
             android:layout_height="40dp"
             android:layout_marginStart="30dp"
@@ -65,7 +65,7 @@
             app:layout_constraintTop_toTopOf="@id/popup_background" />
 
         <Button
-            android:id="@+id/profile_submit_button"
+            android:id="@+id/add_profile_name_submit_button"
             android:layout_width="259dp"
             android:layout_height="52dp"
             android:layout_marginTop="159dp"

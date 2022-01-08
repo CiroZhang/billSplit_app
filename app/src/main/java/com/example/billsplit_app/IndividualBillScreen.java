@@ -11,28 +11,31 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class IndividualBillScreen extends AppCompatActivity {
 
     ProfileAdapter ProfileViewAdapter;
     RecyclerView ProfileRecyclerView;
-
-
-
+    ItemView_adapter ItemViewAdapter;
+    RecyclerView ItemRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.individual_bill_screen);
 
+//        MainActivity.dishList.add(new Dish("Dish 1","00.00"));
+
         ImageButton addUserButton = findViewById(R.id.add_user_button);
+        TextView addDishButton = findViewById(R.id.add_dish_button);
 
         addUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,10 +43,16 @@ public class IndividualBillScreen extends AppCompatActivity {
                 ShowPopup(v);
             }
         });
+        addDishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.dishList.add(new Dish("rice","00.00"));
+                ItemViewAdapter.notifyDataSetChanged();
+                System.out.println(MainActivity.dishList.size());
+            }
+        });
 
-        System.out.println("before setting up");
         setupRecyclerView();
-        System.out.println("after setting up");
     }
 
     void setupRecyclerView() {
@@ -51,29 +60,23 @@ public class IndividualBillScreen extends AppCompatActivity {
         ProfileViewAdapter = new ProfileAdapter(this,MainActivity.usersList);
         ProfileRecyclerView.setAdapter(ProfileViewAdapter);
         ProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+
+        ItemRecyclerView = findViewById(R.id.dish_list_view);
+        ItemViewAdapter = new ItemView_adapter(MainActivity.dishList);
+        ItemRecyclerView.setAdapter(ItemViewAdapter);
+        ItemRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
     }
 
     public void ShowPopup(View view) {
-        setContentView(R.layout.add_profile_popup);
-
-        // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.add_profile_popup, null,false);
 
-        //set up stuff
-
-        // create the popup window
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.MATCH_PARENT;
-        boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
 
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
-
-        // dismiss the popup window when touched
         popupView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -82,23 +85,18 @@ public class IndividualBillScreen extends AppCompatActivity {
             }
         });
 
+        EditText addProfileNameEditText = popupView.findViewById(R.id.add_profile_name_edit_text);
+        Button addProfileNameSubmitButton = popupView.findViewById(R.id.add_profile_name_submit_button);
 
-        EditText ProfileEditText = popupView.findViewById(R.id.profile_edit_text);
-        Button SubmitEditText = popupView.findViewById(R.id.profile_submit_button);
-
-        SubmitEditText.setOnClickListener(new View.OnClickListener() {
+        addProfileNameSubmitButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
-            public void onClick(View popupView) {
-                String text = ProfileEditText.getText().toString();
-                User newUser = new User(text);
-                System.out.println(text);
-                MainActivity.usersList.add(newUser);
+            public void onClick(View v) {
+                MainActivity.usersList.add(new User(addProfileNameEditText.getText().toString()));
                 ProfileViewAdapter.notifyDataSetChanged();
+                popupWindow.dismiss();
             }
         });
-
-
     }
 
     // for opening screens later on

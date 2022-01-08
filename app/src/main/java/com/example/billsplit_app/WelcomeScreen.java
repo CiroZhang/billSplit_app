@@ -6,14 +6,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
-public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class WelcomeScreen extends AppCompatActivity {
 
 EditText editPeopleText;
 EditText editCostText;
@@ -33,13 +31,14 @@ TextView tax_text;
 
         Spinner locationSpin = (Spinner) findViewById(R.id.province_list);
         Button individual_split_button = findViewById(R.id.individual_split_button);
+<<<<<<< HEAD
         tax_text = (TextView) findViewById(R.id.tax_text);
+=======
+>>>>>>> 19bec17e924a649a2a6006c14f5dae6c3fbde999
 
         individual_split_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println(people);
-
                 open_individual_split_screen();
             }
         });
@@ -48,7 +47,6 @@ TextView tax_text;
                 android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.locations));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationSpin.setAdapter(myAdapter);
-        locationSpin.setOnItemSelectedListener(this);
 
     }
 
@@ -56,6 +54,7 @@ TextView tax_text;
         Intent open_individual_split_screen = new Intent(this, IndividualBillScreen.class);
         startActivity(open_individual_split_screen);
     }
+<<<<<<< HEAD
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -87,4 +86,6 @@ TextView tax_text;
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
+=======
+>>>>>>> 19bec17e924a649a2a6006c14f5dae6c3fbde999
 }

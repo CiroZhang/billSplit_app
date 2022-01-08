@@ -1,0 +1,93 @@
+{
+  "Alberta" :
+  {
+    "PST" : 0,
+    "GST" : 5,
+    "HST" : 0
+  },
+
+  "British Columbia" :
+  {
+    "PST" : 7,
+    "GST" : 5,
+    "HST" : 0
+  },
+
+  "Manitoba" :
+  {
+    "PST" : 7,
+    "GST" : 5,
+    "HST" : 0
+  },
+
+  "New Brunswick" :
+  {
+    "PST" : 0,
+    "GST" : 0,
+    "HST" : 15
+  },
+
+  "Newfoundland and Labrador" :
+  {
+    "PST" : 0,
+    "GST" : 0,
+    "HST" : 15
+  },
+
+  "Northwest Territories" :
+  {
+    "PST" : 0,
+    "GST" : 5,
+    "HST" : 0
+  },
+
+  "Nova Scotia" :
+  {
+    "PST" : 0,
+    "GST" : 0,
+    "HST" : 15
+  },
+
+  "Nunavut" :
+  {
+    "PST" : 0,
+    "GST" : 5,
+    "HST" : 0
+  },
+
+  "Ontario" :
+  {
+    "PST" : 0,
+    "GST" : 0,
+    "HST" : 13
+  },
+
+  "Prince Edward Island" :
+  {
+    "PST" : 0,
+    "GST" : 0,
+    "HST" : 15
+  },
+
+  "Quebec" :
+  {
+    "PST" : 10,
+    "GST" : 5,
+    "HST" : 0
+  },
+
+  "Saskatchewan" :
+  {
+    "PST" : 6,
+    "GST" : 5,
+    "HST" : 0
+  },
+
+  "Yukon" :
+  {
+    "PST" : 0,
+    "GST" : 5,
+    "HST" : 0
+  }
+
+}
