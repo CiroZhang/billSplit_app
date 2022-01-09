@@ -1,6 +1,9 @@
 package com.example.billsplit_app;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +52,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
     public void onBindViewHolder(@NonNull ProfileViewHolder holder, int position) {
         String name = userList.get(position).getUsername();
         holder.name_str.setText(name);
+        holder.profile_background.getBackground().setTint(userList.get(position).getColor());
     }
 
     @Override

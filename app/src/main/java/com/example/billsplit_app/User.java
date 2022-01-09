@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 public class User {
     private String name;
+    private int color;
     private ArrayList<Dish> dishes = new ArrayList<>();
 
-    public User(String name){
+    public User(String name, int color){
         this.name = name;
+        this.color = color;
     }
 
     public String getUsername(){
@@ -32,5 +34,13 @@ public class User {
 
     public void removeDish(Dish dish) {
         this.dishes.remove(dish);
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }

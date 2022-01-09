@@ -36,7 +36,7 @@ public class IndividualBillScreen extends AppCompatActivity {
 
     ImageView transparentBackground;
     ImageView profileTransparentBackground;
-    ArrayList<String> color_list = new ArrayList<>(Arrays.asList("#00b17b","#d6b508","#136da9","#8d0e1d"));
+    ArrayList<Integer> color_list = new ArrayList<>(Arrays.asList(-16731781,-2706168,-15503959,-7533027));
     Drawable user_circle;
 
     @SuppressLint("ResourceType")
@@ -113,11 +113,9 @@ public class IndividualBillScreen extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View v) {
-                String color = get_color();
-                System.out.println(color);
-                user_circle.setTint(Color.parseColor(color));
+                int color = get_color();
 
-                MainActivity.usersList.add(new User(addProfileNameEditText.getText().toString()));
+                MainActivity.usersList.add(new User(addProfileNameEditText.getText().toString(),color));
                 ProfileViewAdapter.notifyDataSetChanged();
                 popupWindow.dismiss();
                 popupShown = false;
@@ -136,8 +134,8 @@ public class IndividualBillScreen extends AppCompatActivity {
 //            view2.setVisibility(View.GONE);
         }
     }
-    public String get_color(){
-        String current = color_list.get(0);
+    public int get_color(){
+        int current = color_list.get(0);
         color_list.remove(0);
         color_list.add(current);
         return current;
