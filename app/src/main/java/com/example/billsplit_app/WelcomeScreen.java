@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     TextView tax_text;
     Spinner locationSpin;
     Button individual_split_button;
+    ImageButton scan_button;
 
     String people;
     String cost;
@@ -48,6 +50,17 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         tax_text = (TextView) findViewById(R.id.tax_text);
 
         individual_split_button = (Button) findViewById(R.id.individual_split_button);
+        scan_button = (ImageButton) findViewById(R.id.scan_button);
+
+        scan_button.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("UseCompatLoadingForDrawables")
+            @Override
+            public void onClick(View v) {
+                scan_button.setBackground(getDrawable(R.drawable.scan_bill_clicked));
+
+            }
+        });
+
         individual_split_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

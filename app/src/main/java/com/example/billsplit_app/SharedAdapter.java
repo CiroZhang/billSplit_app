@@ -30,6 +30,7 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
             shared_profile_user_name = itemView.findViewById(R.id.shared_profile_user_name);
             shared_profile_short_user_name = itemView.findViewById(R.id.shared_profile_short_user_name);
             shared_checkmark = itemView.findViewById(R.id.shared_checkmark);
+
         }
     }
 
@@ -46,6 +47,8 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
         String name = MainActivity.usersList.get(position).getUsername();
         holder.shared_profile_user_name.setText(name);
         holder.shared_profile_short_user_name.setText(name.substring(0,1));
+        holder.shared_profile_background.getBackground().setTint(u1.getColor());
+
 
         holder.shared_profile_background.setOnClickListener(new View.OnClickListener() {
             @Override
