@@ -44,9 +44,9 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
     @Override
     public void onBindViewHolder(@NonNull SharedViewHolder holder, int position) {
         User u1 = MainActivity.usersList.get(position);
-        String name = MainActivity.usersList.get(position).getUsername();
+        String name = u1.getUsername();
         holder.shared_profile_user_name.setText(name);
-        holder.shared_profile_short_user_name.setText(name.substring(0,1));
+        if (!name.isEmpty()) { holder.shared_profile_short_user_name.setText(name.substring(0,1)); }
         holder.shared_profile_background.getBackground().setTint(u1.getColor());
 
 

@@ -36,7 +36,6 @@ public class IndividualBillScreen extends AppCompatActivity {
     Boolean popupShown = false;
 
     ArrayList<Integer> color_list = new ArrayList<>(Arrays.asList(-16731781,-2706168,-15503959,-7533027));
-    Drawable user_circle;
 
     @SuppressLint("ResourceType")
     @Override
@@ -44,12 +43,9 @@ public class IndividualBillScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.individual_bill_screen);
 
-//        MainActivity.dishList.add(new Dish("Dish 1","00.00"));
-
         ImageButton backButton = findViewById(R.id.back_button);
         ImageButton addUserButton = findViewById(R.id.add_user_button);
         TextView addDishButton = findViewById(R.id.add_dish_button);
-        user_circle = getDrawable(R.drawable.circle1);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +65,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         addDishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.dishList.add(new Dish("rice","00.00"));
+                MainActivity.dishList.add(new Dish("Dish 1","00.00"));
                 ItemViewAdapter.notifyDataSetChanged();
                 System.out.println(MainActivity.dishList.size());
             }
@@ -85,10 +81,9 @@ public class IndividualBillScreen extends AppCompatActivity {
         ProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
         ItemRecyclerView = findViewById(R.id.dish_list_view);
-        ItemViewAdapter = new ItemAdapter(MainActivity.dishList);
+        ItemViewAdapter = new ItemAdapter();
         ItemRecyclerView.setAdapter(ItemViewAdapter);
         ItemRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-
     }
 
     public void ShowPopup(View view) {
@@ -128,6 +123,7 @@ public class IndividualBillScreen extends AppCompatActivity {
                 popupWindow.dismiss();
                 popupShown = false;
                 CheckPopup();
+                ItemViewAdapter.SharedAdapter.notifyDataSetChanged();
             }
         });
     }

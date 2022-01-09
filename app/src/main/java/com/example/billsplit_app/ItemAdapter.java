@@ -16,15 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder>{
-    private ArrayList<Dish> dishList;
     Boolean IsCollapsed = false;
     Boolean alcoholImageClicked = false;
     RecyclerView SharedRecyclerView;
-    SharedAdapter SharedAdapter;
+    SharedAdapter SharedAdapter = new SharedAdapter();
 
-    public ItemAdapter(ArrayList<Dish> dishList){
-        this.dishList = dishList;
-    }
+    public ItemAdapter(){}
+
     public class ItemViewHolder extends RecyclerView.ViewHolder{
         private ImageButton delete_button;
         private TextView name_str;
@@ -55,8 +53,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        String name = dishList.get(position).getName();
-        String price = dishList.get(position).getPrice();
+        Dish dishItem = MainActivity.dishList.get(position);
+        String name = dishItem.getName();
+        String price = dishItem.getPrice();
 
         holder.name_str.setText(name);
         holder.price_str.setText(price);
@@ -64,7 +63,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dishList.remove(position);
+                MainActivity.dishList.remove(dishItem);
+                ItemAdapter.this.notifyDataSetChanged();
+                System.out.println(MainActivity.dishList.size());
             }
         });
 
@@ -102,18 +103,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             }
         });
 
-        SharedAdapter.adapterDish(dishList.get(position));
+        SharedAdapter.adapterDish(dishItem);
         SharedAdapter.notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return dishList.size();
+        return MainActivity.dishList.size();
     }
 
     void setupRecyclerView(Context context, View view) {
         SharedRecyclerView = view.findViewById(R.id.shared_profile_list_view);
-        SharedAdapter = new SharedAdapter();
         SharedRecyclerView.setAdapter(SharedAdapter);
         SharedRecyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
     }
