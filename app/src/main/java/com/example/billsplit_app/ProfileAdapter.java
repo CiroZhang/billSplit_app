@@ -51,6 +51,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
         String name = userList.get(position).getUsername();
         holder.name_str.setText(name);
         holder.profile_background.getBackground().setTint(userList.get(position).getColor());
+        holder.profile_short_user_name.setText(name.substring(0,1));
     }
 
     @Override

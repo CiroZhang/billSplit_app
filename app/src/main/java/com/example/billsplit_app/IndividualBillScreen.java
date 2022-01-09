@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -45,9 +46,18 @@ public class IndividualBillScreen extends AppCompatActivity {
 
 //        MainActivity.dishList.add(new Dish("Dish 1","00.00"));
 
+        ImageButton backButton = findViewById(R.id.back_button);
         ImageButton addUserButton = findViewById(R.id.add_user_button);
         TextView addDishButton = findViewById(R.id.add_dish_button);
         user_circle = getDrawable(R.drawable.circle1);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                open_welcome_screen();
+            }
+        });
+
         addUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +65,7 @@ public class IndividualBillScreen extends AppCompatActivity {
                 CheckPopup();
             }
         });
+
         addDishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +124,7 @@ public class IndividualBillScreen extends AppCompatActivity {
 
                 MainActivity.usersList.add(new User(addProfileNameEditText.getText().toString(),color));
                 ProfileViewAdapter.notifyDataSetChanged();
+                ItemViewAdapter.UpdateSharedAdapter();
                 popupWindow.dismiss();
                 popupShown = false;
                 CheckPopup();
@@ -120,9 +132,14 @@ public class IndividualBillScreen extends AppCompatActivity {
         });
     }
 
-    public void CheckPopup() {
-
+    private void open_welcome_screen() {
+        Intent open_welcome_screen = new Intent(this, WelcomeScreen.class);
+        startActivity(open_welcome_screen);
     }
+
+    public void CheckPopup() {
+    }
+
     public int get_color(){
         int current = color_list.get(0);
         color_list.remove(0);
