@@ -25,18 +25,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="53dp"
-                    android:layout_marginTop="24dp"
                     android:layout_marginStart="120dp"
-                    android:textAlignment="center"
-                    android:text="App Name"
+                    android:layout_marginTop="24dp"
                     android:fontFamily="@font/avenir_semi_bold"
+                    android:text="App Name"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="34sp"/>
+                    android:textSize="34sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
 
                     <ImageButton
                         android:id="@+id/scan_button"
@@ -46,6 +47,15 @@
                         android:layout_marginTop="24dp"
                         android:background="@drawable/scan_bill_unclicked"
                         android:visibility="visible" />
+
+                    <ImageButton
+                        android:id="@+id/scan_cancel_button"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="366dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/delete_button_circle"
+                        android:visibility="invisible" />
 
 
                 </RelativeLayout>
@@ -145,7 +155,7 @@
                     android:layout_marginStart="255dp"
                     android:layout_marginTop="3dp"
                     android:fontFamily="@font/avenir_book"
-                    android:text="* Without tax and tip"
+                    android:text="Without tax and tip"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 

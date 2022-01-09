@@ -29,6 +29,8 @@
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/drawable/circle2.xml" value="0.2682291666666667" />
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2682291666666667" />
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/drawable/rectangle1.xml" value="0.2682291666666667" />
+        <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/drawable/testing_rectangle.xml" value="0.2682291666666667" />
+        <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/drawable/transparent_background.xml" value="0.2682291666666667" />
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/layout/activity_main.xml" value="0.1716485507246377" />
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/layout/add_profile_popup.xml" value="0.16394927536231885" />
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/layout/individual_bill_screen.xml" value="0.75" />
@@ -36,7 +38,7 @@
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/layout/item_dish.xml" value="0.16394927536231885" />
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/layout/item_profile.xml" value="0.5" />
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/layout/item_shared_profile.xml" value="0.2520833333333333" />
-        <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/layout/welcome_screen.xml" value="0.22" />
+        <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/layout/welcome_screen.xml" value="0.33" />
       </map>
     </option>
   </component>

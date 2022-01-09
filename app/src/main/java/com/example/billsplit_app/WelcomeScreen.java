@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     Spinner locationSpin;
     Button individual_split_button;
     ImageButton scan_button;
+    ImageButton scan_cancel_button;
 
     String people;
     String cost;
@@ -51,13 +53,23 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
 
         individual_split_button = (Button) findViewById(R.id.individual_split_button);
         scan_button = (ImageButton) findViewById(R.id.scan_button);
+        scan_cancel_button = (ImageButton) findViewById(R.id.scan_cancel_button);
 
         scan_button.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")
             @Override
             public void onClick(View v) {
+                scan_cancel_button.setVisibility(View.VISIBLE);
                 scan_button.setBackground(getDrawable(R.drawable.scan_bill_clicked));
 
+            }
+        });
+        scan_cancel_button.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("UseCompatLoadingForDrawables")
+            @Override
+            public void onClick(View v) {
+                scan_cancel_button.setVisibility(View.GONE);
+                scan_button.setBackground(getDrawable(R.drawable.scan_bill_unclicked));
             }
         });
 
