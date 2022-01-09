@@ -11,15 +11,6 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/profile_transparent_background"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/transparent_background"
-            android:visibility="gone"/>
-
-        <ImageView
             android:id="@+id/profile_background"
             android:layout_width="64dp"
             android:layout_height="64dp"

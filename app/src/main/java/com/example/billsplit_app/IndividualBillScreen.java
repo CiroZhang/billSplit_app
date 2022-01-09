@@ -34,8 +34,6 @@ public class IndividualBillScreen extends AppCompatActivity {
     RecyclerView ItemRecyclerView;
     Boolean popupShown = false;
 
-    ImageView transparentBackground;
-    ImageView profileTransparentBackground;
     ArrayList<Integer> color_list = new ArrayList<>(Arrays.asList(-16731781,-2706168,-15503959,-7533027));
     Drawable user_circle;
 
@@ -44,7 +42,6 @@ public class IndividualBillScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.individual_bill_screen);
-        transparentBackground = findViewById(R.id.transparent_background);
 
 //        MainActivity.dishList.add(new Dish("Dish 1","00.00"));
 
@@ -55,7 +52,7 @@ public class IndividualBillScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ShowPopup(v);
-                CheckPopup(transparentBackground, profileTransparentBackground);
+                CheckPopup();
             }
         });
         addDishButton.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +65,6 @@ public class IndividualBillScreen extends AppCompatActivity {
         });
 
         setupRecyclerView();
-        profileTransparentBackground = findViewById(R.id.profile_transparent_background);
     }
 
     void setupRecyclerView() {
@@ -88,7 +84,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.add_profile_popup, null,false);
         popupShown = true;
-        CheckPopup(transparentBackground, profileTransparentBackground);
+        CheckPopup();
 
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -101,7 +97,7 @@ public class IndividualBillScreen extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 popupWindow.dismiss();
                 popupShown = false;
-                CheckPopup(transparentBackground, profileTransparentBackground);
+                CheckPopup();
                 return true;
             }
         });
@@ -119,20 +115,13 @@ public class IndividualBillScreen extends AppCompatActivity {
                 ProfileViewAdapter.notifyDataSetChanged();
                 popupWindow.dismiss();
                 popupShown = false;
-                CheckPopup(transparentBackground, profileTransparentBackground);
+                CheckPopup();
             }
         });
     }
 
-    public void CheckPopup(ImageView view1, ImageView view2) {
-        if (popupShown) {
-            view1.setVisibility(View.VISIBLE);
-//            view2.setVisibility(View.VISIBLE);
-        }
-        else {
-            view1.setVisibility(View.GONE);
-//            view2.setVisibility(View.GONE);
-        }
+    public void CheckPopup() {
+
     }
     public int get_color(){
         int current = color_list.get(0);

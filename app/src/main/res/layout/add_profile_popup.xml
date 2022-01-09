@@ -6,13 +6,21 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/popup_transparent_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/transparent_background"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="visible" />
 
         <ImageView
             android:id="@+id/popup_background"
             android:layout_width="379dp"
             android:layout_height="240dp"
-            android:layout_marginTop="200dp"
             android:background="@drawable/rectangle2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +62,7 @@
 
         <EditText
             android:id="@+id/add_profile_name_edit_text"
-            android:layout_width="115dp"
+            android:layout_width="319dp"
             android:layout_height="40dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="79dp"

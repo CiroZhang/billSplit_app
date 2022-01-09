@@ -65,4 +65,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         SharedRecyclerView.setAdapter(SharedAdapter);
         SharedRecyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
     }
+
+    public void UpdateSharedAdapter() {
+        if (SharedAdapter == null) {
+            return;
+        }
+        SharedAdapter.notifyDataSetChanged();
+    }
 }
