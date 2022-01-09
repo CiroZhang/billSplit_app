@@ -27,10 +27,14 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
 
     EditText editPeopleText;
     EditText editCostText;
+    TextView tax_text;
+    Spinner locationSpin;
+    Button individual_split_button;
 
     String people;
     String cost;
-    TextView tax_text;
+    String province;
+    JSONObject tax;
 
 
     @Override
@@ -40,30 +44,34 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
 
         editPeopleText = (EditText) findViewById(R.id.people_edit_text);
         editCostText = (EditText) findViewById(R.id.cost_edit_text);
-
-        Spinner locationSpin = (Spinner) findViewById(R.id.province_list);
-        Button individual_split_button = findViewById(R.id.individual_split_button);
+        locationSpin = (Spinner) findViewById(R.id.province_list);
         tax_text = (TextView) findViewById(R.id.tax_text);
 
+        individual_split_button = (Button) findViewById(R.id.individual_split_button);
         individual_split_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 JSONObject data = new JSONObject();
+                boolean ready = false;
                 people = editPeopleText.getText().toString();
                 cost = editCostText.getText().toString();
+
                 // check data plz
+                if(true) {
+                    try {
+                        data.put("people", people);
+                        data.put("cost", cost);
+                        data.put("province", province);
+                        data.put("tax", tax);
 
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
-                try {
-                    data.put("people", people);
-                    data.put("cost", cost);
                     writeToJson("datas.json", data.toString());
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    open_individual_split_screen();
                 }
-
-                open_individual_split_screen();
             }
         });
 
@@ -108,7 +116,6 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
 
     }
 
-
     private void open_individual_split_screen() {
         Intent open_individual_split_screen = new Intent(this, IndividualBillScreen.class);
         startActivity(open_individual_split_screen);
@@ -117,17 +124,13 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     @SuppressLint("SetTextI18n")
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        int pst, gst, hst;
 
         try {
             JSONObject tax_details = new JSONObject(readJson("res/tax_details.json"));
             String province = parent.getItemAtPosition(position).toString();
-            JSONObject current = tax_details.getJSONObject(province);
+            tax = tax_details.getJSONObject(province);
+            tax_text.setText(tax.getInt("PST") + "% PST  " + tax.getInt("GST") + "% GST  " + tax.getInt("HST")  + "% HST");
 
-            pst = current.getInt("PST");
-            gst = current.getInt("GST");
-            hst = current.getInt("HST");
-            tax_text.setText(pst + "% PST  " + gst + "% GST  " + hst + "% HST");
 
         } catch (JSONException e) {
             e.printStackTrace();

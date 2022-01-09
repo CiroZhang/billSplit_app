@@ -2,6 +2,7 @@
     <string name="app_name">billSplit_app</string>
 
     <string-array name="locations">
+        <item>Choose Category</item>
         <item>Alberta</item>
         <item>British Columbia</item>
         <item>Manitoba</item>

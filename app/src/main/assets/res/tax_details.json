@@ -1,4 +1,11 @@
 {
+  "Choose Category":
+  {
+    "PST" : 0,
+    "GST" : 0,
+    "HST" : 0
+  },
+
   "Alberta" :
   {
     "PST" : 0,
