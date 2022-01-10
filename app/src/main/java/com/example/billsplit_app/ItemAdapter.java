@@ -16,9 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder>{
-    Boolean IsCollapsed = false;
-    Boolean alcoholImageClicked = false;
-    RecyclerView SharedRecyclerView;
     SharedAdapter SharedAdapter = new SharedAdapter();
 
     public ItemAdapter(){}
@@ -30,6 +27,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         private ImageButton expand_collapse_button;
         private TextView shared_with_text;
         private ImageButton alcohol_image;
+        private RecyclerView SharedRecyclerView;
+        private Boolean IsCollapsed = false;
+        private Boolean alcoholImageClicked = false;
 
         public ItemViewHolder(final View view) {
             super(view);
@@ -39,8 +39,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             expand_collapse_button = view.findViewById(R.id.expand_collapse_button);
             shared_with_text = view.findViewById(R.id.shared_with_text);
             alcohol_image = view.findViewById(R.id.alcohol_image);
+            SharedRecyclerView = view.findViewById(R.id.shared_profile_list_view);
 
-            setupRecyclerView(view.getContext(), view);
+            setupRecyclerView(view.getContext(), SharedRecyclerView);
         }
     }
 
@@ -72,19 +73,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.expand_collapse_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!IsCollapsed) {
+                if (!holder.IsCollapsed) {
                     holder.expand_collapse_button.setBackgroundResource(R.drawable.expand_button);
-                    SharedRecyclerView.setVisibility(View.GONE);
+                    holder.SharedRecyclerView.setVisibility(View.GONE);
                     holder.shared_with_text.setVisibility(View.GONE);
                     holder.alcohol_image.setVisibility(View.GONE);
-                    IsCollapsed = true;
+                    holder.IsCollapsed = true;
                 }
                 else {
                     holder.expand_collapse_button.setBackgroundResource(R.drawable.collapse_button);
-                    SharedRecyclerView.setVisibility(View.VISIBLE);
+                    holder.SharedRecyclerView.setVisibility(View.VISIBLE);
                     holder.shared_with_text.setVisibility(View.VISIBLE);
                     holder.alcohol_image.setVisibility(View.VISIBLE);
-                    IsCollapsed = false;
+                    holder.IsCollapsed = false;
                 }
             }
         });
@@ -92,13 +93,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.alcohol_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (alcoholImageClicked) {
+                if (!holder.alcoholImageClicked) {
                     holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_checked);
-                    alcoholImageClicked = false;
+                    holder.alcoholImageClicked = true;
                 }
                 else {
                     holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_unchecked);
-                    alcoholImageClicked = true;
+                    holder.alcoholImageClicked = false;
                 }
             }
         });
@@ -112,8 +113,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         return MainActivity.dishList.size();
     }
 
-    void setupRecyclerView(Context context, View view) {
-        SharedRecyclerView = view.findViewById(R.id.shared_profile_list_view);
+    void setupRecyclerView(Context context, RecyclerView SharedRecyclerView) {
         SharedRecyclerView.setAdapter(SharedAdapter);
         SharedRecyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
     }
