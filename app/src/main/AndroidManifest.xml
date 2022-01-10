@@ -13,6 +13,9 @@
             android:name=".IndividualBillScreen"
             android:exported="false" />
         <activity
+            android:name=".EvenBillScreen"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false"/>
         <activity

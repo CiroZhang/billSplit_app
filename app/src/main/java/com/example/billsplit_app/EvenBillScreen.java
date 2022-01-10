@@ -1,15 +1,10 @@
 package com.example.billsplit_app;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,35 +13,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class IndividualBillScreen extends AppCompatActivity {
+public class EvenBillScreen extends AppCompatActivity {
 
     ProfileAdapter ProfileViewAdapter;
+    TipAdapter TipViewAdapter;
     RecyclerView ProfileRecyclerView;
-    ItemAdapter ItemViewAdapter;
-    RecyclerView ItemRecyclerView;
+    RecyclerView EvenTipRecyclerView;
     Boolean popupShown = false;
-    int empty_count = 1;
 
     ArrayList<Integer> color_list = new ArrayList<>(Arrays.asList(-16731781,-2706168,-15503959,-7533027));
+    int empty_count = 1;
 
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.individual_bill_screen);
+        setContentView(R.layout.even_bill_screen);
 
         ImageButton backButton = findViewById(R.id.back_button);
         ImageButton addUserButton = findViewById(R.id.add_user_button);
-        TextView addDishButton = findViewById(R.id.add_dish_button);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,29 +53,21 @@ public class IndividualBillScreen extends AppCompatActivity {
                 CheckPopup();
             }
         });
-
-        addDishButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.dishList.add(new Dish("Dish 1","00.00"));
-                ItemViewAdapter.notifyDataSetChanged();
-                System.out.println(MainActivity.dishList.size());
-            }
-        });
-
         setupRecyclerView();
     }
 
     void setupRecyclerView() {
-        ProfileRecyclerView = findViewById(R.id.profile_list_view);
         ProfileViewAdapter = new ProfileAdapter(this,MainActivity.usersList);
+        TipViewAdapter = new TipAdapter(this,MainActivity.usersList);
+
+        ProfileRecyclerView = findViewById(R.id.profile_list_view);
         ProfileRecyclerView.setAdapter(ProfileViewAdapter);
         ProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
-        ItemRecyclerView = findViewById(R.id.dish_list_view);
-        ItemViewAdapter = new ItemAdapter();
-        ItemRecyclerView.setAdapter(ItemViewAdapter);
-        ItemRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        EvenTipRecyclerView = findViewById(R.id.even_tip_profile_list);
+        EvenTipRecyclerView.setAdapter(ProfileViewAdapter);
+//        EvenTipRecyclerView.setAdapter(TipViewAdapter);
+        EvenTipRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
     }
 
     public void ShowPopup(View view) {
@@ -117,8 +100,6 @@ public class IndividualBillScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int color = get_color();
-
-
                 String name = addProfileNameEditText.getText().toString();
                 if (name.isEmpty()){
                     name = "Person" + empty_count;
@@ -127,11 +108,9 @@ public class IndividualBillScreen extends AppCompatActivity {
 
                 MainActivity.usersList.add(new User(name,color));
                 ProfileViewAdapter.notifyDataSetChanged();
-                ItemViewAdapter.UpdateSharedAdapter();
                 popupWindow.dismiss();
                 popupShown = false;
                 CheckPopup();
-                ItemViewAdapter.SharedAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -143,7 +122,6 @@ public class IndividualBillScreen extends AppCompatActivity {
 
     public void CheckPopup() {
     }
-
     public int get_color(){
         int current = color_list.get(0);
         color_list.remove(0);
@@ -151,9 +129,4 @@ public class IndividualBillScreen extends AppCompatActivity {
         return current;
     }
 
-    // for opening screens later on
-//    private void open_org_screen() {
-//        Intent open_org_screen = new Intent(this, OrganizationScreen.class);
-//        startActivity(open_org_screen);
-//    }
 }
