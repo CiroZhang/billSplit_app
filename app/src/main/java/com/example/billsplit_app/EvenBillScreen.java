@@ -58,15 +58,14 @@ public class EvenBillScreen extends AppCompatActivity {
 
     void setupRecyclerView() {
         ProfileViewAdapter = new ProfileAdapter(this,MainActivity.usersList);
-        TipViewAdapter = new TipAdapter(this,MainActivity.usersList);
+        TipViewAdapter = new TipAdapter();
 
         ProfileRecyclerView = findViewById(R.id.profile_list_view);
         ProfileRecyclerView.setAdapter(ProfileViewAdapter);
         ProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
         EvenTipRecyclerView = findViewById(R.id.even_tip_profile_list);
-        EvenTipRecyclerView.setAdapter(ProfileViewAdapter);
-//        EvenTipRecyclerView.setAdapter(TipViewAdapter);
+        EvenTipRecyclerView.setAdapter(TipViewAdapter);
         EvenTipRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
     }
 
@@ -108,6 +107,7 @@ public class EvenBillScreen extends AppCompatActivity {
 
                 MainActivity.usersList.add(new User(name,color));
                 ProfileViewAdapter.notifyDataSetChanged();
+                TipViewAdapter.notifyDataSetChanged();
                 popupWindow.dismiss();
                 popupShown = false;
                 CheckPopup();

@@ -13,13 +13,7 @@ import java.util.ArrayList;
 
 public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder>{
 
-    private Context context;
-    private ArrayList<User> userList;
-
-    public TipAdapter(@NonNull Context context, @NonNull ArrayList<User> userList){
-        this.context = context;
-        this.userList = userList;
-    }
+    public TipAdapter(){ }
 
     public class TipViewHolder extends RecyclerView.ViewHolder{
         private TextView name_str;
@@ -35,18 +29,18 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder>{
     @NonNull
     @Override
     public TipViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.item_tip, parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tip, parent,false);
         return new TipViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TipViewHolder holder, int position) {
-        String name = userList.get(position).getUsername();
+        String name = MainActivity.usersList.get(position).getUsername();
         holder.name_str.setText(name);
     }
 
     @Override
     public int getItemCount() {
-        return userList.size();
+        return MainActivity.usersList.size();
     }
 }
