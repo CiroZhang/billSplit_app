@@ -32,6 +32,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     TextView tax_text;
     Spinner locationSpin;
     Button individual_split_button;
+    Button even_split_button;
     ImageButton scan_button;
     ImageButton scan_cancel_button;
 
@@ -52,8 +53,16 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         tax_text = (TextView) findViewById(R.id.tax_text);
 
         individual_split_button = (Button) findViewById(R.id.individual_split_button);
+        even_split_button = (Button) findViewById(R.id.even_split_botton);
         scan_button = (ImageButton) findViewById(R.id.scan_button);
         scan_cancel_button = (ImageButton) findViewById(R.id.scan_cancel_button);
+
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(WelcomeScreen.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.locations));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        locationSpin.setAdapter(myAdapter);
+        locationSpin.setOnItemSelectedListener(this);
+
 
         scan_button.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")
@@ -64,6 +73,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
 
             }
         });
+
         scan_cancel_button.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")
             @Override
@@ -100,12 +110,32 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
             }
         });
 
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(WelcomeScreen.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.locations));
-        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        locationSpin.setAdapter(myAdapter);
-        locationSpin.setOnItemSelectedListener(this);
+        even_split_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JSONObject data = new JSONObject();
+                boolean ready = false;
+                people = editPeopleText.getText().toString();
+                cost = editCostText.getText().toString();
 
+                // check data plz
+                if(true) {
+                    try {
+                        data.put("people", people);
+                        data.put("cost", cost);
+                        data.put("province", province);
+                        data.put("tax", tax);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    writeToJson("datas.json", data.toString());
+                    open_even_split_screen();
+
+                }
+            }
+        });
     }
 
     public void writeToJson(String fileName, String content) {
@@ -145,6 +175,13 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         Intent open_individual_split_screen = new Intent(this, IndividualBillScreen.class);
         startActivity(open_individual_split_screen);
     }
+
+    private void open_even_split_screen() {
+        Intent open_even_split_screen = new Intent(this, EvenBillScreen.class);
+        startActivity(open_even_split_screen);
+    }
+
+
 
     @SuppressLint("SetTextI18n")
     @Override
