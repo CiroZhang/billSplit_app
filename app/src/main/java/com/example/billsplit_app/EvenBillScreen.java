@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -26,6 +27,8 @@ public class EvenBillScreen extends AppCompatActivity {
     RecyclerView ProfileRecyclerView;
     RecyclerView EvenTipRecyclerView;
     Boolean popupShown = false;
+    Boolean same_tip = false;
+
 
     ArrayList<Integer> color_list = new ArrayList<>(Arrays.asList(-16731781,-2706168,-15503959,-7533027));
     int empty_count = 1;
@@ -38,6 +41,9 @@ public class EvenBillScreen extends AppCompatActivity {
 
         ImageButton backButton = findViewById(R.id.back_button);
         ImageButton addUserButton = findViewById(R.id.add_user_button);
+
+        CheckBox sameTipButton = findViewById(R.id.same_tip_button);
+
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,17 +60,26 @@ public class EvenBillScreen extends AppCompatActivity {
             }
         });
         setupRecyclerView();
+
+        sameTipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                same_tip = sameTipButton.isChecked();
+
+            }
+        });
     }
 
     void setupRecyclerView() {
         ProfileViewAdapter = new ProfileAdapter(this,MainActivity.usersList);
-        TipViewAdapter = new TipAdapter();
+        TipViewAdapter = new TipAdapter(this,MainActivity.usersList);
 
         ProfileRecyclerView = findViewById(R.id.profile_list_view);
         ProfileRecyclerView.setAdapter(ProfileViewAdapter);
         ProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
         EvenTipRecyclerView = findViewById(R.id.even_tip_profile_list);
+//        EvenTipRecyclerView.setAdapter(ProfileViewAdapter);
         EvenTipRecyclerView.setAdapter(TipViewAdapter);
         EvenTipRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
     }
@@ -107,7 +122,6 @@ public class EvenBillScreen extends AppCompatActivity {
 
                 MainActivity.usersList.add(new User(name,color));
                 ProfileViewAdapter.notifyDataSetChanged();
-                TipViewAdapter.notifyDataSetChanged();
                 popupWindow.dismiss();
                 popupShown = false;
                 CheckPopup();
