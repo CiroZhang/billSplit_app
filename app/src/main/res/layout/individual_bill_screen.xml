@@ -55,13 +55,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="37dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginStart="176dp"
-                    android:textAlignment="center"
-                    android:text="Party"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/avenir_semi_bold"
+                    android:text="Party"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="24sp"/>
+                    android:textSize="24sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,19 +85,19 @@
                                     android:id="@+id/add_user_button"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="12dp"
                                     android:layout_marginStart="30dp"
+                                    android:layout_marginTop="12dp"
                                     android:background="@drawable/add_profile" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
                                     android:layout_marginStart="49dp"
-                                    android:text="Add"
+                                    android:layout_marginTop="5dp"
                                     android:fontFamily="@font/avenir_book"
+                                    android:text="Add"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp"/>
+                                    android:textSize="14sp" />
 
                             </LinearLayout>
 
@@ -144,7 +144,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:layout_marginBottom="200dp"
+                            android:layout_marginBottom="0dp"
                             android:orientation="vertical"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -162,18 +162,18 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="46dp"
                     android:layout_marginStart="150dp"
+                    android:layout_marginTop="0dp"
                     android:background="@drawable/add_button" />
 
                 <TextView
                     android:id="@+id/add_dish_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="47.5dp"
                     android:layout_marginStart="4dp"
-                    android:text="Add dish"
+                    android:layout_marginTop="0dp"
                     android:fontFamily="@font/avenir_book"
+                    android:text="Add dish"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -183,59 +183,59 @@
 
     </ScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="149dp"
-        android:layout_marginTop="510dp">
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="149dp"-->
+<!--        android:layout_marginTop="510dp">-->
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="149dp"
-            android:layout_marginTop="0dp"
-            android:background="@drawable/rectangle2"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+<!--        <ImageView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="149dp"-->
+<!--            android:layout_marginTop="0dp"-->
+<!--            android:background="@drawable/rectangle2"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
-            android:layout_marginStart="31dp"
-            android:text="Current Total:"
-            android:fontFamily="@font/avenir_book"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="26dp"-->
+<!--            android:layout_marginStart="31dp"-->
+<!--            android:text="Current Total:"-->
+<!--            android:fontFamily="@font/avenir_book"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="16sp"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="300dp"
-            android:text="$ ####.##"
-            android:fontFamily="@font/avenir_medium"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="24dp"-->
+<!--            android:layout_marginStart="300dp"-->
+<!--            android:text="$ ####.##"-->
+<!--            android:fontFamily="@font/avenir_medium"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="18sp"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"/>-->
 
-        <Button
-            android:layout_width="347dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="76.5dp"
-            android:background="@drawable/rounded_rectangle3"
-            android:fontFamily="@font/avenir_book"
-            android:text="Submit"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:visibility="visible"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+<!--        <Button-->
+<!--            android:layout_width="347dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_marginTop="76.5dp"-->
+<!--            android:background="@drawable/rounded_rectangle3"-->
+<!--            android:fontFamily="@font/avenir_book"-->
+<!--            android:text="Submit"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="16sp"-->
+<!--            android:visibility="visible"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent" />-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 </RelativeLayout>

@@ -51,13 +51,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="150dp"
                 android:layout_marginTop="17dp"
+                android:background="@android:color/transparent"
                 android:fontFamily="@font/avenir_book"
                 android:text="$00.00"
-                android:textDirection="rtl"
                 android:textAlignment="viewEnd"
                 android:textColor="#FF000000"
-                android:textSize="16sp"
-                android:background="@android:color/transparent"/>
+                android:textDirection="rtl"
+                android:textSize="16sp" />
 
             <ImageButton
                 android:id="@+id/expand_collapse_button"
