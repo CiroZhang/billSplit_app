@@ -98,7 +98,8 @@
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/avenir_book"
                         android:textDirection="rtl"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:inputType="number"/>
 
                 </RelativeLayout>
 

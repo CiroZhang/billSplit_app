@@ -50,8 +50,12 @@ public class IndividualBillScreen extends AppCompatActivity {
         ImageButton addDishButton = findViewById(R.id.add_dish_button);
         TextView addDishButton2 = findViewById(R.id.add_dish_button2);
 
-        MainActivity.usersList.add(new User("Me", get_color()));
         MainActivity.dishList.add(new Dish("New Dish " + dishCount,"00.00"));
+
+        while (empty_count <= MainActivity.numOfUsers) {
+            MainActivity.usersList.add(new User("Person " + empty_count, get_color()));
+            empty_count++;
+        }
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +133,7 @@ public class IndividualBillScreen extends AppCompatActivity {
 
                 String name = addProfileNameEditText.getText().toString();
                 if (name.isEmpty()){
-                    name = "Person" + empty_count;
+                    name = "Person " + empty_count;
                     empty_count++;
                 }
 

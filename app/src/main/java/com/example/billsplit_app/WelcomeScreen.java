@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -40,6 +42,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     String cost;
     String province;
     JSONObject tax;
+    int nOfUsers = 1;
 
 
     @Override
@@ -136,6 +139,29 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
                 }
             }
         });
+
+        editPeopleText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().isEmpty()) {
+                    nOfUsers = Integer.parseInt(s.toString());
+                }
+                else {
+                    nOfUsers = 1;
+                }
+                MainActivity.usersList.clear();
+            }
+        });
     }
 
     public void writeToJson(String fileName, String content) {
@@ -172,11 +198,13 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     }
 
     private void open_individual_split_screen() {
+        MainActivity.numOfUsers = nOfUsers;
         Intent open_individual_split_screen = new Intent(this, IndividualBillScreen.class);
         startActivity(open_individual_split_screen);
     }
 
     private void open_even_split_screen() {
+        MainActivity.numOfUsers = nOfUsers;
         Intent open_even_split_screen = new Intent(this, EvenBillScreen.class);
         startActivity(open_even_split_screen);
     }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     public static ArrayList<User> usersList = new ArrayList<>();
     public static ArrayList<Dish> dishList = new ArrayList<>();
+    public static int numOfUsers = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
