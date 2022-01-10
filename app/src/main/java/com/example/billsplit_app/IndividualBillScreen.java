@@ -46,7 +46,11 @@ public class IndividualBillScreen extends AppCompatActivity {
 
         ImageButton backButton = findViewById(R.id.back_button);
         ImageButton addUserButton = findViewById(R.id.add_user_button);
-        TextView addDishButton = findViewById(R.id.add_dish_button);
+        ImageButton addDishButton = findViewById(R.id.add_dish_button);
+        TextView addDishButton2 = findViewById(R.id.add_dish_button2);
+
+        MainActivity.usersList.add(new User("Me", get_color()));
+        MainActivity.dishList.add(new Dish("New Dish","00.00"));
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,13 +67,15 @@ public class IndividualBillScreen extends AppCompatActivity {
             }
         });
 
-        addDishButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.dishList.add(new Dish("Dish 1","00.00"));
-                ItemViewAdapter.notifyDataSetChanged();
-                System.out.println(MainActivity.dishList.size());
-            }
+        addDishButton.setOnClickListener(v -> {
+            MainActivity.dishList.add(new Dish("New Dish","00.00"));
+            ItemViewAdapter.notifyDataSetChanged();
+            System.out.println(MainActivity.dishList.size());
+        });
+        addDishButton2.setOnClickListener(v -> {
+            MainActivity.dishList.add(new Dish("New Dish","00.00"));
+            ItemViewAdapter.notifyDataSetChanged();
+            System.out.println(MainActivity.dishList.size());
         });
 
         setupRecyclerView();
@@ -117,7 +123,6 @@ public class IndividualBillScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int color = get_color();
-
 
                 String name = addProfileNameEditText.getText().toString();
                 if (name.isEmpty()){

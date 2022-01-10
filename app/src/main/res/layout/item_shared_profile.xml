@@ -28,7 +28,7 @@
             android:fontFamily="@font/avenir_semi_bold"
             android:textAlignment="center"
             android:text="M"
-            android:textColor="#FF494949"
+            android:textColor="#FFFFFFFF"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@id/shared_profile_background"
             app:layout_constraintTop_toTopOf="@id/shared_profile_background"/>
