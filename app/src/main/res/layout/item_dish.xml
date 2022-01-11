@@ -1,10 +1,10 @@
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:background="#FFf6f6f6">
 
     <LinearLayout
@@ -30,12 +30,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:minEms="1"
                 android:fontFamily="@font/avenir_semi_bold"
-                android:textAlignment="center"
                 android:text="Dish 1"
+                android:textAlignment="center"
                 android:textColor="#FF000000"
-                android:textSize="18sp"
-                android:background="@android:color/transparent"/>
+                android:textSize="18sp" />
 
             <ImageButton
                 android:id="@+id/price_box"
@@ -45,6 +46,18 @@
                 android:layout_marginTop="6dp"
                 android:background="@drawable/rounded_rectangle4" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="225dp"
+                android:layout_marginTop="16.5dp"
+                android:fontFamily="@font/avenir_book"
+                android:text="$"
+                android:textAlignment="center"
+                android:textColor="#FF000000"
+                android:textSize="16sp"
+                android:visibility="visible" />
+
             <EditText
                 android:id="@+id/dish_price"
                 android:layout_width="90dp"
@@ -53,7 +66,7 @@
                 android:layout_marginTop="7dp"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/avenir_book"
-                android:hint="$00.00"
+                android:hint="00.00"
                 android:inputType="numberDecimal"
                 android:textAlignment="viewEnd"
                 android:textColor="#FF000000"
@@ -72,16 +85,17 @@
 
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/shared_with_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="52dp"
-            android:layout_marginTop="63dp"
+            android:layout_marginTop="25dp"
             android:fontFamily="@font/avenir_book"
             android:text="Shared with"
             android:textAlignment="center"
@@ -94,7 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="96dp"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="95dp"
+            android:layout_marginTop="24dp"
             android:orientation="horizontal"
             android:visibility="visible" />
 
@@ -103,13 +117,22 @@
             android:layout_width="139dp"
             android:layout_height="56dp"
             android:layout_marginStart="136dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/alcohol_unchecked"
             android:visibility="visible" />
 
-    </RelativeLayout>
+        <ImageButton
+            android:id="@+id/line"
+            android:layout_width="379dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rectangle3"
+            android:visibility="visible" />
 
-</RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
 
 

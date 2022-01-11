@@ -49,7 +49,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         ImageButton addDishButton = findViewById(R.id.add_dish_button);
         TextView addDishButton2 = findViewById(R.id.add_dish_button2);
 
-        MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),"00.00"));
+        MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),""));
 
         while (empty_count <= MainActivity.numOfUsers) {
             MainActivity.usersList.add(new User("Person " + (MainActivity.usersList.size()+1), get_color()));
@@ -72,12 +72,12 @@ public class IndividualBillScreen extends AppCompatActivity {
         });
 
         addDishButton.setOnClickListener(v -> {
-            MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),"00.00"));
+            MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1), ""));
             ItemViewAdapter.notifyDataSetChanged();
             System.out.println(MainActivity.dishList.size());
         });
         addDishButton2.setOnClickListener(v -> {
-            MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),"00.00"));
+            MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),""));
             ItemViewAdapter.notifyDataSetChanged();
             System.out.println(MainActivity.dishList.size());
         });

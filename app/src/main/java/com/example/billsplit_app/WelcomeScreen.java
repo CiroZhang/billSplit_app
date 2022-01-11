@@ -56,8 +56,6 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
 
         individual_split_button = findViewById(R.id.individual_split_button);
         even_split_button = findViewById(R.id.even_split_botton);
-        scan_button = findViewById(R.id.scan_button);
-        scan_cancel_button = findViewById(R.id.scan_cancel_button);
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(WelcomeScreen.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.locations));
@@ -66,23 +64,23 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         locationSpin.setOnItemSelectedListener(this);
 
 
-        scan_button.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View v) {
-                scan_cancel_button.setVisibility(View.VISIBLE);
-                scan_button.setBackground(getDrawable(R.drawable.scan_bill_clicked));
-            }
-        });
-
-        scan_cancel_button.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View v) {
-                scan_cancel_button.setVisibility(View.GONE);
-                scan_button.setBackground(getDrawable(R.drawable.scan_bill_unclicked));
-            }
-        });
+//        scan_button.setOnClickListener(new View.OnClickListener() {
+//            @SuppressLint("UseCompatLoadingForDrawables")
+//            @Override
+//            public void onClick(View v) {
+//                scan_cancel_button.setVisibility(View.VISIBLE);
+//                scan_button.setBackground(getDrawable(R.drawable.scan_bill_clicked));
+//            }
+//        });
+//
+//        scan_cancel_button.setOnClickListener(new View.OnClickListener() {
+//            @SuppressLint("UseCompatLoadingForDrawables")
+//            @Override
+//            public void onClick(View v) {
+//                scan_cancel_button.setVisibility(View.GONE);
+//                scan_button.setBackground(getDrawable(R.drawable.scan_bill_unclicked));
+//            }
+//        });
 
         individual_split_button.setOnClickListener(new View.OnClickListener() {
             @Override

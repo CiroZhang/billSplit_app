@@ -35,7 +35,27 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         private Boolean IsCollapsed = false;
         private Boolean alcoholImageClicked = false;
         private Boolean alcoholTaxApplicable = false;
-        private TextWatcher textWatcher = new TextWatcher() {
+
+        private TextWatcher textWatcherName = new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+
+        private TextWatcher textWatcherPrice = new TextWatcher() {
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -75,7 +95,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        holder.name_str.removeTextChangedListener(holder.textWatcher);
+        holder.name_str.removeTextChangedListener(holder.textWatcherName);
+        holder.price_str.removeTextChangedListener(holder.textWatcherPrice);
         Dish dishItem = MainActivity.dishList.get(position);
         String name = dishItem.getName();
         String price = dishItem.getPrice();
@@ -133,7 +154,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             }
         });
 
-        holder.textWatcher = new TextWatcher() {
+        holder.textWatcherName = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -150,7 +171,27 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 System.out.println(s.toString());
             }
         };
-        holder.name_str.addTextChangedListener(holder.textWatcher);
+
+        holder.textWatcherPrice = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                dishItem.setPrice(s.toString());
+                System.out.println(s.toString());
+            }
+        };
+
+        holder.name_str.addTextChangedListener(holder.textWatcherName);
+        holder.price_str.addTextChangedListener(holder.textWatcherPrice);
 
         SharedAdapter.adapterDish(dishItem);
         SharedAdapter.notifyDataSetChanged();
