@@ -44,21 +44,20 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     JSONObject tax;
     int nOfUsers = 1;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_screen);
 
-        editPeopleText = (EditText) findViewById(R.id.people_edit_text);
-        editCostText = (EditText) findViewById(R.id.cost_edit_text);
-        locationSpin = (Spinner) findViewById(R.id.province_list);
-        tax_text = (TextView) findViewById(R.id.tax_text);
+        editPeopleText = findViewById(R.id.people_edit_text);
+        editCostText = findViewById(R.id.cost_edit_text);
+        locationSpin = findViewById(R.id.province_list);
+        tax_text = findViewById(R.id.tax_text);
 
-        individual_split_button = (Button) findViewById(R.id.individual_split_button);
-        even_split_button = (Button) findViewById(R.id.even_split_botton);
-        scan_button = (ImageButton) findViewById(R.id.scan_button);
-        scan_cancel_button = (ImageButton) findViewById(R.id.scan_cancel_button);
+        individual_split_button = findViewById(R.id.individual_split_button);
+        even_split_button = findViewById(R.id.even_split_botton);
+        scan_button = findViewById(R.id.scan_button);
+        scan_cancel_button = findViewById(R.id.scan_cancel_button);
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(WelcomeScreen.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.locations));
@@ -73,7 +72,6 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
             public void onClick(View v) {
                 scan_cancel_button.setVisibility(View.VISIBLE);
                 scan_button.setBackground(getDrawable(R.drawable.scan_bill_clicked));
-
             }
         });
 
@@ -108,6 +106,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
                     }
 
                     writeToJson("datas.json", data.toString());
+                    System.out.println(cost);
                     open_individual_split_screen();
                 }
             }

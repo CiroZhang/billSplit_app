@@ -3,6 +3,8 @@ package com.example.billsplit_app;
 
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         private RecyclerView SharedRecyclerView;
         private Boolean IsCollapsed = false;
         private Boolean alcoholImageClicked = false;
+        private Boolean alcoholTaxApplicable = false;
 
         public ItemViewHolder(final View view) {
             super(view);
@@ -70,6 +73,23 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             }
         });
 
+//        holder.name_str.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+
         holder.expand_collapse_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +116,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 if (!holder.alcoholImageClicked) {
                     holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_checked);
                     holder.alcoholImageClicked = true;
+                    holder.alcoholTaxApplicable = true;
                 }
                 else {
                     holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_unchecked);

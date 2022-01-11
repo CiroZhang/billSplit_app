@@ -48,12 +48,13 @@
             <EditText
                 android:id="@+id/dish_price"
                 android:layout_width="90dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="217dp"
-                android:layout_marginTop="17dp"
+                android:layout_marginTop="7dp"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/avenir_book"
-                android:text="$00.00"
+                android:hint="$00.00"
+                android:inputType="numberDecimal"
                 android:textAlignment="viewEnd"
                 android:textColor="#FF000000"
                 android:textDirection="rtl"
@@ -103,6 +104,7 @@
             android:layout_height="56dp"
             android:layout_marginStart="136dp"
             android:layout_marginTop="200dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/alcohol_unchecked"
             android:visibility="visible" />
 
