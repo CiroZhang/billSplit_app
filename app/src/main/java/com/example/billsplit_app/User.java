@@ -7,9 +7,13 @@ public class User {
     private int color;
     private ArrayList<Dish> dishes = new ArrayList<>();
 
-    public User(String name, int color){
+    public User(String name){
+        if (name.isEmpty()){
+            name = "Person" + MainActivity.get_count();
+
+        }
         this.name = name;
-        this.color = color;
+        this.color = MainActivity.get_color();
     }
 
     public String getUsername(){

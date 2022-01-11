@@ -9,16 +9,29 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class MainActivity extends AppCompatActivity {
     public static ArrayList<User> usersList = new ArrayList<>();
     public static ArrayList<Dish> dishList = new ArrayList<>();
-    public static int numOfUsers = 1;
+    public static ArrayList<Integer> colorList = new ArrayList<>(Arrays.asList(-16731781,-2706168,-15503959,-7533027));
+    public static int empty_count = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+    public static int get_color(){
+        int current = colorList.get(0);
+        colorList.remove(0);
+        colorList.add(current);
+        return current;
+    }
+    public static int get_count(){
+        return empty_count ++;
+    }
+
 }

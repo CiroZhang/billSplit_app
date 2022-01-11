@@ -105,8 +105,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
                         e.printStackTrace();
                     }
 
-                    writeToJson("datas.json", data.toString());
-                    System.out.println(cost);
+                    Internal_files.writeToDataFiles(data.toString());
                     open_individual_split_screen();
                 }
             }
@@ -132,7 +131,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
                         e.printStackTrace();
                     }
 
-                    writeToJson("datas.json", data.toString());
+                    Internal_files.writeToDataFiles( data.toString());
                     open_even_split_screen();
 
                 }
@@ -163,20 +162,6 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         });
     }
 
-    public void writeToJson(String fileName, String content) {
-        File path = getApplicationContext().getFilesDir();
-
-        try {
-            FileOutputStream writer = new FileOutputStream(new File(path, fileName));
-            writer.write(content.getBytes());
-            writer.flush();
-            writer.close();
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public String readJson(String fileName) {
         try {
@@ -197,13 +182,11 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     }
 
     private void open_individual_split_screen() {
-        MainActivity.numOfUsers = nOfUsers;
         Intent open_individual_split_screen = new Intent(this, IndividualBillScreen.class);
         startActivity(open_individual_split_screen);
     }
 
     private void open_even_split_screen() {
-        MainActivity.numOfUsers = nOfUsers;
         Intent open_even_split_screen = new Intent(this, EvenBillScreen.class);
         startActivity(open_even_split_screen);
     }

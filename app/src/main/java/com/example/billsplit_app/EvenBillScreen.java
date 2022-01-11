@@ -112,14 +112,7 @@ public class EvenBillScreen extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View v) {
-                int color = get_color();
-                String name = addProfileNameEditText.getText().toString();
-                if (name.isEmpty()){
-                    name = "Person" + empty_count;
-                    empty_count++;
-                }
-
-                MainActivity.usersList.add(new User(name,color));
+                MainActivity.usersList.add(new User( addProfileNameEditText.getText().toString()));
                 ProfileViewAdapter.notifyDataSetChanged();
                 TipViewAdapter.notifyDataSetChanged();
                 popupWindow.dismiss();
@@ -136,11 +129,4 @@ public class EvenBillScreen extends AppCompatActivity {
 
     public void CheckPopup() {
     }
-    public int get_color(){
-        int current = color_list.get(0);
-        color_list.remove(0);
-        color_list.add(current);
-        return current;
-    }
-
 }
