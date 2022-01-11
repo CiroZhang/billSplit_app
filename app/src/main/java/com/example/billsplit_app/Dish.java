@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Dish {
     private String name;
     private String price;
+    private boolean collapsed = false;
 
     public Dish (String name, String price) {
         this.name = name;
@@ -25,5 +26,13 @@ public class Dish {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public boolean isCollapsed() {
+        return collapsed;
+    }
+
+    public void setCollapsed(boolean collapsed) {
+        this.collapsed = collapsed;
     }
 }

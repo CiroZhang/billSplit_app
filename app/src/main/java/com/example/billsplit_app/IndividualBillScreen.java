@@ -35,7 +35,6 @@ public class IndividualBillScreen extends AppCompatActivity {
     RecyclerView ItemRecyclerView;
     Boolean popupShown = false;
     int empty_count = 1;
-    int dishCount = 1;
 
     ArrayList<Integer> color_list = new ArrayList<>(Arrays.asList(-16731781,-2706168,-15503959,-7533027));
 
@@ -50,10 +49,10 @@ public class IndividualBillScreen extends AppCompatActivity {
         ImageButton addDishButton = findViewById(R.id.add_dish_button);
         TextView addDishButton2 = findViewById(R.id.add_dish_button2);
 
-        MainActivity.dishList.add(new Dish("New Dish ","00.00"));
+        MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),"00.00"));
 
         while (empty_count <= MainActivity.numOfUsers) {
-            MainActivity.usersList.add(new User("Person " + empty_count, get_color()));
+            MainActivity.usersList.add(new User("Person " + (MainActivity.usersList.size()+1), get_color()));
             empty_count++;
         }
 
@@ -73,17 +72,14 @@ public class IndividualBillScreen extends AppCompatActivity {
         });
 
         addDishButton.setOnClickListener(v -> {
-            MainActivity.dishList.add(new Dish("New Dish " + dishCount,"00.00"));
+            MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),"00.00"));
             ItemViewAdapter.notifyDataSetChanged();
             System.out.println(MainActivity.dishList.size());
-            dishCount++;
         });
-
         addDishButton2.setOnClickListener(v -> {
-            MainActivity.dishList.add(new Dish("New Dish " + dishCount,"00.00"));
+            MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),"00.00"));
             ItemViewAdapter.notifyDataSetChanged();
             System.out.println(MainActivity.dishList.size());
-            dishCount++;
         });
 
         setupRecyclerView();

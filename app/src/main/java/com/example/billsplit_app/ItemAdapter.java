@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder>{
@@ -33,6 +35,22 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         private Boolean IsCollapsed = false;
         private Boolean alcoholImageClicked = false;
         private Boolean alcoholTaxApplicable = false;
+        private TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
 
         public ItemViewHolder(final View view) {
             super(view);
@@ -57,6 +75,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+        holder.name_str.removeTextChangedListener(holder.textWatcher);
         Dish dishItem = MainActivity.dishList.get(position);
         String name = dishItem.getName();
         String price = dishItem.getPrice();
@@ -64,49 +83,38 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.name_str.setText(name);
         holder.price_str.setText(price);
 
+        if (dishItem.isCollapsed()) {
+            holder.expand_collapse_button.setBackgroundResource(R.drawable.expand_button);
+            holder.SharedRecyclerView.setVisibility(View.GONE);
+            holder.shared_with_text.setVisibility(View.GONE);
+            holder.alcohol_image.setVisibility(View.GONE);
+        }
+        else {
+            holder.expand_collapse_button.setBackgroundResource(R.drawable.collapse_button);
+            holder.SharedRecyclerView.setVisibility(View.VISIBLE);
+            holder.shared_with_text.setVisibility(View.VISIBLE);
+            holder.alcohol_image.setVisibility(View.VISIBLE);
+        }
+
         holder.delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity.dishList.remove(dishItem);
-                ItemAdapter.this.notifyDataSetChanged();
+                notifyDataSetChanged();
                 System.out.println(MainActivity.dishList.size());
             }
         });
 
-//        holder.name_str.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-
         holder.expand_collapse_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!holder.IsCollapsed) {
-                    holder.expand_collapse_button.setBackgroundResource(R.drawable.expand_button);
-                    holder.SharedRecyclerView.setVisibility(View.GONE);
-                    holder.shared_with_text.setVisibility(View.GONE);
-                    holder.alcohol_image.setVisibility(View.GONE);
-                    holder.IsCollapsed = true;
+                if (!dishItem.isCollapsed()) {
+                    dishItem.setCollapsed(true);
                 }
                 else {
-                    holder.expand_collapse_button.setBackgroundResource(R.drawable.collapse_button);
-                    holder.SharedRecyclerView.setVisibility(View.VISIBLE);
-                    holder.shared_with_text.setVisibility(View.VISIBLE);
-                    holder.alcohol_image.setVisibility(View.VISIBLE);
-                    holder.IsCollapsed = false;
+                    dishItem.setCollapsed(false);
                 }
+                notifyDataSetChanged();
             }
         });
 
@@ -124,6 +132,25 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 }
             }
         });
+
+        holder.textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                dishItem.setName(s.toString());
+                System.out.println(s.toString());
+            }
+        };
+        holder.name_str.addTextChangedListener(holder.textWatcher);
 
         SharedAdapter.adapterDish(dishItem);
         SharedAdapter.notifyDataSetChanged();
