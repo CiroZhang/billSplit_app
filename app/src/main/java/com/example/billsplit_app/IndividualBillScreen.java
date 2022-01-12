@@ -44,7 +44,22 @@ public class IndividualBillScreen extends AppCompatActivity {
         TextView addDishButton2 = findViewById(R.id.add_dish_button2);
         Button submitBillButton = findViewById(R.id.submit_bill_button);
 
-        MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),""));
+
+        System.out.println(MainActivity.usersList);
+        System.out.println(MainActivity.dishList);
+
+        if (MainActivity.usersList.isEmpty()) {
+            MainActivity.usersList.add(new User("Me"));
+        }
+
+        if (MainActivity.dishList.isEmpty()) {
+            MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),""));
+        }
+
+
+        System.out.println("added user and dish");
+        System.out.println(MainActivity.usersList);
+        System.out.println(MainActivity.dishList);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,16 +155,11 @@ public class IndividualBillScreen extends AppCompatActivity {
     }
 
     private void open_individual_tip_screen() {
-        Intent open_individual_tip_screen = new Intent(this, IndividualBillTIp.class);
+        Intent open_individual_tip_screen = new Intent(this, IndividualBillTip.class);
         startActivity(open_individual_tip_screen);
     }
 
     public void CheckPopup() {
     }
 
-    // for opening screens later on
-//    private void open_org_screen() {
-//        Intent open_org_screen = new Intent(this, OrganizationScreen.class);
-//        startActivity(open_org_screen);
-//    }
 }

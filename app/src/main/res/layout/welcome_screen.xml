@@ -17,28 +17,29 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="53dp"
-                    android:layout_marginStart="120dp"
-                    android:layout_marginTop="84dp"
+                    android:layout_marginTop="34dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:fontFamily="@font/avenir_semi_bold"
-                    android:text="App Name"
+                    android:text="Slice"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="34sp" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="0dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -57,7 +58,7 @@
 
                     <ImageView
                         android:layout_width="132dp"
-                        android:layout_height="44dp"
+                        android:layout_height="42dp"
                         android:layout_marginStart="42dp"
                         android:layout_marginTop="29dp"
                         android:background="@drawable/rounded_rectangle1" />
@@ -67,11 +68,12 @@
                         android:layout_width="115dp"
                         android:layout_height="40dp"
                         android:layout_marginStart="50dp"
-                        android:layout_marginTop="31dp"
+                        android:layout_marginTop="30dp"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/avenir_book"
                         android:inputType="number"
-                        android:textDirection="rtl"
+                        android:maxLength="3"
+                        android:textAlignment="viewEnd"
                         android:textSize="16sp" />
 
                 </RelativeLayout>
@@ -81,40 +83,64 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="21dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="42dp"
-                    android:text="Total cost of the meal"
-                    android:textSize="16sp"
+                    android:layout_marginTop="31dp"
                     android:fontFamily="@font/avenir_medium"
-                    android:textColor="@color/black"/>
+                    android:text="Total cost of the meal"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:layout_width="132dp"
-                        android:layout_height="44dp"
+                        android:layout_height="42dp"
                         android:layout_marginStart="80dp"
-                        android:layout_marginTop="29dp"
+                        android:layout_marginTop="20dp"
                         android:background="@drawable/rounded_rectangle1" />
 
                     <EditText
                         android:id="@+id/cost_edit_text"
                         android:layout_width="115dp"
-                        android:layout_height="40dp"
+                        android:layout_height="42dp"
                         android:layout_marginStart="88dp"
-                        android:layout_marginTop="31dp"
+                        android:layout_marginTop="20dp"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/avenir_book"
                         android:inputType="numberDecimal"
-                        android:textDirection="rtl"
+                        android:maxLength="7"
+                        android:textAlignment="viewEnd"
                         android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="90dp"
+                        android:layout_marginTop="31dp"
+                        android:fontFamily="@font/avenir_book"
+                        android:text="$"
+                        android:textAlignment="center"
+                        android:textColor="#FF000000"
+                        android:textSize="16sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="83dp"
+                        android:layout_marginTop="67dp"
+                        android:fontFamily="@font/avenir_book"
+                        android:text="Without tax and tip"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
                 </RelativeLayout>
 
@@ -124,15 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="255dp"
-                    android:layout_marginTop="3dp"
-                    android:fontFamily="@font/avenir_book"
-                    android:text="Without tax and tip"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+
 
             </RelativeLayout>
 
@@ -145,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="21dp"
                     android:layout_marginStart="17dp"
-                    android:layout_marginTop="42dp"
+                    android:layout_marginTop="22dp"
                     android:text="Province/Territory"
                     android:fontFamily="@font/avenir_medium"
                     android:textSize="16sp"
@@ -206,7 +224,7 @@
                     android:textColor="@color/white" />
 
                 <Button
-                    android:id="@+id/even_split_botton"
+                    android:id="@+id/even_split_button"
                     android:layout_width="347dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="32dp"

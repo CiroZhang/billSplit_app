@@ -28,15 +28,30 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/even_tip_frame" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="318dp"
+            android:layout_marginTop="22.5dp"
+            android:fontFamily="@font/avenir_book"
+            android:text="%"
+            android:textAlignment="center"
+            android:textColor="#FF000000"
+            android:textSize="14sp"
+            android:visibility="visible" />
+
         <EditText
             android:id="@+id/tip_edit_text"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="37dp"
-            android:layout_marginStart="260dp"
+            android:layout_marginStart="255dp"
             android:layout_marginTop="13dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/avenir_book"
-            android:hint="Enter tip %"
+            android:hint="Enter tip"
+            android:inputType="numberDecimal"
+            android:maxLength="3"
+            android:textAlignment="viewEnd"
             android:textColor="@color/black"
             android:textSize="14sp" />
 

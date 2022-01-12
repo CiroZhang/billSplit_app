@@ -10,9 +10,9 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 
-public class IndividualBillTIp extends AppCompatActivity {
+public class IndividualBillTip extends AppCompatActivity {
 
-    TipAdapter IndividualTipViewAdapter;
+    TipAdapter TipAdapter;
     RecyclerView IndividualTipRecyclerView;
     Boolean same_tip = false;
 
@@ -48,10 +48,10 @@ public class IndividualBillTIp extends AppCompatActivity {
     }
 
     void setupRecyclerView() {
-        IndividualTipViewAdapter = new TipAdapter();
+        TipAdapter = new TipAdapter();
 
-        IndividualTipRecyclerView = findViewById(R.id.even_tip_list_view);
-        IndividualTipRecyclerView.setAdapter(IndividualTipViewAdapter);
+        IndividualTipRecyclerView = findViewById(R.id.individual_tip_list_view);
+        IndividualTipRecyclerView.setAdapter(TipAdapter);
         IndividualTipRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
     }
 }

@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -21,8 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -59,7 +56,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         tax_text = findViewById(R.id.tax_text);
 
         individual_split_button = findViewById(R.id.individual_split_button);
-        even_split_button = findViewById(R.id.even_split_botton);
+        even_split_button = findViewById(R.id.even_split_button);
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(WelcomeScreen.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.locations));
@@ -67,6 +64,8 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         locationSpin.setAdapter(myAdapter);
         locationSpin.setOnItemSelectedListener(this);
 
+//        individual_split_button.setActivated(false);
+//        even_split_button.setActivated(false);
 
 //        scan_button.setOnClickListener(new View.OnClickListener() {
 //            @SuppressLint("UseCompatLoadingForDrawables")
@@ -164,14 +163,15 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
                 if (editPeopleTextFilled && editCostTextFilled && locationSpinFilled) {
                     individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
                     even_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
+                    individual_split_button.setActivated(true);
+                    even_split_button.setActivated(true);
                 }
                 else {
                     individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
                     even_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
+                    individual_split_button.setActivated(false);
+                    even_split_button.setActivated(false);
                 }
-//                System.out.println(nOfUsers);
-//                System.out.println(editPeopleTextFilled);
-                MainActivity.usersList.clear();
             }
         });
 
@@ -183,11 +183,15 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+
+//                double num = Double.parseDouble(s.toString())*100;
+//                int num2 = (int) num;
+//                num = (double) num2 /100;
+
                 if (!s.toString().isEmpty()) {
                     totalBillCost = Double.parseDouble(s.toString());
                     editCostTextFilled = true;
@@ -199,14 +203,15 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
                 if (editPeopleTextFilled && editCostTextFilled && locationSpinFilled) {
                     individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
                     even_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
+                    individual_split_button.setActivated(true);
+                    even_split_button.setActivated(true);
                 }
                 else {
                     individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
                     even_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
+                    individual_split_button.setActivated(false);
+                    even_split_button.setActivated(false);
                 }
-//                System.out.println(totalBillCost);
-//                System.out.println(editCostTextFilled);
-                MainActivity.usersList.clear();
             }
         });
     }
@@ -231,13 +236,17 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     }
 
     private void open_individual_split_screen() {
-        Intent open_individual_split_screen = new Intent(this, IndividualBillScreen.class);
-        startActivity(open_individual_split_screen);
+        if (individual_split_button.isActivated()) {
+            Intent open_individual_split_screen = new Intent(this, IndividualBillScreen.class);
+            startActivity(open_individual_split_screen);
+        }
     }
 
     private void open_even_split_screen() {
-        Intent open_even_split_screen = new Intent(this, EvenBillScreen.class);
-        startActivity(open_even_split_screen);
+        if (even_split_button.isActivated()) {
+            Intent open_even_split_screen = new Intent(this, EvenBillScreen.class);
+            startActivity(open_even_split_screen);
+        }
     }
 
 
@@ -252,11 +261,24 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
             tax = tax_details.getJSONObject(province);
             tax_text.setText(tax.getInt("PST") + "% PST  " + tax.getInt("GST") + "% GST  " + tax.getInt("HST")  + "% HST");
 
+            locationSpinFilled = !province.equals("Choose Category");
+
+            if (editPeopleTextFilled && editCostTextFilled && locationSpinFilled) {
+                individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
+                even_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
+                individual_split_button.setActivated(true);
+                even_split_button.setActivated(true);
+            }
+            else {
+                individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
+                even_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
+                individual_split_button.setActivated(false);
+                even_split_button.setActivated(false);
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
     }
 
