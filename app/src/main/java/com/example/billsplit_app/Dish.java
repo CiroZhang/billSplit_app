@@ -6,6 +6,7 @@ public class Dish {
     private String name;
     private String price;
     private boolean collapsed = false;
+    private boolean alcoholic = false;
 
     public Dish (String name, String price) {
         this.name = name;
@@ -34,5 +35,13 @@ public class Dish {
 
     public void setCollapsed(boolean collapsed) {
         this.collapsed = collapsed;
+    }
+
+    public boolean isAlcoholic() {
+        return alcoholic;
+    }
+
+    public void setAlcoholic(boolean alcoholic) {
+        this.alcoholic = alcoholic;
     }
 }

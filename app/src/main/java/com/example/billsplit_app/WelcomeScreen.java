@@ -43,6 +43,10 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     String province;
     JSONObject tax;
     int nOfUsers = 1;
+    double totalBillCost = 0.0;
+    boolean editPeopleTextFilled = false;
+    boolean editCostTextFilled = false;
+    boolean locationSpinFilled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,10 +155,57 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
             public void afterTextChanged(Editable s) {
                 if (!s.toString().isEmpty()) {
                     nOfUsers = Integer.parseInt(s.toString());
+                    editPeopleTextFilled = true;
                 }
                 else {
                     nOfUsers = 1;
+                    editPeopleTextFilled = false;
                 }
+                if (editPeopleTextFilled && editCostTextFilled && locationSpinFilled) {
+                    individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
+                    even_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
+                }
+                else {
+                    individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
+                    even_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
+                }
+//                System.out.println(nOfUsers);
+//                System.out.println(editPeopleTextFilled);
+                MainActivity.usersList.clear();
+            }
+        });
+
+        editCostText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().isEmpty()) {
+                    totalBillCost = Double.parseDouble(s.toString());
+                    editCostTextFilled = true;
+                }
+                else {
+                    totalBillCost = 0.0;
+                    editCostTextFilled = false;
+                }
+                if (editPeopleTextFilled && editCostTextFilled && locationSpinFilled) {
+                    individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
+                    even_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
+                }
+                else {
+                    individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
+                    even_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
+                }
+//                System.out.println(totalBillCost);
+//                System.out.println(editCostTextFilled);
                 MainActivity.usersList.clear();
             }
         });

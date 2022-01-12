@@ -1,7 +1,6 @@
 package com.example.billsplit_app;
 
 
-
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,12 +18,13 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder>{
+public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
     SharedAdapter SharedAdapter = new SharedAdapter();
 
-    public ItemAdapter(){}
+    public ItemAdapter() {
+    }
 
-    public class ItemViewHolder extends RecyclerView.ViewHolder{
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
         private ImageButton delete_button;
         private TextView name_str;
         private TextView price_str;
@@ -89,7 +89,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dish, parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dish, parent, false);
         return new ItemViewHolder(itemView);
     }
 
@@ -117,6 +117,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             holder.alcohol_image.setVisibility(View.VISIBLE);
         }
 
+        if (dishItem.isAlcoholic()) {
+            holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_checked);
+            holder.alcoholImageClicked = true;
+            holder.alcoholTaxApplicable = true;
+        }
+        else {
+            holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_unchecked);
+            holder.alcoholImageClicked = false;
+        }
+
         holder.delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,8 +141,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             public void onClick(View v) {
                 if (!dishItem.isCollapsed()) {
                     dishItem.setCollapsed(true);
-                }
-                else {
+                } else {
                     dishItem.setCollapsed(false);
                 }
                 notifyDataSetChanged();
@@ -142,15 +151,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.alcohol_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!holder.alcoholImageClicked) {
-                    holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_checked);
-                    holder.alcoholImageClicked = true;
-                    holder.alcoholTaxApplicable = true;
+                if (!dishItem.isAlcoholic()) {
+                    dishItem.setAlcoholic(true);
+                } else {
+                    dishItem.setAlcoholic(false);
                 }
-                else {
-                    holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_unchecked);
-                    holder.alcoholImageClicked = false;
-                }
+                notifyDataSetChanged();
             }
         });
 
