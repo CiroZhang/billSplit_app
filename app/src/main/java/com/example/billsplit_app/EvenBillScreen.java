@@ -67,7 +67,8 @@ public class EvenBillScreen extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                open_even_final_screen();
+
 
             }
         });
@@ -130,6 +131,10 @@ public class EvenBillScreen extends AppCompatActivity {
     private void open_welcome_screen() {
         Intent open_welcome_screen = new Intent(this, WelcomeScreen.class);
         startActivity(open_welcome_screen);
+    }
+    private void open_even_final_screen() {
+        Intent open_even_final_screen = new Intent(this, EvenFinalScreen.class);
+        startActivity(open_even_final_screen);
     }
 
     public void CheckPopup() {
