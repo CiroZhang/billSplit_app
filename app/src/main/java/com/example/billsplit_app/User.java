@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class User {
     private String name;
     private int color;
+    private int tips;
     private ArrayList<Dish> dishes = new ArrayList<>();
 
     public User(String name){
@@ -32,6 +33,8 @@ public class User {
         this.dishes = dishes;
     }
 
+    public void setTips(int tips){ this.tips = tips; }
+
     public void addDish(Dish dish) {
         this.dishes.add(dish);
     }
@@ -44,7 +47,10 @@ public class User {
         return color;
     }
 
+    public int getTips(){return tips;}
+
     public void setColor(int color) {
         this.color = color;
     }
+
 }

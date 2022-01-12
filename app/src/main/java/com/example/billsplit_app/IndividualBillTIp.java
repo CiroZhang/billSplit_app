@@ -12,7 +12,7 @@ import android.widget.ImageButton;
 
 public class IndividualBillTIp extends AppCompatActivity {
 
-    EvenTipAdapter IndividualTipViewAdapter;
+    TipAdapter IndividualTipViewAdapter;
     RecyclerView IndividualTipRecyclerView;
     Boolean same_tip = false;
 
@@ -48,7 +48,7 @@ public class IndividualBillTIp extends AppCompatActivity {
     }
 
     void setupRecyclerView() {
-        IndividualTipViewAdapter = new EvenTipAdapter();
+        IndividualTipViewAdapter = new TipAdapter();
 
         IndividualTipRecyclerView = findViewById(R.id.even_tip_list_view);
         IndividualTipRecyclerView.setAdapter(IndividualTipViewAdapter);

@@ -23,15 +23,11 @@ import java.util.Arrays;
 public class EvenBillScreen extends AppCompatActivity {
 
     ProfileAdapter ProfileViewAdapter;
-    EvenTipAdapter TipViewAdapter;
+    TipAdapter TipViewAdapter;
     RecyclerView ProfileRecyclerView;
     RecyclerView EvenTipRecyclerView;
     Boolean popupShown = false;
     Boolean same_tip = false;
-
-
-    ArrayList<Integer> color_list = new ArrayList<>(Arrays.asList(-16731781,-2706168,-15503959,-7533027));
-    int empty_count = 1;
 
     @SuppressLint("ResourceType")
     @Override
@@ -41,6 +37,7 @@ public class EvenBillScreen extends AppCompatActivity {
 
         ImageButton backButton = findViewById(R.id.back_button);
         ImageButton addUserButton = findViewById(R.id.add_user_button);
+        Button submitButton = findViewById(R.id.submit_button);
 
         CheckBox sameTipButton = findViewById(R.id.same_tip_button);
 
@@ -64,6 +61,13 @@ public class EvenBillScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 same_tip = sameTipButton.isChecked();
+            }
+        });
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
 
             }
         });
@@ -73,7 +77,7 @@ public class EvenBillScreen extends AppCompatActivity {
 
     void setupRecyclerView() {
         ProfileViewAdapter = new ProfileAdapter(this,MainActivity.usersList);
-        TipViewAdapter = new EvenTipAdapter();
+        TipViewAdapter = new TipAdapter();
 
         ProfileRecyclerView = findViewById(R.id.profile_list_view);
         ProfileRecyclerView.setAdapter(ProfileViewAdapter);
