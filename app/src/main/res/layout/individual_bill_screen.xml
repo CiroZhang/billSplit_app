@@ -211,6 +211,7 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <Button
+            android:id="@+id/submit_bill_button"
             android:layout_width="347dp"
             android:layout_height="48dp"
             android:layout_marginTop="76.5dp"

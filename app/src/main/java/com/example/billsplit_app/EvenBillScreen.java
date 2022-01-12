@@ -23,7 +23,7 @@ import java.util.Arrays;
 public class EvenBillScreen extends AppCompatActivity {
 
     ProfileAdapter ProfileViewAdapter;
-    TipAdapter TipViewAdapter;
+    EvenTipAdapter TipViewAdapter;
     RecyclerView ProfileRecyclerView;
     RecyclerView EvenTipRecyclerView;
     Boolean popupShown = false;
@@ -59,7 +59,6 @@ public class EvenBillScreen extends AppCompatActivity {
                 CheckPopup();
             }
         });
-        setupRecyclerView();
 
         sameTipButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,17 +67,19 @@ public class EvenBillScreen extends AppCompatActivity {
 
             }
         });
+
+        setupRecyclerView();
     }
 
     void setupRecyclerView() {
         ProfileViewAdapter = new ProfileAdapter(this,MainActivity.usersList);
-        TipViewAdapter = new TipAdapter();
+        TipViewAdapter = new EvenTipAdapter();
 
         ProfileRecyclerView = findViewById(R.id.profile_list_view);
         ProfileRecyclerView.setAdapter(ProfileViewAdapter);
         ProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
-        EvenTipRecyclerView = findViewById(R.id.even_tip_profile_list);
+        EvenTipRecyclerView = findViewById(R.id.even_tip_list_view);
         EvenTipRecyclerView.setAdapter(TipViewAdapter);
         EvenTipRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
     }

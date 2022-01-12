@@ -211,7 +211,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/even_tip_profile_list"
+                            android:id="@+id/even_tip_list_view"
                             android:layout_width="match_parent"
                             android:layout_height="96dp"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

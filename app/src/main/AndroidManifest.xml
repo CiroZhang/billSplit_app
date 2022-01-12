@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BillSplit_app">
         <activity
-            android:name=".individual_bill_tip"
+            android:name=".IndividualBillTIp"
             android:exported="false" />
         <activity
             android:name=".IndividualBillScreen"

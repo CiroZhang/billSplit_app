@@ -1,6 +1,5 @@
 package com.example.billsplit_app;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+public class EvenTipAdapter extends RecyclerView.Adapter<EvenTipAdapter.TipViewHolder>{
 
-public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder>{
-
-    public TipAdapter(){ }
+    public EvenTipAdapter(){ }
 
     public class TipViewHolder extends RecyclerView.ViewHolder{
         private TextView name_str;

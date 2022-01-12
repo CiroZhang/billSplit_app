@@ -5,11 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,11 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,6 +42,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         ImageButton addUserButton = findViewById(R.id.add_user_button);
         ImageButton addDishButton = findViewById(R.id.add_dish_button);
         TextView addDishButton2 = findViewById(R.id.add_dish_button2);
+        Button submitBillButton = findViewById(R.id.submit_bill_button);
 
         MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),""));
 
@@ -75,6 +70,13 @@ public class IndividualBillScreen extends AppCompatActivity {
             MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),""));
             ItemViewAdapter.notifyDataSetChanged();
             System.out.println(MainActivity.dishList.size());
+        });
+
+        submitBillButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                open_individual_tip_screen();
+            }
         });
 
         setupRecyclerView();
@@ -135,6 +137,11 @@ public class IndividualBillScreen extends AppCompatActivity {
     private void open_welcome_screen() {
         Intent open_welcome_screen = new Intent(this, WelcomeScreen.class);
         startActivity(open_welcome_screen);
+    }
+
+    private void open_individual_tip_screen() {
+        Intent open_individual_tip_screen = new Intent(this, IndividualBillTIp.class);
+        startActivity(open_individual_tip_screen);
     }
 
     public void CheckPopup() {
