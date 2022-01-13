@@ -1,5 +1,7 @@
 package com.example.billsplit_app;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class User {
@@ -8,14 +10,21 @@ public class User {
     private int tips;
     private boolean lock_tips = false;
     private ArrayList<Dish> dishes = new ArrayList<>();
+    private InternalFiles data;
 
-    public User(String name){
+    public User(String name) {
         if (name.isEmpty()){
             name = "Person" + MainActivity.get_count();
 
         }
         this.name = name;
         this.color = MainActivity.get_color();
+
+        try {
+            data = new InternalFiles();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getUsername(){
@@ -56,6 +65,22 @@ public class User {
 
     public void setColor(int color) {
         this.color = color;
+    }
+
+    public double getEvenTotal(){
+        double user = MainActivity.get_user_count();
+        double tip = tips/100;
+        try {
+            double totalCost = InternalFiles.getSavedCost();
+            double tax = 1 + InternalFiles.getSavedTax();
+            return (totalCost * tax)/user + totalCost*tip;
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println("error");
+        return 0;
+
     }
 
 }

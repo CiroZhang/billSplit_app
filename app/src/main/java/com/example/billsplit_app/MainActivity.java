@@ -39,4 +39,8 @@ public class MainActivity extends AppCompatActivity {
         return empty_count ++;
     }
 
+    public static int get_user_count(){
+        return (int) usersList.stream().count();
+    }
+
 }
