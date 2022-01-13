@@ -1,4 +1,4 @@
-package com.example.billsplit_app;
+package com.example.billsplit_app.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,9 +10,13 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 
-public class IndividualBillTip extends AppCompatActivity {
+import com.example.billsplit_app.Adapters.TipAdapter;
+import com.example.billsplit_app.R;
+import com.example.billsplit_app.Screens.IndividualBillScreen;
 
-    TipAdapter TipAdapter;
+public class IndividualTipScreen extends AppCompatActivity {
+
+    com.example.billsplit_app.Adapters.TipAdapter TipAdapter;
     RecyclerView IndividualTipRecyclerView;
     Boolean same_tip = false;
 

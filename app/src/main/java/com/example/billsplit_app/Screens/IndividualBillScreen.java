@@ -1,4 +1,4 @@
-package com.example.billsplit_app;
+package com.example.billsplit_app.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +18,13 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.billsplit_app.Adapters.ItemAdapter;
+import com.example.billsplit_app.Adapters.ProfileAdapter;
+import com.example.billsplit_app.Dish;
+import com.example.billsplit_app.MainActivity;
+import com.example.billsplit_app.R;
+import com.example.billsplit_app.User;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -28,9 +35,6 @@ public class IndividualBillScreen extends AppCompatActivity {
     ItemAdapter ItemViewAdapter;
     RecyclerView ItemRecyclerView;
     Boolean popupShown = false;
-    int empty_count = 1;
-
-    ArrayList<Integer> color_list = new ArrayList<>(Arrays.asList(-16731781,-2706168,-15503959,-7533027));
 
     @SuppressLint("ResourceType")
     @Override
@@ -155,7 +159,7 @@ public class IndividualBillScreen extends AppCompatActivity {
     }
 
     private void open_individual_tip_screen() {
-        Intent open_individual_tip_screen = new Intent(this, IndividualBillTip.class);
+        Intent open_individual_tip_screen = new Intent(this, IndividualTipScreen.class);
         startActivity(open_individual_tip_screen);
     }
 

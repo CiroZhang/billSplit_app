@@ -1,4 +1,4 @@
-package com.example.billsplit_app;
+package com.example.billsplit_app.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +16,9 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.billsplit_app.InternalFiles;
+import com.example.billsplit_app.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,6 +26,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -44,11 +48,17 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     boolean editPeopleTextFilled = false;
     boolean editCostTextFilled = false;
     boolean locationSpinFilled = false;
+    InternalFiles internalFiles= new InternalFiles();
+    ArrayList<String> list = new ArrayList<>();
+
+    public WelcomeScreen() throws JSONException {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_screen);
+
 
         editPeopleText = findViewById(R.id.people_edit_text);
         editCostText = findViewById(R.id.cost_edit_text);
@@ -57,9 +67,31 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
 
         individual_split_button = findViewById(R.id.individual_split_button);
         even_split_button = findViewById(R.id.even_split_button);
+        Object obj = getResources().getStringArray(R.array.locations);
+        try {
+            list.add(InternalFiles.getSavedLocation());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        list.add("Alberta");
+        list.add("British Columbia");
+        list.add("Manitoba");
+        list.add("New Brunswick");
+        list.add("Newfoundland and Labrador");
+        list.add("Northwest Territories");
+        list.add("Nova Scotia");
+        list.add("Nunavut");
+        list.add("Ontario");
+        list.add("Prince Edward Island");
+        list.add("Quebec");
+        list.add("Saskatchewan");
+        list.add("Yukon");
 
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(WelcomeScreen.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.locations));
+        ArrayAdapter <String> myAdapter = new ArrayAdapter<String>(WelcomeScreen.this,
+                android.R.layout.simple_list_item_1, list);
+        myAdapter.notifyDataSetChanged();
+
+
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationSpin.setAdapter(myAdapter);
         locationSpin.setOnItemSelectedListener(this);
@@ -88,54 +120,22 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         individual_split_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JSONObject data = new JSONObject();
-                boolean ready = false;
                 people = editPeopleText.getText().toString();
                 cost = editCostText.getText().toString();
+                update_Internal();
+                open_individual_split_screen();
 
-                // check data plz
-                if(true) {
-                    try {
-                        data.put("people", people);
-                        data.put("cost", cost);
-                        data.put("province", province);
-                        data.put("tax", tax);
-
-                    }
-                    catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    Internal_files.writeToDataFiles(data.toString());
-                    open_individual_split_screen();
-                }
             }
         });
 
         even_split_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JSONObject data = new JSONObject();
-                boolean ready = false;
                 people = editPeopleText.getText().toString();
                 cost = editCostText.getText().toString();
+                update_Internal();
+                open_even_split_screen();
 
-                // check data plz
-                if(true) {
-                    try {
-                        data.put("people", people);
-                        data.put("cost", cost);
-                        data.put("province", province);
-                        data.put("tax", tax);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    Internal_files.writeToDataFiles( data.toString());
-                    open_even_split_screen();
-
-                }
             }
         });
 
@@ -249,15 +249,13 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
-
-
     @SuppressLint("SetTextI18n")
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         try {
             JSONObject tax_details = new JSONObject(readJson("res/tax_details.json"));
-            String province = parent.getItemAtPosition(position).toString();
+            province = parent.getItemAtPosition(position).toString();
             tax = tax_details.getJSONObject(province);
             tax_text.setText(tax.getInt("PST") + "% PST  " + tax.getInt("GST") + "% GST  " + tax.getInt("HST")  + "% HST");
 
@@ -285,4 +283,19 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
+
+    public void update_Internal(){
+        try {
+            InternalFiles.setSomething("people",people);
+            InternalFiles.setSomething("cost",cost);
+            InternalFiles.setSomething("location",province);
+            InternalFiles.setSomething("tax",tax);
+            InternalFiles.saveData();
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

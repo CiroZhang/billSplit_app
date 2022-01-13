@@ -13,19 +13,19 @@
             android:name=".IndividualBillTIp"
             android:exported="false" />
         <activity
-            android:name=".IndividualBillScreen"
+            android:name=".Screens.IndividualBillScreen"
             android:exported="false" />
         <activity
-            android:name=".EvenBillScreen"
+            android:name=".Screens.EvenBillScreen"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".EvenFinalScreen"
+            android:name=".Screens.EvenFinalScreen"
             android:exported="false"/>
         <activity
-            android:name=".WelcomeScreen"
+            android:name=".Screens.WelcomeScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,7 +1,5 @@
-package com.example.billsplit_app;
+package com.example.billsplit_app.Adapters;
 
-import android.content.Context;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.example.billsplit_app.Dish;
+import com.example.billsplit_app.MainActivity;
+import com.example.billsplit_app.R;
+import com.example.billsplit_app.User;
 
 public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedViewHolder>{
 

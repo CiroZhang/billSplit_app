@@ -1,4 +1,4 @@
-package com.example.billsplit_app;
+package com.example.billsplit_app.Adapters;
 
 
 import android.content.Context;
@@ -14,12 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
+import com.example.billsplit_app.Dish;
+import com.example.billsplit_app.MainActivity;
+import com.example.billsplit_app.R;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
-    SharedAdapter SharedAdapter = new SharedAdapter();
+    public com.example.billsplit_app.Adapters.SharedAdapter SharedAdapter = new SharedAdapter();
 
     public ItemAdapter() {
     }

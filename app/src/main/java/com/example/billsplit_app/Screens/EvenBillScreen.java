@@ -1,4 +1,4 @@
-package com.example.billsplit_app;
+package com.example.billsplit_app.Screens;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,8 +17,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.example.billsplit_app.Adapters.ProfileAdapter;
+import com.example.billsplit_app.Adapters.TipAdapter;
+import com.example.billsplit_app.MainActivity;
+import com.example.billsplit_app.R;
+import com.example.billsplit_app.User;
 
 public class EvenBillScreen extends AppCompatActivity {
 
@@ -40,6 +43,7 @@ public class EvenBillScreen extends AppCompatActivity {
         Button submitButton = findViewById(R.id.submit_button);
 
         CheckBox sameTipButton = findViewById(R.id.same_tip_button);
+        View same_tip_selection = findViewById(R.id.same_tip_selection);
 
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +64,14 @@ public class EvenBillScreen extends AppCompatActivity {
         sameTipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                same_tip = sameTipButton.isChecked();
+
+                if (sameTipButton.isChecked()) {
+                    same_tip_selection.setVisibility(View.VISIBLE);
+                }
+                else{
+                    same_tip_selection.setVisibility(View.INVISIBLE);
+                }
+
             }
         });
 
@@ -77,7 +88,7 @@ public class EvenBillScreen extends AppCompatActivity {
     }
 
     void setupRecyclerView() {
-        ProfileViewAdapter = new ProfileAdapter(this,MainActivity.usersList);
+        ProfileViewAdapter = new ProfileAdapter(this, MainActivity.usersList);
         TipViewAdapter = new TipAdapter();
 
         ProfileRecyclerView = findViewById(R.id.profile_list_view);
@@ -132,6 +143,7 @@ public class EvenBillScreen extends AppCompatActivity {
         Intent open_welcome_screen = new Intent(this, WelcomeScreen.class);
         startActivity(open_welcome_screen);
     }
+
     private void open_even_final_screen() {
         Intent open_even_final_screen = new Intent(this, EvenFinalScreen.class);
         startActivity(open_even_final_screen);

@@ -6,6 +6,7 @@ public class User {
     private String name;
     private int color;
     private int tips;
+    private boolean lock_tips = false;
     private ArrayList<Dish> dishes = new ArrayList<>();
 
     public User(String name){
@@ -34,6 +35,10 @@ public class User {
     }
 
     public void setTips(int tips){ this.tips = tips; }
+
+    public void setLock_tips(boolean lock){
+        this.lock_tips = lock;
+    }
 
     public void addDish(Dish dish) {
         this.dishes.add(dish);

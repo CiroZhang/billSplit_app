@@ -1,10 +1,6 @@
-package com.example.billsplit_app;
+package com.example.billsplit_app.Adapters;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.billsplit_app.R;
+import com.example.billsplit_app.User;
 
 import java.util.ArrayList;
 

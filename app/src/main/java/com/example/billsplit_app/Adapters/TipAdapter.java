@@ -1,4 +1,4 @@
-package com.example.billsplit_app;
+package com.example.billsplit_app.Adapters;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.billsplit_app.MainActivity;
+import com.example.billsplit_app.R;
+import com.example.billsplit_app.User;
 
 public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder>{
 
@@ -55,6 +59,10 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder>{
         User current = MainActivity.usersList.get(position);
         holder.name_str.setText(name);
         holder.tips.removeTextChangedListener(holder.tw);
+
+
+
+
         holder.tw = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
