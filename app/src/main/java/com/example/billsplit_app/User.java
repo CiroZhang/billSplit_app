@@ -68,12 +68,15 @@ public class User {
     }
 
     public double getEvenTotal(){
-        double user = MainActivity.get_user_count();
-        double tip = tips/100;
+        double user = (double)  MainActivity.get_user_count();
+        double tip = (double) tips/100;
         try {
-            double totalCost = InternalFiles.getSavedCost();
-            double tax = 1 + InternalFiles.getSavedTax();
-            return (totalCost * tax)/user + totalCost*tip;
+            double totalCost = (double)  InternalFiles.getSavedCost();
+            double tax =(double) InternalFiles.getSavedTax();
+            double total = ((totalCost * (1 + tax + tip))/user);
+            int cal = (int) (total * 100);
+            total = (double) cal/100;
+            return total;
         }
         catch (JSONException e) {
             e.printStackTrace();

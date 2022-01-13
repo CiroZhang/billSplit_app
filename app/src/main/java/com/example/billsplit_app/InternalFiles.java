@@ -57,7 +57,11 @@ public class InternalFiles extends AppCompatActivity {
     }
     public static double getSavedTax() throws JSONException {
         JSONObject current = data.getJSONObject("tax");
-        return (current.getInt("PST") + current.getInt("GST") + current.getInt("HST"))/100;
+        double pst = current.getInt("PST");
+        double gst = current.getInt("GST");
+        double hst = current.getInt("HST");
+
+        return (pst + gst + hst)/100;
 
     }
 

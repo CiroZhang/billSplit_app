@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/profile_background"
+            android:id="@+id/final_profile_background"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginStart="16dp"
@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/profile_short_user_name"
+            android:id="@+id/final_profile_short_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -30,11 +30,11 @@
             android:text="M"
             android:textColor="#FFFFFFFF"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@id/profile_background"
-            app:layout_constraintTop_toTopOf="@id/profile_background"/>
+            app:layout_constraintStart_toStartOf="@id/final_profile_background"
+            app:layout_constraintTop_toTopOf="@id/final_profile_background"/>
 
         <TextView
-            android:id="@+id/profile_user_name"
+            android:id="@+id/final_profile_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
@@ -46,10 +46,10 @@
             android:textColor="#FF000000"
             android:textSize="14sp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/profile_background" />
+            app:layout_constraintStart_toEndOf="@id/final_profile_background" />
 
         <TextView
-            android:id="@+id/profile_total_price"
+            android:id="@+id/final_profile_total_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22.5dp"
