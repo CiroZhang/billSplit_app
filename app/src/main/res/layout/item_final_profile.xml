@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#f6f6f6">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/profile_background"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/circle1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/profile_short_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/avenir_semi_bold"
+            android:textAlignment="center"
+            android:text="M"
+            android:textColor="#FFFFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@id/profile_background"
+            app:layout_constraintTop_toTopOf="@id/profile_background"/>
+
+        <TextView
+            android:id="@+id/profile_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/avenir_book"
+            android:gravity="center"
+            android:text="Person"
+            android:textAlignment="center"
+            android:textColor="#FF000000"
+            android:textSize="14sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/profile_background" />
+
+        <TextView
+            android:id="@+id/profile_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22.5dp"
+            android:layout_marginStart="336dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/avenir_semi_bold"
+            android:gravity="center"
+            android:text="$00.00"
+            android:textAlignment="center"
+            android:textColor="#FF000000"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>
