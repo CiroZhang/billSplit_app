@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     public static int nOfUsers = 1;
     public static boolean allTipsSelected = false;
 
+    public static double indivTotal = 0.0;
+
     public MainActivity() throws JSONException {
     }
 
@@ -52,5 +54,15 @@ public class MainActivity extends AppCompatActivity {
         return sum;
     }
 
+    public static void refreshIndivTotal() {
+        double total = 0.0;
+        for (Dish d : dishList) {
+            if (d.isAlcoholic()) {
 
+            }
+            total += Double.parseDouble(d.getPrice());
+        }
+        indivTotal = total;
+        System.out.println("indivTotal: " + indivTotal);
+    }
 }

@@ -131,6 +131,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             @Override
             public void onClick(View v) {
                 MainActivity.dishList.remove(dishItem);
+                MainActivity.refreshIndivTotal();
                 notifyDataSetChanged();
                 System.out.println(MainActivity.dishList.size());
             }
@@ -156,6 +157,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 } else {
                     dishItem.setAlcoholic(false);
                 }
+                MainActivity.refreshIndivTotal();
                 notifyDataSetChanged();
             }
         });
@@ -191,8 +193,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
             @Override
             public void afterTextChanged(Editable s) {
-                dishItem.setPrice(s.toString());
-                System.out.println(s.toString());
+                if (!s.toString().isEmpty()) {
+                    dishItem.setPrice(s.toString());
+                }
+                else {
+                    dishItem.setPrice("0.0");
+                }
+                MainActivity.refreshIndivTotal();
             }
         };
 

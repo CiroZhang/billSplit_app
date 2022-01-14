@@ -9,12 +9,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.billsplit_app.Adapters.TipAdapter;
@@ -130,5 +135,8 @@ public class IndividualTipScreen extends AppCompatActivity {
         IndividualTipRecyclerView = findViewById(R.id.individual_tip_list_view);
         IndividualTipRecyclerView.setAdapter(TipAdapter);
         IndividualTipRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+    }
+
+    public void CheckPopup() {
     }
 }

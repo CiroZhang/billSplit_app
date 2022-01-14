@@ -47,7 +47,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         ImageButton addDishButton = findViewById(R.id.add_dish_button);
         TextView addDishButton2 = findViewById(R.id.add_dish_button2);
         Button submitBillButton = findViewById(R.id.submit_bill_button);
-
+        TextView currentTotal = findViewById(R.id.current_total_price);
 
         System.out.println(MainActivity.usersList);
         System.out.println(MainActivity.dishList);
@@ -166,5 +166,4 @@ public class IndividualBillScreen extends AppCompatActivity {
 
     public void CheckPopup() {
     }
-
 }

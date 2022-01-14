@@ -2,12 +2,16 @@ package com.example.billsplit_app.Adapters;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -80,6 +84,13 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             holder.layoutGreyed.setVisibility(View.INVISIBLE);
         }
 
+        holder.transitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowPopup(v,current);
+            }
+        });
+
         holder.tips.removeTextChangedListener(holder.tw);
         holder.tw = new TextWatcher() {
             @Override
@@ -106,6 +117,98 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         };
         holder.tips.addTextChangedListener(holder.tw);
     }
+
+    public void ShowPopup(View view, User u) {
+        View popupView = LayoutInflater.from(view.getContext()).inflate(R.layout.open_tip_popup, null,false);
+        popupShown = true;
+        CheckPopup();
+
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                popupShown = false;
+                CheckPopup();
+                return true;
+            }
+        });
+
+        ImageView zeroButton = popupView.findViewById(R.id.tip_button1);
+        ImageView tenButton = popupView.findViewById(R.id.tip_button2);
+        ImageView twelveButton = popupView.findViewById(R.id.tip_button3);
+        ImageView fifteenButton = popupView.findViewById(R.id.tip_button4);
+        EditText popupTipText = popupView.findViewById(R.id.popup_tip_edit_text);
+
+        zeroButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                u.setTips(0);
+                popupWindow.dismiss();
+                popupShown = false;
+                CheckPopup();
+            }
+        });
+
+        tenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                u.setTips(10);
+                popupWindow.dismiss();
+                popupShown = false;
+                CheckPopup();
+            }
+        });
+
+        twelveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                u.setTips(12);
+                popupWindow.dismiss();
+                popupShown = false;
+                CheckPopup();
+            }
+        });
+
+        fifteenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                u.setTips(15);
+                popupWindow.dismiss();
+                popupShown = false;
+                CheckPopup();
+            }
+        });
+
+        popupTipText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().isEmpty()) {
+                    u.setTips(Integer.parseInt(s.toString()));
+                }
+                else {
+                    u.setTips(0);
+                }
+            }
+        });
+    }
+
+    public void CheckPopup() {}
 
     @Override
     public int getItemCount() {
