@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.billsplit_app.InternalFiles;
+import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
 
 import org.json.JSONException;
@@ -48,7 +49,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     boolean editPeopleTextFilled = false;
     boolean editCostTextFilled = false;
     boolean locationSpinFilled = false;
-    InternalFiles internalFiles= new InternalFiles();
+    InternalFiles internalFiles = new InternalFiles();
     ArrayList<String> list = new ArrayList<>();
 
     public WelcomeScreen() throws JSONException {

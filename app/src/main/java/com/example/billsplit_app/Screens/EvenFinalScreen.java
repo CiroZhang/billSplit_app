@@ -34,6 +34,9 @@ public class EvenFinalScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.final_bill_screen);
+        for (User i: MainActivity.usersList){
+            i.setEvenTotal();
+        }
 
         ImageButton backButton = findViewById(R.id.back_button);
         Button submitButton = findViewById(R.id.submit_button);

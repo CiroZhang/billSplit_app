@@ -16,12 +16,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.example.billsplit_app.Adapters.ProfileAdapter;
 import com.example.billsplit_app.Adapters.TipAdapter;
+import com.example.billsplit_app.InternalFiles;
 import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
 import com.example.billsplit_app.User;
+
+import org.json.JSONException;
 
 public class EvenBillScreen extends AppCompatActivity {
 
@@ -32,7 +36,7 @@ public class EvenBillScreen extends AppCompatActivity {
     Boolean popupShown = false;
     Boolean same_tip = false;
 
-    @SuppressLint("ResourceType")
+    @SuppressLint({"ResourceType", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +45,12 @@ public class EvenBillScreen extends AppCompatActivity {
         ImageButton backButton = findViewById(R.id.back_button);
         ImageButton addUserButton = findViewById(R.id.add_user_button);
         Button submitButton = findViewById(R.id.submit_button);
-
         CheckBox sameTipButton = findViewById(R.id.same_tip_button);
+
         View same_tip_selection = findViewById(R.id.same_tip_selection);
+        TextView current_total = findViewById(R.id.current_total);
+        try { current_total.setText("$ " + InternalFiles.getSavedCost());
+        } catch (JSONException e) { e.printStackTrace(); }
 
 
         backButton.setOnClickListener(new View.OnClickListener() {

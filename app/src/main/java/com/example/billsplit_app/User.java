@@ -11,6 +11,7 @@ public class User {
     private boolean lock_tips = false;
     private ArrayList<Dish> dishes = new ArrayList<>();
     private InternalFiles data;
+    private double total;
 
     public User(String name) {
         if (name.isEmpty()){
@@ -67,7 +68,7 @@ public class User {
         this.color = color;
     }
 
-    public double getEvenTotal(){
+    public void setEvenTotal(){
         double user = (double)  MainActivity.get_user_count();
         double tip = (double) tips/100;
         try {
@@ -76,14 +77,15 @@ public class User {
             double total = ((totalCost * (1 + tax + tip))/user);
             int cal = (int) (total * 100);
             total = (double) cal/100;
-            return total;
+            this.total = total;
         }
         catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println("error");
-        return 0;
+    }
 
+    public double getTotal(){
+        return total;
     }
 
 }

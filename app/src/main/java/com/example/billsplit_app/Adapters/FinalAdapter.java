@@ -53,7 +53,7 @@ public class FinalAdapter extends RecyclerView.Adapter<FinalAdapter.finalViewHol
         holder.name_str.setText(name);
         holder.profile_background.getBackground().setTint(userList.get(position).getColor());
         holder.profile_short_user_name.setText(name.substring(0,1));
-        holder.profile_price.setText("$ " + Double.toString(userList.get(position).getEvenTotal()));
+        holder.profile_price.setText("$ " + Double.toString(userList.get(position).getTotal()));
     }
 
     @Override

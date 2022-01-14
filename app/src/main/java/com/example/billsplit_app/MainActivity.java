@@ -29,12 +29,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+
     public static int get_color(){
         int current = colorList.get(0);
         colorList.remove(0);
         colorList.add(current);
         return current;
     }
+
     public static int get_count(){
         return empty_count ++;
     }
@@ -42,5 +45,14 @@ public class MainActivity extends AppCompatActivity {
     public static int get_user_count(){
         return (int) usersList.stream().count();
     }
+
+    public static double get_user_sum(){
+        double sum = 0;
+        for (User i: usersList) {
+            sum = sum + i.getTotal();
+        }
+        return sum;
+    }
+
 
 }
