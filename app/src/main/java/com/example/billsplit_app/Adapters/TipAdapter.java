@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -144,6 +145,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         ImageView twelveButton = popupView.findViewById(R.id.tip_button3);
         ImageView fifteenButton = popupView.findViewById(R.id.tip_button4);
         EditText popupTipText = popupView.findViewById(R.id.popup_tip_edit_text);
+        Button popupSubmitButton = popupView.findViewById(R.id.popup_submit_button);
 
         zeroButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,6 +181,15 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             @Override
             public void onClick(View v) {
                 u.setTips(15);
+                popupWindow.dismiss();
+                popupShown = false;
+                CheckPopup();
+            }
+        });
+
+        popupSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 popupWindow.dismiss();
                 popupShown = false;
                 CheckPopup();

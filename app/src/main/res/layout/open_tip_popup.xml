@@ -27,6 +27,7 @@
             android:layout_width="309dp"
             android:layout_height="467dp"
             android:background="@drawable/rectangle2"
+            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +121,7 @@
             app:layout_constraintTop_toBottomOf="@id/tip_button4" />
 
         <EditText
-            android:id="@+id/tip_edit_text"
+            android:id="@+id/popup_tip_edit_text"
             android:layout_width="80dp"
             android:layout_height="37dp"
             android:layout_marginStart="174dp"
@@ -137,7 +138,7 @@
             app:layout_constraintTop_toBottomOf="@id/tip_button4" />
 
         <Button
-            android:id="@+id/submit_button"
+            android:id="@+id/popup_submit_button"
             android:layout_width="259dp"
             android:layout_height="52dp"
             android:layout_marginTop="387dp"
