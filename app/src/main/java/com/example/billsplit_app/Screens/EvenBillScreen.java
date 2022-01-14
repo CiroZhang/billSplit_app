@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -35,12 +37,20 @@ public class EvenBillScreen extends AppCompatActivity {
     RecyclerView EvenTipRecyclerView;
     Boolean popupShown = false;
     Boolean same_tip = false;
+    int allTip = 0;
 
     @SuppressLint({"ResourceType", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.even_bill_screen);
+
+        MainActivity.usersList.add(new User("Me"));
+        if (MainActivity.nOfUsers > 1) {
+            for (int i = 1; i < MainActivity.nOfUsers; i++) {
+                MainActivity.usersList.add(new User("Person " + i));
+            }
+        }
 
         ImageButton backButton = findViewById(R.id.back_button);
         ImageButton addUserButton = findViewById(R.id.add_user_button);
@@ -49,6 +59,8 @@ public class EvenBillScreen extends AppCompatActivity {
 
         View same_tip_selection = findViewById(R.id.same_tip_selection);
         TextView current_total = findViewById(R.id.current_total);
+        EditText sameTipEditText = findViewById(R.id.same_tip_edit_text);
+
         try { current_total.setText("$ " + InternalFiles.getSavedCost());
         } catch (JSONException e) { e.printStackTrace(); }
 
@@ -85,9 +97,33 @@ public class EvenBillScreen extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (User user : MainActivity.usersList) {
+                    user.setTips(allTip);
+                }
+
                 open_even_final_screen();
+            }
+        });
 
+        sameTipEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().isEmpty()) {
+                    allTip = Integer.parseInt(s.toString());
+                }
+                else {
+                    allTip = 0;
+                }
             }
         });
 
