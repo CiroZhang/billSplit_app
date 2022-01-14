@@ -14,7 +14,7 @@ public class User {
 
     public User(String name) {
         if (name.isEmpty()){
-            name = "Person" + MainActivity.get_count();
+            name = "Person " + MainActivity.usersList.size();
 
         }
         this.name = name;

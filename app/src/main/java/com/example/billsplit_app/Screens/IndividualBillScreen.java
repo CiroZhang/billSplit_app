@@ -52,14 +52,13 @@ public class IndividualBillScreen extends AppCompatActivity {
         System.out.println(MainActivity.usersList);
         System.out.println(MainActivity.dishList);
 
-        if (MainActivity.usersList.isEmpty()) {
-            MainActivity.usersList.add(new User("Me"));
+        MainActivity.usersList.add(new User("Me"));
+        if (MainActivity.nOfUsers > 1) {
+            for (int i = 1; i < MainActivity.nOfUsers; i++) {
+                MainActivity.usersList.add(new User("Person " + i));
+            }
         }
-
-        if (MainActivity.dishList.isEmpty()) {
-            MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),""));
-        }
-
+        MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),""));
 
         System.out.println("added user and dish");
         System.out.println(MainActivity.usersList);
