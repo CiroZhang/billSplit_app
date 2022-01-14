@@ -36,7 +36,6 @@ public class EvenBillScreen extends AppCompatActivity {
     RecyclerView ProfileRecyclerView;
     RecyclerView EvenTipRecyclerView;
     Boolean popupShown = false;
-    Boolean same_tip = false;
     int allTip = 0;
 
     @SuppressLint({"ResourceType", "SetTextI18n"})
@@ -60,7 +59,7 @@ public class EvenBillScreen extends AppCompatActivity {
 
         View same_tip_selection = findViewById(R.id.same_tip_selection);
         TextView current_total = findViewById(R.id.current_total);
-        EditText sameTipEditText = findViewById(R.id.same_tip_edit_text);
+        EditText sameTipEditText = findViewById(R.id.even_tip_edit_text);
 
         try { current_total.setText("$ " + InternalFiles.getSavedCost());
         } catch (JSONException e) { e.printStackTrace(); }
@@ -98,22 +97,6 @@ public class EvenBillScreen extends AppCompatActivity {
             }
         });
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (sameTipButton.isChecked()) {
-                    for (User user : MainActivity.usersList) {
-                        user.setTips(allTip);
-                    }
-                }
-                for (User user : MainActivity.usersList) {
-                    System.out.println(user.getTips());
-                }
-
-                open_final_screen();
-            }
-        });
-
         sameTipEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -133,6 +116,22 @@ public class EvenBillScreen extends AppCompatActivity {
                 else {
                     allTip = 0;
                 }
+            }
+        });
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sameTipButton.isChecked()) {
+                    for (User user : MainActivity.usersList) {
+                        user.setTips(allTip);
+                    }
+                }
+                for (User user : MainActivity.usersList) {
+                    System.out.println(user.getTips());
+                }
+
+                open_final_screen();
             }
         });
 

@@ -15,28 +15,23 @@
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/drawable/rectangle2.xml" value="0.3828125" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/drawable/rounded_rectangle1.xml" value="0.3828125" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/drawable/rounded_rectangle2.xml" value="0.33" />
-        <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/drawable/rounded_rectangle4.xml" value="0.3828125" />
-        <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/drawable/rounded_rectangle5.xml" value="0.3828125" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/drawable/testing_rectangle.xml" value="0.3828125" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/activity_main.xml" value="0.28306159420289856" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/add_profile_popup.xml" value="0.33" />
-        <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/even_bill_screen.xml" value="0.2554347826086957" />
-        <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/final_bill_screen.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/individual_bill_screen.xml" value="0.33" />
-        <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/individual_bill_tip.xml" value="0.5" />
+        <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/individual_bill_tip.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/item_dish.xml" value="0.5" />
-        <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/item_final_profile.xml" value="0.2554347826086957" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/item_profile.xml" value="0.23007246376811594" />
-        <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/item_shared_profile.xml" value="0.2554347826086957" />
-        <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/item_tip.xml" value="0.2554347826086957" />
-        <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/item_tip_popuo.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/open_tip_popup.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/rounded_rectangle1.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/welcome_screen.xml" value="0.33" />
+        <entry key="..\:/Users/Oscar/AndroidStudioProjects/billSplit_app/app/src/main/res/layout/even_bill_screen.xml" value="0.5" />
+        <entry key="..\:/Users/Oscar/AndroidStudioProjects/billSplit_app/app/src/main/res/layout/final_bill_screen.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/Oscar/AndroidStudioProjects/billSplit_app/app/src/main/res/layout/individual_bill_screen.xml" value="0.25" />
-        <entry key="..\:/Users/Oscar/AndroidStudioProjects/billSplit_app/app/src/main/res/layout/individual_bill_tip.xml" value="0.3052536231884058" />
+        <entry key="..\:/Users/Oscar/AndroidStudioProjects/billSplit_app/app/src/main/res/layout/individual_bill_tip.xml" value="0.7590966122961104" />
         <entry key="..\:/Users/Oscar/AndroidStudioProjects/billSplit_app/app/src/main/res/layout/item_dish.xml" value="0.3052536231884058" />
-        <entry key="..\:/Users/Oscar/AndroidStudioProjects/billSplit_app/app/src/main/res/layout/item_tip.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Oscar/AndroidStudioProjects/billSplit_app/app/src/main/res/layout/item_shared_profile.xml" value="0.276268115942029" />
+        <entry key="..\:/Users/Oscar/AndroidStudioProjects/billSplit_app/app/src/main/res/layout/item_tip.xml" value="0.5607043558850788" />
+        <entry key="..\:/Users/Oscar/AndroidStudioProjects/billSplit_app/app/src/main/res/layout/open_tip_popup.xml" value="0.2515625" />
         <entry key="..\:/Users/Oscar/AndroidStudioProjects/billSplit_app/app/src/main/res/layout/welcome_screen.xml" value="0.3052536231884058" />
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2682291666666667" />
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/drawable/circle1.xml" value="0.2682291666666667" />

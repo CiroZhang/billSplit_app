@@ -95,17 +95,19 @@
                     </LinearLayout>
 
                     <ImageView
+                        android:id="@+id/indiv_tip_frame"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="245dp"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/even_tip_frame" />
+                        android:background="@drawable/even_tip_frame"
+                        android:visibility="invisible" />
 
                     <EditText
-                        android:id="@+id/same_tip_edit_text"
+                        android:id="@+id/indiv_tip_edit_text"
                         android:layout_width="wrap_content"
                         android:layout_height="37dp"
-                        android:layout_marginStart="252dp"
+                        android:layout_marginStart="258dp"
                         android:layout_marginTop="13dp"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/avenir_book"
@@ -114,10 +116,11 @@
                         android:maxLength="3"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:visibility="invisible" />
 
                     <TextView
-                        android:id="@+id/tip_percentage_sign"
+                        android:id="@+id/indiv_tip_percentage_sign"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="316dp"
@@ -127,14 +130,16 @@
                         android:textAlignment="center"
                         android:textColor="#FFC6C6C6"
                         android:textSize="14sp"
-                        android:visibility="visible" />
+                        android:visibility="invisible" />
 
                     <ImageButton
+                        android:id="@+id/indiv_transit_enter_exit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="355dp"
                         android:layout_marginTop="18dp"
-                        android:background="@drawable/transit_enter_exit" />
+                        android:background="@drawable/transit_enter_exit"
+                        android:visibility="invisible" />
 
                 </RelativeLayout>
 
@@ -148,9 +153,9 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/individual_tip_list_view"
                     android:layout_width="match_parent"
-                    android:layout_height="96dp"
+                    android:layout_height="314dp"
                     android:layout_marginTop="12dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </LinearLayout>
 

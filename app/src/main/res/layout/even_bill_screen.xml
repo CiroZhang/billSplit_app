@@ -177,6 +177,7 @@
                         android:visibility="invisible">
 
                         <ImageView
+                            android:id="@+id/even_tip_frame"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="102dp"
@@ -184,7 +185,7 @@
                             android:background="@drawable/even_tip_frame" />
 
                         <EditText
-                            android:id="@+id/same_tip_edit_text"
+                            android:id="@+id/even_tip_edit_text"
                             android:layout_width="wrap_content"
                             android:layout_height="37dp"
                             android:layout_marginStart="115dp"
@@ -199,7 +200,7 @@
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/tip_percentage_sign"
+                            android:id="@+id/even_tip_percentage_sign"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="173dp"
@@ -212,6 +213,7 @@
                             android:visibility="visible" />
 
                         <ImageButton
+                            android:id="@+id/even_transit_enter_exit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="210dp"

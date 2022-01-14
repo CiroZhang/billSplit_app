@@ -95,10 +95,12 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().isEmpty()) {
-                    current.setTips(Integer.parseInt(s.toString()));
+                    MainActivity.usersList.get(MainActivity.usersList.indexOf(current)).setTips(Integer.parseInt(s.toString()));
+//                    current.setTips(Integer.parseInt(s.toString()));
                 }
                 else {
-                    current.setTips(0);
+                    MainActivity.usersList.get(MainActivity.usersList.indexOf(current)).setTips(0);
+//                    current.setTips(0);
                 }
             }
         };

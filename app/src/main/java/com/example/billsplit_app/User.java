@@ -87,5 +87,4 @@ public class User {
     public double getTotal(){
         return total;
     }
-
 }
