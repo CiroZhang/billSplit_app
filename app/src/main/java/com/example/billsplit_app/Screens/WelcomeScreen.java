@@ -44,7 +44,6 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     String cost;
     String province;
     JSONObject tax;
-    int nOfUsers = 1;
     double totalBillCost = 0.0;
     boolean editPeopleTextFilled = false;
     boolean editCostTextFilled = false;
@@ -59,7 +58,6 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_screen);
-
 
         editPeopleText = findViewById(R.id.people_edit_text);
         editCostText = findViewById(R.id.cost_edit_text);
@@ -121,6 +119,8 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         individual_split_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.usersList.clear();
+                MainActivity.dishList.clear();
                 people = editPeopleText.getText().toString();
                 cost = editCostText.getText().toString();
                 update_Internal();
@@ -132,6 +132,8 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         even_split_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.usersList.clear();
+                MainActivity.dishList.clear();
                 people = editPeopleText.getText().toString();
                 cost = editCostText.getText().toString();
                 update_Internal();
@@ -154,11 +156,11 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().isEmpty()) {
-                    nOfUsers = Integer.parseInt(s.toString());
+                    MainActivity.nOfUsers = Integer.parseInt(s.toString());
                     editPeopleTextFilled = true;
                 }
                 else {
-                    nOfUsers = 1;
+                    MainActivity.nOfUsers = 1;
                     editPeopleTextFilled = false;
                 }
                 if (editPeopleTextFilled && editCostTextFilled && locationSpinFilled) {
