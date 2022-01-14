@@ -146,6 +146,7 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <Button
+            android:id="@+id/submit_button"
             android:layout_width="347dp"
             android:layout_height="48dp"
             android:layout_marginTop="76.5dp"
@@ -156,9 +157,9 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:visibility="visible"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -101,7 +101,7 @@ public class EvenBillScreen extends AppCompatActivity {
                     user.setTips(allTip);
                 }
 
-                open_even_final_screen();
+                open_final_screen();
             }
         });
 
@@ -187,8 +187,11 @@ public class EvenBillScreen extends AppCompatActivity {
         startActivity(open_welcome_screen);
     }
 
-    private void open_even_final_screen() {
-        Intent open_even_final_screen = new Intent(this, EvenFinalScreen.class);
+    private void open_final_screen() {
+        for (User i: MainActivity.usersList){
+            i.setEvenTotal();
+        }
+        Intent open_even_final_screen = new Intent(this, FinalScreen.class);
         startActivity(open_even_final_screen);
     }
 

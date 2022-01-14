@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 
@@ -26,6 +28,7 @@ public class IndividualTipScreen extends AppCompatActivity {
         setContentView(R.layout.individual_bill_tip);
 
         ImageButton backButton = findViewById(R.id.back_button);
+        Button submitButton = findViewById(R.id.submit_button);
         CheckBox sameTipButton = findViewById(R.id.same_tip_button);
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +45,12 @@ public class IndividualTipScreen extends AppCompatActivity {
 
             }
         });
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                open_final_screen();
+            }
+        });
 
         setupRecyclerView();
     }
@@ -49,6 +58,10 @@ public class IndividualTipScreen extends AppCompatActivity {
     private void open_individual_bill_screen() {
         Intent open_individual_bill_screen = new Intent(this, IndividualBillScreen.class);
         startActivity(open_individual_bill_screen);
+    }
+    private void open_final_screen() {
+        Intent open_even_final_screen = new Intent(this, FinalScreen.class);
+        startActivity(open_even_final_screen);
     }
 
     void setupRecyclerView() {

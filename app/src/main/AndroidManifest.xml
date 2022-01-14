@@ -22,7 +22,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Screens.EvenFinalScreen"
+            android:name=".Screens.FinalScreen"
             android:exported="false"/>
         <activity
             android:name=".Screens.WelcomeScreen"

@@ -26,6 +26,7 @@ public class InternalFiles extends AppCompatActivity {
 
         fileName = "datas.json";
         data = readDataFile();
+        System.out.println(data);
     }
     public static JSONObject getDefault() throws JSONException {
         JSONObject tax = new JSONObject();
@@ -81,7 +82,7 @@ public class InternalFiles extends AppCompatActivity {
 
     @SuppressLint("SdCardPath")
     public static void saveData() {
-        File path = new File("/data/user/0/com.example.billsplit_app/files");
+        File path = new File("/data/user/0/com.example.billsplit_app");
         try {
             FileOutputStream writer = new FileOutputStream(new File(path, fileName));
             writer.write(data.toString().getBytes());
@@ -100,7 +101,7 @@ public class InternalFiles extends AppCompatActivity {
         String ret = "";
 
         try {
-            File file = new File("/data/data/com.example.billsplit_app/files/datas.json");
+            File file = new File("/data/data/com.example.billsplit_app/datas.json");
             InputStream inputStream = new FileInputStream(file);
 
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

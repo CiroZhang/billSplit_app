@@ -69,7 +69,7 @@ public class User {
     }
 
     public void setEvenTotal(){
-        double user = (double)  MainActivity.get_user_count();
+        double user = (double)  MainActivity.get_user_count() -1;
         double tip = (double) tips/100;
         try {
             double totalCost = (double)  InternalFiles.getSavedCost();

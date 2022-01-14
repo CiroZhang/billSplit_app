@@ -47,7 +47,7 @@
                             android:layout_height="25dp"
                             android:layout_marginTop="24dp"
                             android:fontFamily="@font/avenir_medium"
-                            android:text="Even Bill"
+                            android:text="Final Bill"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="16sp"
@@ -120,6 +120,7 @@
                         android:textSize="24sp" />
 
                     <TextView
+                        android:id="@+id/total"
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
                         android:layout_marginStart="280dp"
@@ -133,7 +134,7 @@
                 </RelativeLayout>
 
                 <Button
-                    android:id="@+id/even_return_button"
+                    android:id="@+id/return_button"
                     android:layout_width="match_parent"
                     android:layout_height="63dp"
                     android:layout_marginTop="76.5dp"

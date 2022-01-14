@@ -16,30 +16,32 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.example.billsplit_app.Adapters.FinalAdapter;
 import com.example.billsplit_app.Adapters.ProfileAdapter;
 import com.example.billsplit_app.Adapters.TipAdapter;
+import com.example.billsplit_app.InternalFiles;
 import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
 import com.example.billsplit_app.User;
 
-public class EvenFinalScreen extends AppCompatActivity {
+public class FinalScreen extends AppCompatActivity {
 
     FinalAdapter FinalViewAdapter;
     RecyclerView FinalRecyclerView;
 
-    @SuppressLint("ResourceType")
+    @SuppressLint({"ResourceType", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.final_bill_screen);
-        for (User i: MainActivity.usersList){
-            i.setEvenTotal();
-        }
 
         ImageButton backButton = findViewById(R.id.back_button);
         Button submitButton = findViewById(R.id.return_button);
+        TextView Total= findViewById(R.id.total);
+
+        Total.setText("$ " + MainActivity.get_user_sum() + " CA") ;
 
 
 

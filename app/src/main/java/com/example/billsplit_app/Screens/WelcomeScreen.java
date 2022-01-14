@@ -293,6 +293,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
             InternalFiles.setSomething("cost",cost);
             InternalFiles.setSomething("location",province);
             InternalFiles.setSomething("tax",tax);
+            System.out.println("hello");
             InternalFiles.saveData();
         }
         catch (JSONException e) {
