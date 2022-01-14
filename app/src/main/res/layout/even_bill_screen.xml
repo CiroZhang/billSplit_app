@@ -192,6 +192,7 @@
                             android:background="@android:color/transparent"
                             android:fontFamily="@font/avenir_book"
                             android:hint="Enter tip %"
+                            android:inputType="number"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 

@@ -70,9 +70,6 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         holder.name_str.setText(name);
         holder.tips.removeTextChangedListener(holder.tw);
 
-
-
-
         holder.tw = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

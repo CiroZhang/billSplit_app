@@ -97,8 +97,13 @@ public class EvenBillScreen extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (sameTipButton.isChecked()) {
+                    for (User user : MainActivity.usersList) {
+                        user.setTips(allTip);
+                    }
+                }
                 for (User user : MainActivity.usersList) {
-                    user.setTips(allTip);
+                    System.out.println(user.getTips());
                 }
 
                 open_final_screen();
