@@ -39,7 +39,7 @@ public class EvenFinalScreen extends AppCompatActivity {
         }
 
         ImageButton backButton = findViewById(R.id.back_button);
-        Button submitButton = findViewById(R.id.submit_button);
+        Button submitButton = findViewById(R.id.return_button);
 
 
 
@@ -51,14 +51,14 @@ public class EvenFinalScreen extends AppCompatActivity {
         });
 
 
-//        submitButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                open_welcome_screen();
-//
-//
-//            }
-//        });
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                open_welcome_screen();
+
+
+            }
+        });
 
         setupRecyclerView();
     }

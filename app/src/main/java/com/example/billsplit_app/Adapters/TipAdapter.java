@@ -1,11 +1,20 @@
 package com.example.billsplit_app.Adapters;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +24,8 @@ import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
 import com.example.billsplit_app.User;
 
-public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder>{
+public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
+    Boolean popupShown = false;
 
     public class TipViewHolder extends RecyclerView.ViewHolder{
         private TextView name_str;
