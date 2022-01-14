@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<Dish> dishList = new ArrayList<>();
     public static ArrayList<Integer> colorList = new ArrayList<>(Arrays.asList(-16731781,-2706168,-15503959,-7533027));
     public static int nOfUsers = 1;
+    public static boolean allTipsSelected = false;
 
     public MainActivity() throws JSONException {
     }

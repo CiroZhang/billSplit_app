@@ -1,20 +1,13 @@
 package com.example.billsplit_app.Adapters;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,6 +23,10 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
     public class TipViewHolder extends RecyclerView.ViewHolder{
         private TextView name_str;
         private EditText tips;
+        private ImageView textFrame;
+        private TextView percentageSign;
+        private ImageButton transitButton;
+        private ImageView layoutGreyed;
         private TextWatcher tw = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -52,7 +49,10 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             super(itemView);
             name_str = itemView.findViewById(R.id.tip_user_name);
             tips = itemView.findViewById(R.id.tip_edit_text);
-
+            textFrame = itemView.findViewById(R.id.tip_frame);
+            percentageSign = itemView.findViewById(R.id.tip_percentage_sign);
+            transitButton = itemView.findViewById(R.id.transit_enter_exit);
+            layoutGreyed = itemView.findViewById(R.id.tip_layout_greyed);
         }
     }
 
@@ -68,8 +68,19 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         String name = MainActivity.usersList.get(position).getUsername();
         User current = MainActivity.usersList.get(position);
         holder.name_str.setText(name);
-        holder.tips.removeTextChangedListener(holder.tw);
 
+        if (MainActivity.allTipsSelected) {
+            holder.tips.setEnabled(false);
+            holder.transitButton.setEnabled(false);
+            holder.layoutGreyed.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.tips.setEnabled(true);
+            holder.transitButton.setEnabled(true);
+            holder.layoutGreyed.setVisibility(View.INVISIBLE);
+        }
+
+        holder.tips.removeTextChangedListener(holder.tw);
         holder.tw = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

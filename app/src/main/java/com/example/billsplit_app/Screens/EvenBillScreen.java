@@ -45,6 +45,7 @@ public class EvenBillScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.even_bill_screen);
 
+        MainActivity.allTipsSelected = false;
         MainActivity.usersList.add(new User("Me"));
         if (MainActivity.nOfUsers > 1) {
             for (int i = 1; i < MainActivity.nOfUsers; i++) {
@@ -83,14 +84,17 @@ public class EvenBillScreen extends AppCompatActivity {
         sameTipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                sameTipEditText.getText().clear();
                 if (sameTipButton.isChecked()) {
                     same_tip_selection.setVisibility(View.VISIBLE);
+
+                    MainActivity.allTipsSelected = true;
                 }
                 else{
                     same_tip_selection.setVisibility(View.INVISIBLE);
+                    MainActivity.allTipsSelected = false;
                 }
-
+                TipViewAdapter.notifyDataSetChanged();
             }
         });
 
