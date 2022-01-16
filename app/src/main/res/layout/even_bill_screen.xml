@@ -141,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="37dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="42dp"
+                    android:layout_marginTop="15dp"
                     android:fontFamily="@font/avenir_semi_bold"
                     android:text="Choose Tip Amount"
                     android:textColor="@color/black"
@@ -157,14 +157,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="18dp" />
+                        android:layout_marginTop="13dp" />
 
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="37dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="12.5dp"
                         android:fontFamily="@font/avenir_roman"
                         android:text="All tip same"
                         android:textColor="@color/black"
@@ -174,14 +174,14 @@
                         android:id="@+id/same_tip_selection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="invisible">
+                        android:visibility="visible">
 
                         <ImageView
                             android:id="@+id/even_tip_frame"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="102dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="5dp"
                             android:background="@drawable/even_tip_frame" />
 
                         <EditText
@@ -189,7 +189,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="37dp"
                             android:layout_marginStart="115dp"
-                            android:layout_marginTop="13dp"
+                            android:layout_marginTop="8dp"
                             android:background="@android:color/transparent"
                             android:fontFamily="@font/avenir_book"
                             android:hint="Enter tip"
@@ -204,7 +204,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="173dp"
-                            android:layout_marginTop="22.5dp"
+                            android:layout_marginTop="17.5dp"
                             android:fontFamily="@font/avenir_book"
                             android:text="%"
                             android:textAlignment="center"
@@ -217,7 +217,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="210dp"
-                            android:layout_marginTop="18dp"
+                            android:layout_marginTop="13dp"
                             android:background="@drawable/transit_enter_exit" />
 
                     </RelativeLayout>
@@ -229,7 +229,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -239,9 +238,8 @@
                             android:layout_marginTop="5dp"
                             android:id="@+id/even_tip_list_view"
                             android:layout_width="match_parent"
-                            android:layout_height="150dp"
+                            android:layout_height="wrap_content"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
 
                     </LinearLayout>
 

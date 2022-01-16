@@ -130,7 +130,7 @@ public class IndividualTipScreen extends AppCompatActivity {
     }
 
     void setupRecyclerView() {
-        TipAdapter = new TipAdapter();
+        TipAdapter = new TipAdapter(this);
 
         IndividualTipRecyclerView = findViewById(R.id.individual_tip_list_view);
         IndividualTipRecyclerView.setAdapter(TipAdapter);

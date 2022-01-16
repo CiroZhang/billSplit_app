@@ -1,5 +1,7 @@
 package com.example.billsplit_app.Adapters;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -20,12 +22,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
+import com.example.billsplit_app.Screens.IndividualTipScreen;
 import com.example.billsplit_app.User;
 
 public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
     Boolean popupShown = false;
+    Context context;
 
-    public class TipViewHolder extends RecyclerView.ViewHolder{
+    public TipAdapter(Context context) {
+        this.context = context;
+    }
+
+    public class TipViewHolder extends RecyclerView.ViewHolder {
         private TextView name_str;
         private EditText tips;
         private ImageView textFrame;
@@ -49,7 +57,6 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         };
 
 
-
         public TipViewHolder(@NonNull View itemView) {
             super(itemView);
             name_str = itemView.findViewById(R.id.tip_user_name);
@@ -64,7 +71,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
     @NonNull
     @Override
     public TipViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tip, parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tip, parent, false);
         return new TipViewHolder(itemView);
     }
 
@@ -77,18 +84,19 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         if (MainActivity.allTipsSelected) {
             holder.tips.setEnabled(false);
             holder.transitButton.setEnabled(false);
+            holder.name_str.setTextColor(context.getResources().getColor(R.color.grey2));
             holder.layoutGreyed.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             holder.tips.setEnabled(true);
             holder.transitButton.setEnabled(true);
+            holder.name_str.setTextColor(context.getResources().getColor(R.color.black));
             holder.layoutGreyed.setVisibility(View.INVISIBLE);
         }
 
         holder.transitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowPopup(v,current);
+                ShowPopup(v, current);
             }
         });
 
@@ -109,8 +117,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
                 if (!s.toString().isEmpty()) {
                     MainActivity.usersList.get(MainActivity.usersList.indexOf(current)).setTips(Integer.parseInt(s.toString()));
 //                    current.setTips(Integer.parseInt(s.toString()));
-                }
-                else {
+                } else {
                     MainActivity.usersList.get(MainActivity.usersList.indexOf(current)).setTips(0);
 //                    current.setTips(0);
                 }
@@ -120,7 +127,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
     }
 
     public void ShowPopup(View view, User u) {
-        View popupView = LayoutInflater.from(view.getContext()).inflate(R.layout.open_tip_popup, null,false);
+        View popupView = LayoutInflater.from(view.getContext()).inflate(R.layout.open_tip_popup, null, false);
         popupShown = true;
         CheckPopup();
 
@@ -140,28 +147,6 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             }
         });
 
-//        public void ShowPopup(View view) {
-//            LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-//            View popupView = inflater.inflate(R.layout.add_profile_popup, null,false);
-//            popupShown = true;
-//            CheckPopup();
-//
-//            int width = LinearLayout.LayoutParams.MATCH_PARENT;
-//            int height = LinearLayout.LayoutParams.MATCH_PARENT;
-//            final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
-//
-//            popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-//
-//            popupView.setOnTouchListener(new View.OnTouchListener() {
-//                @Override
-//                public boolean onTouch(View v, MotionEvent event) {
-//                    popupWindow.dismiss();
-//                    popupShown = false;
-//                    CheckPopup();
-//                    return true;
-//                }
-//            });
-
         ImageView zeroButton = popupView.findViewById(R.id.tip_button1);
         ImageView tenButton = popupView.findViewById(R.id.tip_button2);
         ImageView twelveButton = popupView.findViewById(R.id.tip_button3);
@@ -169,53 +154,38 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         EditText popupTipText = popupView.findViewById(R.id.popup_tip_edit_text);
         Button popupSubmitButton = popupView.findViewById(R.id.popup_submit_button);
 
-        zeroButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                u.setTips(0);
-                popupWindow.dismiss();
-                popupShown = false;
-                CheckPopup();
-            }
+        zeroButton.setOnClickListener(v -> {
+            u.setTips(0);
+            popupWindow.dismiss();
+            popupShown = false;
+            CheckPopup();
         });
 
-        tenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                u.setTips(10);
-                popupWindow.dismiss();
-                popupShown = false;
-                CheckPopup();
-            }
+        tenButton.setOnClickListener(v -> {
+            u.setTips(10);
+            popupWindow.dismiss();
+            popupShown = false;
+            CheckPopup();
         });
 
-        twelveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                u.setTips(12);
-                popupWindow.dismiss();
-                popupShown = false;
-                CheckPopup();
-            }
+        twelveButton.setOnClickListener(v -> {
+            u.setTips(12);
+            popupWindow.dismiss();
+            popupShown = false;
+            CheckPopup();
         });
 
-        fifteenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                u.setTips(15);
-                popupWindow.dismiss();
-                popupShown = false;
-                CheckPopup();
-            }
+        fifteenButton.setOnClickListener(v -> {
+            u.setTips(15);
+            popupWindow.dismiss();
+            popupShown = false;
+            CheckPopup();
         });
 
-        popupSubmitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-                popupShown = false;
-                CheckPopup();
-            }
+        popupSubmitButton.setOnClickListener(v -> {
+            popupWindow.dismiss();
+            popupShown = false;
+            CheckPopup();
         });
 
         popupTipText.addTextChangedListener(new TextWatcher() {
@@ -233,15 +203,15 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().isEmpty()) {
                     u.setTips(Integer.parseInt(s.toString()));
-                }
-                else {
+                } else {
                     u.setTips(0);
                 }
             }
         });
     }
 
-    public void CheckPopup() {}
+    public void CheckPopup() {
+    }
 
     @Override
     public int getItemCount() {
