@@ -142,18 +142,6 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:id="@+id/cost_edit_text_error"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="35dp"
-                        android:layout_marginTop="78dp"
-                        android:fontFamily="@font/avenir_book"
-                        android:text="Please enter a valid number"
-                        android:textColor="#D92C2C"
-                        android:textSize="13sp"
-                        android:visibility="visible" />
-
                 </RelativeLayout>
 
             </LinearLayout>

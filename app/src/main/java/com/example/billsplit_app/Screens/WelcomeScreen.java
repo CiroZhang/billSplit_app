@@ -3,11 +3,14 @@ package com.example.billsplit_app.Screens;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -121,12 +124,16 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         individual_split_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.usersList.clear();
-                MainActivity.dishList.clear();
-                people = editPeopleText.getText().toString();
-                cost = editCostText.getText().toString();
-                update_Internal();
-                open_individual_split_screen();
+                if (!editCostTextValid) {
+                    resetEditCostInputField();
+                } else {
+                    MainActivity.usersList.clear();
+                    MainActivity.dishList.clear();
+                    people = editPeopleText.getText().toString();
+                    cost = editCostText.getText().toString();
+                    update_Internal();
+                    open_individual_split_screen();
+                }
 
             }
         });
@@ -134,12 +141,16 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         even_split_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.usersList.clear();
-                MainActivity.dishList.clear();
-                people = editPeopleText.getText().toString();
-                cost = editCostText.getText().toString();
-                update_Internal();
-                open_even_split_screen();
+                if (!editCostTextValid) {
+                    resetEditCostInputField();
+                } else {
+                    MainActivity.usersList.clear();
+                    MainActivity.dishList.clear();
+                    people = editPeopleText.getText().toString();
+                    cost = editCostText.getText().toString();
+                    update_Internal();
+                    open_even_split_screen();
+                }
 
             }
         });
@@ -189,6 +200,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
                     editCostTextFilled = false;
                 }
 
+                checkEditCostTextValid(s);
                 checkInputField();
             }
         });
@@ -235,21 +247,12 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         if (s1.contains(".")) {
             count = s1.substring(s1.indexOf(".") + 1).length();
         }
-        if (count > 2) {
 
-            editCostTextValid = false;
-        } else {
-            editCostTextValid = true;
-        }
+        editCostTextValid = count <= 2;
     }
 
     private void checkInputField() {
-        if (!editCostTextValid) {
-            editCostText.setText("");
-            Toast.makeText(WelcomeScreen.this, "Please Enter A Valid Number", Toast.LENGTH_LONG).show();
-        }
-
-        if (editPeopleTextFilled && editCostTextFilled && editCostTextValid && locationSpinFilled) {
+        if (editPeopleTextFilled && editCostTextFilled && locationSpinFilled) {
             individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
             even_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
             individual_split_button.setActivated(true);
@@ -259,6 +262,21 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
             even_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
             individual_split_button.setActivated(false);
             even_split_button.setActivated(false);
+        }
+    }
+
+    private void resetEditCostInputField() {
+        editCostText.setText("");
+        Toast.makeText(this, "Please Enter a Valid Number", Toast.LENGTH_LONG).show();
+        closeKeyboard();
+
+    }
+
+    public void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 

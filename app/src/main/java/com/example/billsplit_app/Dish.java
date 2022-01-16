@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Dish {
     private String name;
-    private String price;
+    private String price = "0.0";
     private boolean collapsed = false;
     private boolean alcoholic = false;
 
