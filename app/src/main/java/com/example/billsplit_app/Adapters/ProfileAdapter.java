@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,12 +27,14 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
     }
 
     public class ProfileViewHolder extends RecyclerView.ViewHolder{
+        private ImageButton profile_close_button;
         private TextView name_str;
         private ImageView profile_background;
         private TextView profile_short_user_name;
 
         public ProfileViewHolder(@NonNull View itemView) {
             super(itemView);
+            profile_close_button = itemView.findViewById(R.id.popup_close_button);
             name_str = itemView.findViewById(R.id.profile_user_name);
             profile_background = itemView.findViewById(R.id.profile_background);
             profile_short_user_name = itemView.findViewById(R.id.profile_short_user_name);

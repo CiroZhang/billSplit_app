@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -136,8 +137,24 @@ public class IndividualBillScreen extends AppCompatActivity {
             }
         });
 
+        ImageView addProfileBackground = popupView.findViewById(R.id.popup_background);
+        ImageButton addProfileCloseButton = popupView.findViewById(R.id.popup_close_button);
         EditText addProfileNameEditText = popupView.findViewById(R.id.add_profile_name_edit_text);
         Button addProfileNameSubmitButton = popupView.findViewById(R.id.add_profile_name_submit_button);
+
+        addProfileBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //This is just here to prevent popup from closing when clicking the background
+            }
+        });
+
+        addProfileCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
 
         addProfileNameSubmitButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NotifyDataSetChanged")
