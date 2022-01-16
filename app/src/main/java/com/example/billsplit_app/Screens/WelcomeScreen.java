@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.billsplit_app.InternalFiles;
 import com.example.billsplit_app.MainActivity;
@@ -47,6 +48,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     double totalBillCost = 0.0;
     boolean editPeopleTextFilled = false;
     boolean editCostTextFilled = false;
+    boolean editCostTextValid = false;
     boolean locationSpinFilled = false;
     InternalFiles internalFiles = new InternalFiles();
     ArrayList<String> list = new ArrayList<>();
@@ -86,7 +88,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         list.add("Saskatchewan");
         list.add("Yukon");
 
-        ArrayAdapter <String> myAdapter = new ArrayAdapter<String>(WelcomeScreen.this,
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(WelcomeScreen.this,
                 android.R.layout.simple_list_item_1, list);
         myAdapter.notifyDataSetChanged();
 
@@ -158,23 +160,12 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
                 if (!s.toString().isEmpty()) {
                     MainActivity.nOfUsers = Integer.parseInt(s.toString());
                     editPeopleTextFilled = true;
-                }
-                else {
+                } else {
                     MainActivity.nOfUsers = 1;
                     editPeopleTextFilled = false;
                 }
-                if (editPeopleTextFilled && editCostTextFilled && locationSpinFilled) {
-                    individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
-                    even_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
-                    individual_split_button.setActivated(true);
-                    even_split_button.setActivated(true);
-                }
-                else {
-                    individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
-                    even_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
-                    individual_split_button.setActivated(false);
-                    even_split_button.setActivated(false);
-                }
+
+                checkInputField();
             }
         });
 
@@ -190,31 +181,15 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
 
             @Override
             public void afterTextChanged(Editable s) {
-
-//                double num = Double.parseDouble(s.toString())*100;
-//                int num2 = (int) num;
-//                num = (double) num2 /100;
-
                 if (!s.toString().isEmpty()) {
                     totalBillCost = Double.parseDouble(s.toString());
                     editCostTextFilled = true;
-                }
-                else {
+                } else {
                     totalBillCost = 0.0;
                     editCostTextFilled = false;
                 }
-                if (editPeopleTextFilled && editCostTextFilled && locationSpinFilled) {
-                    individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
-                    even_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
-                    individual_split_button.setActivated(true);
-                    even_split_button.setActivated(true);
-                }
-                else {
-                    individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
-                    even_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
-                    individual_split_button.setActivated(false);
-                    even_split_button.setActivated(false);
-                }
+
+                checkInputField();
             }
         });
     }
@@ -252,6 +227,41 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
+    private void checkEditCostTextValid(Editable s) {
+        int count = 0;
+        String s1 = s.toString();
+        System.out.println(s1.substring(s1.indexOf(".") + 1));
+
+        if (s1.contains(".")) {
+            count = s1.substring(s1.indexOf(".") + 1).length();
+        }
+        if (count > 2) {
+
+            editCostTextValid = false;
+        } else {
+            editCostTextValid = true;
+        }
+    }
+
+    private void checkInputField() {
+        if (!editCostTextValid) {
+            editCostText.setText("");
+            Toast.makeText(WelcomeScreen.this, "Please Enter A Valid Number", Toast.LENGTH_LONG).show();
+        }
+
+        if (editPeopleTextFilled && editCostTextFilled && editCostTextValid && locationSpinFilled) {
+            individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
+            even_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
+            individual_split_button.setActivated(true);
+            even_split_button.setActivated(true);
+        } else {
+            individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
+            even_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
+            individual_split_button.setActivated(false);
+            even_split_button.setActivated(false);
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -260,22 +270,11 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
             JSONObject tax_details = new JSONObject(readJson("res/tax_details.json"));
             province = parent.getItemAtPosition(position).toString();
             tax = tax_details.getJSONObject(province);
-            tax_text.setText(tax.getInt("PST") + "% PST  " + tax.getInt("GST") + "% GST  " + tax.getInt("HST")  + "% HST");
+            tax_text.setText(tax.getInt("PST") + "% PST  " + tax.getInt("GST") + "% GST  " + tax.getInt("HST") + "% HST");
 
             locationSpinFilled = !province.equals("Choose Category");
 
-            if (editPeopleTextFilled && editCostTextFilled && locationSpinFilled) {
-                individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
-                even_split_button.setBackgroundResource(R.drawable.rounded_rectangle3);
-                individual_split_button.setActivated(true);
-                even_split_button.setActivated(true);
-            }
-            else {
-                individual_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
-                even_split_button.setBackgroundResource(R.drawable.rounded_rectangle2);
-                individual_split_button.setActivated(false);
-                even_split_button.setActivated(false);
-            }
+            checkInputField();
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -287,16 +286,15 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
-    public void update_Internal(){
+    public void update_Internal() {
         try {
-            InternalFiles.setSomething("people",people);
-            InternalFiles.setSomething("cost",cost);
-            InternalFiles.setSomething("location",province);
-            InternalFiles.setSomething("tax",tax);
+            InternalFiles.setSomething("people", people);
+            InternalFiles.setSomething("cost", cost);
+            InternalFiles.setSomething("location", province);
+            InternalFiles.setSomething("tax", tax);
             System.out.println("hello");
             InternalFiles.saveData();
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }

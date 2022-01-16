@@ -140,6 +140,28 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             }
         });
 
+//        public void ShowPopup(View view) {
+//            LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+//            View popupView = inflater.inflate(R.layout.add_profile_popup, null,false);
+//            popupShown = true;
+//            CheckPopup();
+//
+//            int width = LinearLayout.LayoutParams.MATCH_PARENT;
+//            int height = LinearLayout.LayoutParams.MATCH_PARENT;
+//            final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+//
+//            popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+//
+//            popupView.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View v, MotionEvent event) {
+//                    popupWindow.dismiss();
+//                    popupShown = false;
+//                    CheckPopup();
+//                    return true;
+//                }
+//            });
+
         ImageView zeroButton = popupView.findViewById(R.id.tip_button1);
         ImageView tenButton = popupView.findViewById(R.id.tip_button2);
         ImageView twelveButton = popupView.findViewById(R.id.tip_button3);
