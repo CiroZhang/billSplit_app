@@ -1,14 +1,18 @@
 package com.example.billsplit_app.Adapters;
 
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,9 +23,14 @@ import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
+    private TextView indivTotal;
+    private View thisView;
+    private Context context;
     public com.example.billsplit_app.Adapters.SharedAdapter SharedAdapter = new SharedAdapter();
 
-    public ItemAdapter() {
+    public ItemAdapter(TextView total, Context context) {
+        this.indivTotal = total;
+        this.context = context;
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -74,6 +83,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         public ItemViewHolder(final View view) {
             super(view);
+            thisView = view;
             delete_button = view.findViewById(R.id.delete_button);
             name_str = view.findViewById(R.id.dish_name);
             price_str = view.findViewById(R.id.dish_price);
@@ -191,8 +201,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
             }
 
+            @SuppressLint({"DefaultLocale", "SetTextI18n"})
             @Override
             public void afterTextChanged(Editable s) {
+                checkEditCostTextValid(s,holder,thisView);
                 if (!s.toString().isEmpty()) {
                     dishItem.setPrice(s.toString());
                 }
@@ -200,6 +212,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                     dishItem.setPrice("0.0");
                 }
                 MainActivity.refreshIndivTotal();
+                indivTotal.setText("$ " + String.format("%.2f", MainActivity.indivTotal));
             }
         };
 
@@ -215,7 +228,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         return MainActivity.dishList.size();
     }
 
-    void setupRecyclerView(Context context, RecyclerView SharedRecyclerView) {
+    private void setupRecyclerView(Context context, RecyclerView SharedRecyclerView) {
         SharedRecyclerView.setAdapter(SharedAdapter);
         SharedRecyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
     }
@@ -225,5 +238,24 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             return;
         }
         SharedAdapter.notifyDataSetChanged();
+    }
+
+    private void checkEditCostTextValid(Editable s, ItemViewHolder holder, View view) {
+        String s1 = s.toString();
+
+        if (s1.contains(".")) {
+            if (s1.substring(s1.indexOf(".")).length() > 3) {
+                holder.price_str.setText(s1.substring(0,s1.indexOf(".")+3));
+                Toast.makeText(context, "Please only enter up to two decimal places!", Toast.LENGTH_LONG).show();
+                closeKeyboard(view);
+            }
+        }
+    }
+
+    private void closeKeyboard(View v) {
+        if (v != null) {
+            InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        }
     }
 }

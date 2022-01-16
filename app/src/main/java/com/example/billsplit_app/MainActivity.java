@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     public static int nOfUsers = 1;
     public static boolean allTipsSelected = false;
 
-    public static double indivTotal = 0.0;
+    public static double indivTotal = 0.00;
 
     public MainActivity() throws JSONException {
     }
@@ -60,7 +60,12 @@ public class MainActivity extends AppCompatActivity {
             if (d.isAlcoholic()) {
 
             }
-            total += Double.parseDouble(d.getPrice());
+            if (d.getPrice().isEmpty()) {
+                total += 0;
+            }
+            else {
+                total += Double.parseDouble(d.getPrice());
+            }
         }
         indivTotal = total;
         System.out.println("indivTotal: " + indivTotal);

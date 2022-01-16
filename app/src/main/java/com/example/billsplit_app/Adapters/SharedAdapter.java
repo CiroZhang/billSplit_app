@@ -15,8 +15,8 @@ import com.example.billsplit_app.R;
 import com.example.billsplit_app.User;
 
 public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedViewHolder>{
-
     private Dish adapterDish;
+
     public SharedAdapter(){}
 
     public class SharedViewHolder extends RecyclerView.ViewHolder{
@@ -56,13 +56,12 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
             public void onClick(View v) {
                 if (holder.shared_checkmark.getVisibility() == View.VISIBLE) {
                     holder.shared_checkmark.setVisibility(View.INVISIBLE);
-                    u1.removeDish(adapterDish);
+                    MainActivity.dishList.get(MainActivity.dishList.indexOf(adapterDish)).addUser(u1);
                 }
                 else {
                     holder.shared_checkmark.setVisibility(View.VISIBLE);
-                    u1.addDish(adapterDish);
+                    MainActivity.dishList.get(MainActivity.dishList.indexOf(adapterDish)).removeUser(u1);
                 }
-                System.out.println(u1.getUsername() + ": " + u1.getDishes());
             }
         });
     }

@@ -242,10 +242,14 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     private void checkEditCostTextValid(Editable s) {
         int count = 0;
         String s1 = s.toString();
-        System.out.println(s1.substring(s1.indexOf(".") + 1));
 
         if (s1.contains(".")) {
             count = s1.substring(s1.indexOf(".") + 1).length();
+            if (s1.substring(s1.indexOf(".")).length() > 3) {
+                editCostText.setText(s1.substring(0,s1.indexOf(".")+3));
+                Toast.makeText(this, "Please only enter up to two decimal places!", Toast.LENGTH_LONG).show();
+                closeKeyboard();
+            }
         }
 
         editCostTextValid = count <= 2;
@@ -269,7 +273,6 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         editCostText.setText("");
         Toast.makeText(this, "Please Enter a Valid Number", Toast.LENGTH_LONG).show();
         closeKeyboard();
-
     }
 
     public void closeKeyboard() {

@@ -7,6 +7,7 @@ public class Dish {
     private String price = "0.0";
     private boolean collapsed = false;
     private boolean alcoholic = false;
+    private ArrayList<User> sharedUsers = new ArrayList<>();
 
     public Dish (String name, String price) {
         this.name = name;
@@ -43,5 +44,13 @@ public class Dish {
 
     public void setAlcoholic(boolean alcoholic) {
         this.alcoholic = alcoholic;
+    }
+
+    public void addUser(User u) {
+        this.sharedUsers.add(u);
+    }
+
+    public void removeUser(User u) {
+        this.sharedUsers.remove(u);
     }
 }

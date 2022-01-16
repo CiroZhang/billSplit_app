@@ -36,6 +36,7 @@ public class IndividualBillScreen extends AppCompatActivity {
     ItemAdapter ItemViewAdapter;
     RecyclerView ItemRecyclerView;
     Boolean popupShown = false;
+    TextView currentTotal;
 
     @SuppressLint("ResourceType")
     @Override
@@ -48,7 +49,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         ImageButton addDishButton = findViewById(R.id.add_dish_button);
         TextView addDishButton2 = findViewById(R.id.add_dish_button2);
         Button submitBillButton = findViewById(R.id.submit_bill_button);
-        TextView currentTotal = findViewById(R.id.current_total_price);
+        currentTotal = findViewById(R.id.current_total_price);
 
         System.out.println(MainActivity.usersList);
         System.out.println(MainActivity.dishList);
@@ -110,7 +111,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         ProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
         ItemRecyclerView = findViewById(R.id.dish_list_view);
-        ItemViewAdapter = new ItemAdapter();
+        ItemViewAdapter = new ItemAdapter(currentTotal, this);
         ItemRecyclerView.setAdapter(ItemViewAdapter);
         ItemRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
     }
