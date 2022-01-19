@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
     public static int nOfUsers = 1;
     public static boolean allTipsSelected = false;
 
-    public static double indivTotal = 0.00;
+    public static double indivTotal = 0.0;
+    public static double indivTipTotal = 0.0;
 
     public MainActivity() throws JSONException {
     }

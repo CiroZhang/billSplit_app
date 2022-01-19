@@ -1,5 +1,6 @@
 package com.example.billsplit_app.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.Editable;
@@ -28,9 +29,14 @@ import com.example.billsplit_app.User;
 public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
     Boolean popupShown = false;
     Context context;
+    TextView totalTextView;
 
     public TipAdapter(Context context) {
         this.context = context;
+    }
+    public TipAdapter(Context context, TextView currentTotalText) {
+        this.context = context;
+        this.totalTextView = currentTotalText;
     }
 
     public class TipViewHolder extends RecyclerView.ViewHolder {
@@ -55,7 +61,6 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             public void afterTextChanged(Editable s) {
             }
         };
-
 
         public TipViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -101,6 +106,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         });
 
         holder.tips.removeTextChangedListener(holder.tw);
+        holder.tips.getText().clear();
         holder.tw = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -112,18 +118,30 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
 
             }
 
+            @SuppressLint({"DefaultLocale", "SetTextI18n"})
             @Override
             public void afterTextChanged(Editable s) {
+                User u = MainActivity.usersList.get(MainActivity.usersList.indexOf(current));
                 if (!s.toString().isEmpty()) {
-                    MainActivity.usersList.get(MainActivity.usersList.indexOf(current)).setTips(Integer.parseInt(s.toString()));
-//                    current.setTips(Integer.parseInt(s.toString()));
+                    current.setTips(Integer.parseInt(s.toString()));
+                    current.setTotal(MainActivity.indivTotal * (u.getTips()/100.0));
                 } else {
-                    MainActivity.usersList.get(MainActivity.usersList.indexOf(current)).setTips(0);
-//                    current.setTips(0);
+                    current.setTips(0);
                 }
+                MainActivity.indivTipTotal = updateTotal();
+                System.out.println(MainActivity.indivTipTotal);
+                totalTextView.setText("$ " + String.format("%.2f",MainActivity.indivTipTotal));
             }
         };
         holder.tips.addTextChangedListener(holder.tw);
+    }
+
+    public double updateTotal() {
+        double total = 0.0;
+        for (User u : MainActivity.usersList) {
+            total += MainActivity.indivTotal * (u.getTips()/100.0);
+        }
+        return total;
     }
 
     public void ShowPopup(View view, User u) {

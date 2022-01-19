@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
 import com.example.billsplit_app.User;
 
@@ -53,7 +54,8 @@ public class FinalAdapter extends RecyclerView.Adapter<FinalAdapter.finalViewHol
         holder.name_str.setText(name);
         holder.profile_background.getBackground().setTint(userList.get(position).getColor());
         holder.profile_short_user_name.setText(name.substring(0,1));
-        holder.profile_price.setText("$ " + Double.toString(userList.get(position).getTotal()));
+        holder.profile_price.setText("$ " + String.format("%.2f", userList.get(position).getTotal()));
+
     }
 
     @Override

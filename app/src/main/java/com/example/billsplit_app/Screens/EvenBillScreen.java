@@ -37,6 +37,7 @@ public class EvenBillScreen extends AppCompatActivity {
     RecyclerView ProfileRecyclerView;
     RecyclerView EvenTipRecyclerView;
     Boolean popupShown = false;
+    TextView current_total;
     int allTip = 0;
 
     @SuppressLint({"ResourceType", "SetTextI18n"})
@@ -59,7 +60,7 @@ public class EvenBillScreen extends AppCompatActivity {
         CheckBox sameTipButton = findViewById(R.id.same_tip_button);
 
         View same_tip_selection = findViewById(R.id.same_tip_selection);
-        TextView current_total = findViewById(R.id.even_current_total);
+        current_total = findViewById(R.id.even_current_total);
         EditText sameTipEditText = findViewById(R.id.even_tip_edit_text);
         ImageButton sameTipPopupButton = findViewById(R.id.even_transit_enter_exit);
 
@@ -157,7 +158,7 @@ public class EvenBillScreen extends AppCompatActivity {
 
     void setupRecyclerView() {
         ProfileViewAdapter = new ProfileAdapter(this, MainActivity.usersList);
-        TipViewAdapter = new TipAdapter(getApplicationContext());
+        TipViewAdapter = new TipAdapter(this,current_total);
 
         ProfileRecyclerView = findViewById(R.id.profile_list_view);
         ProfileRecyclerView.setAdapter(ProfileViewAdapter);

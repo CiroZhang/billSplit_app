@@ -31,7 +31,7 @@ public class FinalScreen extends AppCompatActivity {
     FinalAdapter FinalViewAdapter;
     RecyclerView FinalRecyclerView;
 
-    @SuppressLint({"ResourceType", "SetTextI18n"})
+    @SuppressLint({"ResourceType", "SetTextI18n", "DefaultLocale"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +39,11 @@ public class FinalScreen extends AppCompatActivity {
 
         ImageButton backButton = findViewById(R.id.back_button);
         Button submitButton = findViewById(R.id.return_button);
-        TextView Total= findViewById(R.id.total);
+        TextView total = findViewById(R.id.total);
+        TextView subtotal = findViewById(R.id.subtotal);
 
-        Total.setText("$ " + MainActivity.get_user_sum() + " CA") ;
-
+        subtotal.setText("$ " + String.format("%.2f", MainActivity.indivTotal));
+        total.setText("$ " + String.format("%.2f", (MainActivity.get_user_sum() + MainActivity.indivTotal))) ;
 
 
         backButton.setOnClickListener(new View.OnClickListener() {

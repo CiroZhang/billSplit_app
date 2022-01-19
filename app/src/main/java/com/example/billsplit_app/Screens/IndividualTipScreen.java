@@ -48,6 +48,7 @@ public class IndividualTipScreen extends AppCompatActivity {
         EditText tipText = findViewById(R.id.indiv_tip_edit_text);
         TextView tipPercentage = findViewById(R.id.indiv_tip_percentage_sign);
         ImageButton tipTransit = findViewById(R.id.indiv_transit_enter_exit);
+        TextView currentTotalText = findViewById(R.id.individual_tip_total);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +74,12 @@ public class IndividualTipScreen extends AppCompatActivity {
                     tipText.setVisibility(View.INVISIBLE);
                     tipPercentage.setVisibility(View.INVISIBLE);
                     tipTransit.setVisibility(View.INVISIBLE);
+
                     MainActivity.allTipsSelected = false;
                 }
+                allTip = 0;
+                updateTotal();
+                currentTotalText.setText("$ 0.00");
                 TipAdapter.notifyDataSetChanged();
             }
         });
@@ -92,12 +97,15 @@ public class IndividualTipScreen extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().isEmpty()) {
+                String s1 = s.toString();
+                if (!s1.isEmpty()) {
                     allTip = Integer.parseInt(s.toString());
+                    MainActivity.indivTipTotal = updateTotal();
                 }
                 else {
                     allTip = 0;
                 }
+                currentTotalText.setText("$ " + String.format("%.2f",MainActivity.indivTipTotal));
             }
         });
 
@@ -117,7 +125,17 @@ public class IndividualTipScreen extends AppCompatActivity {
             }
         });
 
-        setupRecyclerView();
+        setupRecyclerView(currentTotalText);
+    }
+
+    public double updateTotal() {
+        double total = 0.0;
+        for (User u : MainActivity.usersList) {
+            u.setTips(allTip);
+            u.setTotal(MainActivity.indivTotal * (allTip/100.0));
+            total += MainActivity.indivTotal * (allTip/100.0);
+        }
+        return total;
     }
 
     private void open_individual_bill_screen() {
@@ -129,8 +147,8 @@ public class IndividualTipScreen extends AppCompatActivity {
         startActivity(open_even_final_screen);
     }
 
-    void setupRecyclerView() {
-        TipAdapter = new TipAdapter(this);
+    void setupRecyclerView(TextView currentTotalText) {
+        TipAdapter = new TipAdapter(this,currentTotalText);
 
         IndividualTipRecyclerView = findViewById(R.id.individual_tip_list_view);
         IndividualTipRecyclerView.setAdapter(TipAdapter);

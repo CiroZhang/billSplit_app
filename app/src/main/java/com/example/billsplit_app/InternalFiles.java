@@ -53,8 +53,8 @@ public class InternalFiles extends AppCompatActivity {
     public static int getSavedPeople()throws JSONException {
         return data.getInt("people");
     }
-    public static int getSavedCost()throws JSONException {
-        return data.getInt("cost");
+    public static double getSavedCost()throws JSONException {
+        return data.getDouble("cost");
     }
     public static double getSavedTax() throws JSONException {
         JSONObject current = data.getJSONObject("tax");

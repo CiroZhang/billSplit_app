@@ -43,7 +43,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
 
         public ProfileViewHolder(@NonNull View itemView) {
             super(itemView);
-            profile_delete_button = itemView.findViewById(R.id.profile_delete_button);
+//            profile_delete_button = itemView.findViewById(R.id.profile_delete_button);
             name_str = itemView.findViewById(R.id.profile_user_name);
             profile_background = itemView.findViewById(R.id.profile_background);
             profile_short_user_name = itemView.findViewById(R.id.profile_short_user_name);

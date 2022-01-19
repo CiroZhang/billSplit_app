@@ -124,16 +124,16 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         individual_split_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!editCostTextValid) {
-                    resetEditCostInputField();
-                } else {
+//                if (!editCostTextValid) {
+//                    resetEditCostInputField();
+//                } else {
                     MainActivity.usersList.clear();
                     MainActivity.dishList.clear();
                     people = editPeopleText.getText().toString();
                     cost = editCostText.getText().toString();
                     update_Internal();
                     open_individual_split_screen();
-                }
+//                }
 
             }
         });
@@ -141,16 +141,16 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         even_split_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!editCostTextValid) {
-                    resetEditCostInputField();
-                } else {
+//                if (!editCostTextValid) {
+//                    resetEditCostInputField();
+//                } else {
                     MainActivity.usersList.clear();
                     MainActivity.dishList.clear();
                     people = editPeopleText.getText().toString();
                     cost = editCostText.getText().toString();
                     update_Internal();
                     open_even_split_screen();
-                }
+//                }
 
             }
         });
@@ -199,7 +199,6 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
                     totalBillCost = 0.0;
                     editCostTextFilled = false;
                 }
-
                 checkEditCostTextValid(s);
                 checkInputField();
             }
@@ -240,21 +239,20 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     }
 
     private void checkEditCostTextValid(Editable s) {
-        int count = 0;
+//        int count = 0;
         String s1 = s.toString();
 
         if (s1.contains(".")) {
-            count = s1.substring(s1.indexOf(".") + 1).length();
+//            count = s1.substring(s1.indexOf(".") + 1).length();
             if (s1.substring(s1.indexOf(".")).length() > 3) {
-                editCostText.setText(s1.substring(0,s1.indexOf(".")+3));
+                String s2 = s1.substring(0,s1.indexOf(".")+3);
+                totalBillCost = Double.parseDouble(s2);
+                editCostText.setText(s2);
                 Toast.makeText(this, "Please only enter up to two decimal places!", Toast.LENGTH_LONG).show();
                 closeKeyboard();
-                System.out.println(s);
-                System.out.println(editCostText);
             }
         }
-
-        editCostTextValid = count <= 2;
+//        editCostTextValid = count <= 2;
     }
 
     private void checkInputField() {
