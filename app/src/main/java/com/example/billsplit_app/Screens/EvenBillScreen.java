@@ -1,4 +1,5 @@
 package com.example.billsplit_app.Screens;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,11 +59,15 @@ public class EvenBillScreen extends AppCompatActivity {
         CheckBox sameTipButton = findViewById(R.id.same_tip_button);
 
         View same_tip_selection = findViewById(R.id.same_tip_selection);
-        TextView current_total = findViewById(R.id.current_total);
+        TextView current_total = findViewById(R.id.even_current_total);
         EditText sameTipEditText = findViewById(R.id.even_tip_edit_text);
+        ImageButton sameTipPopupButton = findViewById(R.id.even_transit_enter_exit);
 
-        try { current_total.setText("$ " + InternalFiles.getSavedCost());
-        } catch (JSONException e) { e.printStackTrace(); }
+        try {
+            current_total.setText("$ " + InternalFiles.getSavedCost());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +82,7 @@ public class EvenBillScreen extends AppCompatActivity {
             public void onClick(View v) {
                 ShowPopup(v);
                 CheckPopup();
+                TipViewAdapter.notifyDataSetChanged();
             }
         });
 
@@ -88,8 +94,7 @@ public class EvenBillScreen extends AppCompatActivity {
                     same_tip_selection.setVisibility(View.VISIBLE);
 
                     MainActivity.allTipsSelected = true;
-                }
-                else{
+                } else {
                     same_tip_selection.setVisibility(View.INVISIBLE);
                     MainActivity.allTipsSelected = false;
                 }
@@ -112,12 +117,24 @@ public class EvenBillScreen extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().isEmpty()) {
                     allTip = Integer.parseInt(s.toString());
-                }
-                else {
+                } else {
                     allTip = 0;
+                }
+                try {
+                    current_total.setText("$ "+InternalFiles.getSavedCost());
+                    System.out.println(current_total);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         });
+
+//        sameTipPopupButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                TipViewAdapter.ShowPopup();
+//            }
+//        });
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,7 +170,7 @@ public class EvenBillScreen extends AppCompatActivity {
 
     public void ShowPopup(View view) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.add_profile_popup, null,false);
+        View popupView = inflater.inflate(R.layout.add_profile_popup, null, false);
         popupShown = true;
         CheckPopup();
 
@@ -180,7 +197,7 @@ public class EvenBillScreen extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View v) {
-                MainActivity.usersList.add(new User( addProfileNameEditText.getText().toString()));
+                MainActivity.usersList.add(new User(addProfileNameEditText.getText().toString()));
                 ProfileViewAdapter.notifyDataSetChanged();
                 TipViewAdapter.notifyDataSetChanged();
                 popupWindow.dismiss();
@@ -196,7 +213,7 @@ public class EvenBillScreen extends AppCompatActivity {
     }
 
     private void open_final_screen() {
-        for (User i: MainActivity.usersList){
+        for (User i : MainActivity.usersList) {
             i.setEvenTotal();
         }
         Intent open_even_final_screen = new Intent(this, FinalScreen.class);

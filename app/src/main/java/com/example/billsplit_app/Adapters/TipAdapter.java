@@ -130,7 +130,6 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         View popupView = LayoutInflater.from(view.getContext()).inflate(R.layout.open_tip_popup, null, false);
         popupShown = true;
         CheckPopup();
-
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.MATCH_PARENT;
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
@@ -147,6 +146,8 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             }
         });
 
+        ImageView popupBackground = popupView.findViewById(R.id.popup_background);
+        ImageButton popupCloseButton = popupView.findViewById(R.id.back_button);
         ImageView zeroButton = popupView.findViewById(R.id.tip_button1);
         ImageView tenButton = popupView.findViewById(R.id.tip_button2);
         ImageView twelveButton = popupView.findViewById(R.id.tip_button3);
@@ -154,8 +155,20 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         EditText popupTipText = popupView.findViewById(R.id.popup_tip_edit_text);
         Button popupSubmitButton = popupView.findViewById(R.id.popup_submit_button);
 
+        popupBackground.setOnClickListener(v -> {
+            // This is just here to prevent popup from closing when clicking the background
+        });
+
+        popupCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+
         zeroButton.setOnClickListener(v -> {
             u.setTips(0);
+
             popupWindow.dismiss();
             popupShown = false;
             CheckPopup();

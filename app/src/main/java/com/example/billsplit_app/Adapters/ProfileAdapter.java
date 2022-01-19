@@ -1,17 +1,26 @@
 package com.example.billsplit_app.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
+import com.example.billsplit_app.Screens.IndividualBillScreen;
 import com.example.billsplit_app.User;
 
 import java.util.ArrayList;
@@ -27,14 +36,14 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
     }
 
     public class ProfileViewHolder extends RecyclerView.ViewHolder{
-        private ImageButton profile_close_button;
+        private ImageButton profile_delete_button;
         private TextView name_str;
         private ImageView profile_background;
         private TextView profile_short_user_name;
 
         public ProfileViewHolder(@NonNull View itemView) {
             super(itemView);
-            profile_close_button = itemView.findViewById(R.id.popup_close_button);
+            profile_delete_button = itemView.findViewById(R.id.profile_delete_button);
             name_str = itemView.findViewById(R.id.profile_user_name);
             profile_background = itemView.findViewById(R.id.profile_background);
             profile_short_user_name = itemView.findViewById(R.id.profile_short_user_name);
@@ -54,10 +63,26 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
         holder.name_str.setText(name);
         holder.profile_background.getBackground().setTint(userList.get(position).getColor());
         holder.profile_short_user_name.setText(name.substring(0,1));
+
+//        holder.profile_delete_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                MainActivity.usersList.remove();
+//                ProfileAdapter.notifyDataSetChanged();
+//            }
+//        });
+
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                IndividualBillScreen.ShowPopup();
+//            }
+//        });
     }
 
     @Override
     public int getItemCount() {
         return userList.size();
     }
+
 }

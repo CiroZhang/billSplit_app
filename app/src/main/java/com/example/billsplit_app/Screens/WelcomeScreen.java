@@ -249,6 +249,8 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
                 editCostText.setText(s1.substring(0,s1.indexOf(".")+3));
                 Toast.makeText(this, "Please only enter up to two decimal places!", Toast.LENGTH_LONG).show();
                 closeKeyboard();
+                System.out.println(s);
+                System.out.println(editCostText);
             }
         }
 
@@ -313,8 +315,8 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
             InternalFiles.setSomething("cost", cost);
             InternalFiles.setSomething("location", province);
             InternalFiles.setSomething("tax", tax);
-            System.out.println("hello");
             InternalFiles.saveData();
+            System.out.println("saved to internal files");
         } catch (JSONException e) {
             e.printStackTrace();
         }

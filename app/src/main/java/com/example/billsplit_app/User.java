@@ -51,6 +51,11 @@ public class User {
         this.color = color;
     }
 
+    public void setIndividualTotal() {
+        double user = (double)  MainActivity.get_user_count() -1;
+        double tip = (double) tips/100;
+    }
+
     public void setEvenTotal(){
         double user = (double)  MainActivity.get_user_count() -1;
         double tip = (double) tips/100;

@@ -143,11 +143,8 @@ public class IndividualBillScreen extends AppCompatActivity {
         EditText addProfileNameEditText = popupView.findViewById(R.id.add_profile_name_edit_text);
         Button addProfileNameSubmitButton = popupView.findViewById(R.id.add_profile_name_submit_button);
 
-        addProfileBackground.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //This is just here to prevent popup from closing when clicking the background
-            }
+        addProfileBackground.setOnClickListener(v -> {
+            // This is just here to prevent popup from closing when clicking the background
         });
 
         addProfileCloseButton.setOnClickListener(new View.OnClickListener() {

@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -157,14 +157,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="13dp" />
+                        android:layout_marginTop="11.5dp" />
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="12.5dp"
+                        android:layout_marginTop="10.5dp"
                         android:fontFamily="@font/avenir_roman"
                         android:text="All tip same"
                         android:textColor="@color/black"
@@ -174,7 +174,7 @@
                         android:id="@+id/same_tip_selection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible">
+                        android:visibility="invisible">
 
                         <ImageView
                             android:id="@+id/even_tip_frame"
@@ -224,8 +224,7 @@
 
                 </LinearLayout>
 
-
-                <ScrollView
+                <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -235,18 +234,18 @@
                         android:orientation="vertical">
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:layout_marginTop="5dp"
                             android:id="@+id/even_tip_list_view"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="180dp"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                     </LinearLayout>
 
-                </ScrollView>
+                </androidx.core.widget.NestedScrollView>
 
             </LinearLayout>
-
 
         </LinearLayout>
 
@@ -279,7 +278,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/current_total"
+            android:id="@+id/even_current_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="300dp"
