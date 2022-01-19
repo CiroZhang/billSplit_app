@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class IndividualBillScreen extends AppCompatActivity {
     ItemAdapter ItemViewAdapter;
     RecyclerView ItemRecyclerView;
     Boolean popupShown = false;
+    TextView currentTotal;
 
     @SuppressLint("ResourceType")
     @Override
@@ -47,7 +49,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         ImageButton addDishButton = findViewById(R.id.add_dish_button);
         TextView addDishButton2 = findViewById(R.id.add_dish_button2);
         Button submitBillButton = findViewById(R.id.submit_bill_button);
-        TextView currentTotal = findViewById(R.id.current_total_price);
+        currentTotal = findViewById(R.id.current_total_price);
 
         System.out.println(MainActivity.usersList);
         System.out.println(MainActivity.dishList);
@@ -109,7 +111,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         ProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
         ItemRecyclerView = findViewById(R.id.dish_list_view);
-        ItemViewAdapter = new ItemAdapter();
+        ItemViewAdapter = new ItemAdapter(currentTotal, this);
         ItemRecyclerView.setAdapter(ItemViewAdapter);
         ItemRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
     }
@@ -136,8 +138,21 @@ public class IndividualBillScreen extends AppCompatActivity {
             }
         });
 
+        ImageView addProfileBackground = popupView.findViewById(R.id.popup_background);
+        ImageButton addProfileCloseButton = popupView.findViewById(R.id.popup_close_button);
         EditText addProfileNameEditText = popupView.findViewById(R.id.add_profile_name_edit_text);
         Button addProfileNameSubmitButton = popupView.findViewById(R.id.add_profile_name_submit_button);
+
+        addProfileBackground.setOnClickListener(v -> {
+            // This is just here to prevent popup from closing when clicking the background
+        });
+
+        addProfileCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
 
         addProfileNameSubmitButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NotifyDataSetChanged")

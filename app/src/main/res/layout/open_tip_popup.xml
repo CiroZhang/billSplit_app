@@ -37,8 +37,8 @@
             android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="11dp"
             android:background="@drawable/delete_button"
             android:visibility="visible"
             app:layout_constraintStart_toStartOf="@id/popup_background"
@@ -102,14 +102,14 @@
             android:layout_height="42dp"
             android:layout_marginStart="170dp"
             android:layout_marginTop="18dp"
-            android:background="@drawable/even_tip_frame"
+            android:background="@drawable/rounded_rectangle7"
             app:layout_constraintStart_toStartOf="@id/popup_background"
             app:layout_constraintTop_toBottomOf="@id/tip_button4" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="260dp"
+            android:layout_marginStart="256dp"
             android:layout_marginTop="30.5dp"
             android:fontFamily="@font/avenir_book"
             android:text="%"

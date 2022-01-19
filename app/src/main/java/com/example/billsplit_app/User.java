@@ -9,7 +9,6 @@ public class User {
     private int color;
     private int tips;
     private boolean lock_tips = false;
-    private ArrayList<Dish> dishes = new ArrayList<>();
     private InternalFiles data;
     private double total;
 
@@ -36,26 +35,10 @@ public class User {
         this.name = name;
     }
 
-    public ArrayList<Dish> getDishes() {
-        return dishes;
-    }
-
-    public void setDishes(ArrayList<Dish> dishes) {
-        this.dishes = dishes;
-    }
-
     public void setTips(int tips){ this.tips = tips; }
 
     public void setLock_tips(boolean lock){
         this.lock_tips = lock;
-    }
-
-    public void addDish(Dish dish) {
-        this.dishes.add(dish);
-    }
-
-    public void removeDish(Dish dish) {
-        this.dishes.remove(dish);
     }
 
     public int getColor() {
@@ -66,6 +49,11 @@ public class User {
 
     public void setColor(int color) {
         this.color = color;
+    }
+
+    public void setIndividualTotal() {
+        double user = (double)  MainActivity.get_user_count() -1;
+        double tip = (double) tips/100;
     }
 
     public void setEvenTotal(){
