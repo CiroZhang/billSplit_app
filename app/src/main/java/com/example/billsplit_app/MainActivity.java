@@ -65,4 +65,23 @@ public class MainActivity extends AppCompatActivity {
         indivTotal = total;
         System.out.println("indivTotal: " + indivTotal);
     }
+
+    public static double acoholTaxCalculator(String location, double cost){
+        if (location.equals("alberta")){return 4.51;}
+        if (location.equals("british columbia")){return cost * 0.1;}
+        if (location.equals("manitoba")){return 0;}
+        if (location.equals("new brunswick")){return cost* 0.05;}
+        if (location.equals("newfoundland and labrador")){return 0;}
+        if (location.equals("northwest territories")){return cost * 0.7;}
+        if (location.equals("nova scotia")){return 0;}
+        if (location.equals("nunavut")){return 0;}
+        if (location.equals("ontario")){return cost * 0.061;}
+        if (location.equals("prince edward island")){return cost * 0.25;}
+        if (location.equals("quebec")){return 0.72;}
+        if (location.equals("saskatchewan")){return cost * 0.1;}
+        if (location.equals("yukon")){return cost * 0.12;}
+        System.out.println("no province selected");
+        return 0;
+
+    }
 }
