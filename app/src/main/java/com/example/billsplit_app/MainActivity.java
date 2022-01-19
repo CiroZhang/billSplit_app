@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static double indivTotal = 0.0;
     public static double indivTipTotal = 0.0;
+    private static boolean even = false;
 
     public MainActivity() throws JSONException {
     }
@@ -40,6 +41,30 @@ public class MainActivity extends AppCompatActivity {
         colorList.remove(0);
         colorList.add(current);
         return current;
+    }
+    public static double get_default_total(){
+        double sum = 0;
+        for (User i: usersList) {
+            sum = sum + i.getDefault_total();
+        }
+        return sum;
+    }
+
+
+    public static double get_even_tax_total(){
+        double sum = 0;
+        for (User i: usersList) {
+            sum = sum + i.getTax_total();
+        }
+        return sum;
+    }
+
+    public static double get_even_tip_total(){
+        double sum = 0;
+        for (User i: usersList) {
+            sum = sum + i.getTip_total();
+        }
+        return sum;
     }
 
     public static int get_user_count(){
@@ -70,6 +95,16 @@ public class MainActivity extends AppCompatActivity {
         }
         indivTotal = total;
         System.out.println("indivTotal: " + indivTotal);
+    }
+
+    public static void is_Even(){
+        even = true;
+    }
+    public static void is_ind(){
+        even = false;
+    }
+    public static boolean check(){
+        return even;
     }
 
     public static double acoholTaxCalculator(String location, double cost){

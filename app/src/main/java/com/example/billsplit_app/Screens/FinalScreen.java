@@ -26,6 +26,8 @@ import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
 import com.example.billsplit_app.User;
 
+import org.json.JSONException;
+
 public class FinalScreen extends AppCompatActivity {
 
     FinalAdapter FinalViewAdapter;
@@ -41,9 +43,26 @@ public class FinalScreen extends AppCompatActivity {
         Button submitButton = findViewById(R.id.return_button);
         TextView total = findViewById(R.id.total);
         TextView subtotal = findViewById(R.id.subtotal);
+        TextView tax = findViewById(R.id.taxes_total);
+        TextView tip = findViewById(R.id.tips_total);
 
-        subtotal.setText("$ " + String.format("%.2f", MainActivity.indivTotal));
-        total.setText("$ " + String.format("%.2f", (MainActivity.get_user_sum() + MainActivity.indivTotal))) ;
+        try {
+            subtotal.setText("$ " + String.format("%.2f", MainActivity.indivTotal));
+            tax.setText("$ " + String.format("%.2f", MainActivity.indivTotal * InternalFiles.getSavedTax()));
+            tip.setText("$ " + String.format("%.2f", MainActivity.indivTipTotal));
+            if (MainActivity.check()){
+                subtotal.setText("$ " + String.format("%.2f", MainActivity.get_default_total()));
+                System.out.println(MainActivity.get_default_total());
+                tax.setText("$ " + String.format("%.2f", MainActivity.get_even_tax_total()));
+                tip.setText("$ " + String.format("%.2f", MainActivity.get_even_tip_total()));
+
+            }
+            total.setText("$ " + String.format("%.2f", (MainActivity.get_user_sum() + MainActivity.indivTotal + MainActivity.indivTotal * InternalFiles.getSavedTax()))) ;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
 
         backButton.setOnClickListener(new View.OnClickListener() {

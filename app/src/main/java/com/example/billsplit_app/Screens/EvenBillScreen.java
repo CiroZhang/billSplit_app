@@ -149,7 +149,11 @@ public class EvenBillScreen extends AppCompatActivity {
                     System.out.println(user.getTips());
                 }
 
-                open_final_screen();
+                try {
+                    open_final_screen();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -213,10 +217,14 @@ public class EvenBillScreen extends AppCompatActivity {
         startActivity(open_welcome_screen);
     }
 
-    private void open_final_screen() {
+    private void open_final_screen() throws JSONException {
         for (User i : MainActivity.usersList) {
+            i.set_default_total();
             i.setEvenTotal();
+            i.setEvenTax();
+            i.setEvenTips();
         }
+        MainActivity.is_Even();
         Intent open_even_final_screen = new Intent(this, FinalScreen.class);
         startActivity(open_even_final_screen);
     }

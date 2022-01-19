@@ -10,7 +10,11 @@ public class User {
     private int tips;
     private boolean lock_tips = false;
     private InternalFiles data;
+    private double default_total;
+    private double tax_total;
+    private double tip_total;
     private double total;
+
 
     public User(String name) {
         if (name.isEmpty()){
@@ -56,6 +60,24 @@ public class User {
         double tip = (double) tips/100;
     }
 
+    public void setEvenTips(){
+        double tip = (double) tips/100;
+        this.tip_total = this.default_total * tip;
+    }
+
+    public double getTax_total(){
+        return tax_total;
+    }
+    public void setEvenTax() throws JSONException {
+        double tax =(double) InternalFiles.getSavedTax();
+        this.tax_total = default_total * tax;
+
+
+
+    }
+    public double getTip_total(){
+        return tip_total;
+    }
     public void setEvenTotal(){
         double user = (double)  MainActivity.get_user_count() -1;
         double tip = (double) tips/100;
@@ -71,12 +93,19 @@ public class User {
             e.printStackTrace();
         }
     }
+    public double getDefault_total(){
+        return default_total;
+    }
 
     public void setTotal(double total) {
         this.total = total;
+    }
+    public void set_default_total() throws JSONException {
+        default_total = InternalFiles.getSavedCost()/ (MainActivity.get_user_count()-1);
     }
 
     public double getTotal(){
         return total;
     }
+
 }

@@ -42,6 +42,7 @@ public class IndividualBillScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.is_ind();
         setContentView(R.layout.individual_bill_screen);
 
         ImageButton backButton = findViewById(R.id.back_button);
