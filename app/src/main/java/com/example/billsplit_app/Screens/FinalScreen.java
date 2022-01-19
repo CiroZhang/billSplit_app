@@ -39,7 +39,9 @@ public class FinalScreen extends AppCompatActivity {
 
         double totalDishesPriceRaw = 0.0;
         for (Dish d : MainActivity.dishList) {
-            totalDishesPriceRaw += Double.parseDouble(d.getPrice());
+            if (!d.getPrice().isEmpty()) {
+                totalDishesPriceRaw += Double.parseDouble(d.getPrice());
+            }
         }
 
         try {

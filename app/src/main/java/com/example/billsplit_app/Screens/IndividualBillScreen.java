@@ -33,7 +33,7 @@ public class IndividualBillScreen extends AppCompatActivity {
 
     ProfileAdapter ProfileViewAdapter;
     RecyclerView ProfileRecyclerView;
-    ItemAdapter ItemViewAdapter;
+    static ItemAdapter ItemViewAdapter;
     RecyclerView ItemRecyclerView;
     Boolean popupShown = false;
     TextView currentTotal;
@@ -45,6 +45,8 @@ public class IndividualBillScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         MainActivity.is_ind();
         setContentView(R.layout.individual_bill_screen);
+
+        Button ocrButton = findViewById(R.id.ocr_button);
 
         ImageButton backButton = findViewById(R.id.back_button);
         ImageButton addUserButton = findViewById(R.id.add_user_button);
@@ -62,6 +64,13 @@ public class IndividualBillScreen extends AppCompatActivity {
         }
         MainActivity.dishList.clear();
         MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),""));
+
+        ocrButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                open_ocr_screen();
+            }
+        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +169,11 @@ public class IndividualBillScreen extends AppCompatActivity {
                 ItemViewAdapter.SharedAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    private void open_ocr_screen() {
+        Intent open_ocr_screen = new Intent(this, OCR.class);
+        startActivity(open_ocr_screen);
     }
 
     private void open_welcome_screen() {

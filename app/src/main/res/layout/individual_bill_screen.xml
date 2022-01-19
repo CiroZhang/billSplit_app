@@ -63,6 +63,15 @@
                     android:textColor="@color/black"
                     android:textSize="24sp" />
 
+                <Button
+                    android:id="@+id/ocr_button"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="200dp"
+                    android:background="@drawable/rounded_rectangle3"
+                    android:text="OCR"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
