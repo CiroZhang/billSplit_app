@@ -37,6 +37,7 @@ public class IndividualBillScreen extends AppCompatActivity {
     RecyclerView ItemRecyclerView;
     Boolean popupShown = false;
     TextView currentTotal;
+    double indivTotalNum = 0.0;
 
     @SuppressLint("ResourceType")
     @Override
@@ -52,9 +53,6 @@ public class IndividualBillScreen extends AppCompatActivity {
         Button submitBillButton = findViewById(R.id.submit_bill_button);
         currentTotal = findViewById(R.id.current_total_price);
 
-        System.out.println(MainActivity.usersList);
-        System.out.println(MainActivity.dishList);
-
         MainActivity.usersList.clear();
         MainActivity.usersList.add(new User("Me"));
         if (MainActivity.nOfUsers > 1) {
@@ -64,10 +62,6 @@ public class IndividualBillScreen extends AppCompatActivity {
         }
         MainActivity.dishList.clear();
         MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),""));
-
-        System.out.println("added user and dish");
-        System.out.println(MainActivity.usersList);
-        System.out.println(MainActivity.dishList);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,12 +81,10 @@ public class IndividualBillScreen extends AppCompatActivity {
         addDishButton.setOnClickListener(v -> {
             MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1), ""));
             ItemViewAdapter.notifyDataSetChanged();
-            System.out.println(MainActivity.dishList.size());
         });
         addDishButton2.setOnClickListener(v -> {
             MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),""));
             ItemViewAdapter.notifyDataSetChanged();
-            System.out.println(MainActivity.dishList.size());
         });
 
         submitBillButton.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +104,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         ProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
         ItemRecyclerView = findViewById(R.id.dish_list_view);
-        ItemViewAdapter = new ItemAdapter(currentTotal, this);
+        ItemViewAdapter = new ItemAdapter(this,currentTotal,indivTotalNum);
         ItemRecyclerView.setAdapter(ItemViewAdapter);
         ItemRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
     }

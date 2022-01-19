@@ -7,14 +7,17 @@ import java.util.ArrayList;
 public class User {
     private String name;
     private int color;
-    private int tips;
     private boolean lock_tips = false;
     private InternalFiles data;
+    private int tipsPercentage = 0;
     private double default_total;
-    private double tax_total;
-    private double tip_total;
-    private double total;
-
+    private double dishesRawPriceTotal = 0.0;
+    private double tax_total = 0.0;
+    private double tip_total = 0.0;
+    private double tips_times_total = 0.0;
+    private double total = 0.0;
+    private int sharedNum = 1;
+    private ArrayList<Dish> sharedDishes = new ArrayList<>();
 
     public User(String name) {
         if (name.isEmpty()){
@@ -39,8 +42,6 @@ public class User {
         this.name = name;
     }
 
-    public void setTips(int tips){ this.tips = tips; }
-
     public void setLock_tips(boolean lock){
         this.lock_tips = lock;
     }
@@ -49,7 +50,9 @@ public class User {
         return color;
     }
 
-    public int getTips(){return tips;}
+    public int getTipsPercentage(){return tipsPercentage;}
+
+    public void setTipsPercentage(int tips){ this.tipsPercentage = tips; }
 
     public void setColor(int color) {
         this.color = color;
@@ -57,30 +60,34 @@ public class User {
 
     public void setIndividualTotal() {
         double user = (double)  MainActivity.get_user_count() -1;
-        double tip = (double) tips/100;
+        double tip = (double) tipsPercentage /100;
     }
 
     public void setEvenTips(){
-        double tip = (double) tips/100;
+        double tip = (double) tipsPercentage /100;
         this.tip_total = this.default_total * tip;
+    }
+
+    public void setTax_total(double n) {
+        this.tax_total = n;
     }
 
     public double getTax_total(){
         return tax_total;
     }
+
     public void setEvenTax() throws JSONException {
         double tax =(double) InternalFiles.getSavedTax();
         this.tax_total = default_total * tax;
-
-
-
     }
+
     public double getTip_total(){
         return tip_total;
     }
+
     public void setEvenTotal(){
         double user = (double)  MainActivity.get_user_count() -1;
-        double tip = (double) tips/100;
+        double tip = (double) tipsPercentage /100;
         try {
             double totalCost = (double)  InternalFiles.getSavedCost();
             double tax =(double) InternalFiles.getSavedTax();
@@ -93,6 +100,7 @@ public class User {
             e.printStackTrace();
         }
     }
+
     public double getDefault_total(){
         return default_total;
     }
@@ -100,6 +108,7 @@ public class User {
     public void setTotal(double total) {
         this.total = total;
     }
+
     public void set_default_total() throws JSONException {
         default_total = InternalFiles.getSavedCost()/ (MainActivity.get_user_count()-1);
     }
@@ -108,4 +117,44 @@ public class User {
         return total;
     }
 
+    public ArrayList<Dish> getSharedDishes() {
+        return sharedDishes;
+    }
+
+    public void addDish(Dish dish) {
+        this.sharedDishes.add(dish);
+    }
+
+    public void removeDish(Dish dish) {
+        this.sharedDishes.remove(dish);
+    }
+
+    public double getTips_times_total() {
+        return tips_times_total;
+    }
+
+    public void setTips_times_total(double tips_times_total) {
+        this.tips_times_total = tips_times_total;
+    }
+
+    public void setSharedNum(int sharedNum) {
+        this.sharedNum = sharedNum;
+    }
+
+    public void setDishesRawPriceTotal(Double n) {
+        this.dishesRawPriceTotal = n;
+    }
+
+    public void addToDishesRawPrice(double n) {
+        this.dishesRawPriceTotal += n;
+    }
+
+    public void refreshTotal() {
+        this.tips_times_total = ((double)this.tipsPercentage * (this.dishesRawPriceTotal/(double)this.sharedNum))/100.0;
+        this.total = (this.tax_total + this.tips_times_total + (this.dishesRawPriceTotal/(double)this.sharedNum));
+    }
+
+    public double getDishesRawPriceTotal() {
+        return this.dishesRawPriceTotal;
+    }
 }

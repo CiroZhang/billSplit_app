@@ -1,11 +1,7 @@
 package com.example.billsplit_app;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import org.json.JSONException;
@@ -21,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
     public static int nOfUsers = 1;
     public static boolean allTipsSelected = false;
 
-    public static double indivTotal = 0.0;
-    public static double indivTipTotal = 0.0;
+    public static double finalTaxTotal = 0.0;
+    public static double finalTipTotal = 0.0;
     private static boolean even = false;
 
     public MainActivity() throws JSONException {
@@ -68,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static int get_user_count(){
-//        return (int) usersList.stream().count();
         return usersList.size()+1;
     }
 
@@ -78,23 +73,6 @@ public class MainActivity extends AppCompatActivity {
             sum = sum + i.getTotal();
         }
         return sum;
-    }
-
-    public static void refreshIndivTotal() {
-        double total = 0.0;
-        for (Dish d : dishList) {
-            if (d.isAlcoholic()) {
-
-            }
-            if (d.getPrice().isEmpty()) {
-                total += 0;
-            }
-            else {
-                total += Double.parseDouble(d.getPrice());
-            }
-        }
-        indivTotal = total;
-        System.out.println("indivTotal: " + indivTotal);
     }
 
     public static void is_Even(){

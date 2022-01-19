@@ -2,7 +2,6 @@ package com.example.billsplit_app.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -21,10 +20,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.billsplit_app.Dish;
+import com.example.billsplit_app.InternalFiles;
 import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
-import com.example.billsplit_app.Screens.IndividualTipScreen;
 import com.example.billsplit_app.User;
+
+import org.json.JSONException;
 
 public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
     Boolean popupShown = false;
@@ -82,9 +84,10 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull TipViewHolder holder, int position) {
-        String name = MainActivity.usersList.get(position).getUsername();
         User current = MainActivity.usersList.get(position);
-        holder.name_str.setText(name);
+        holder.name_str.setText(current.getUsername());
+        holder.tips.setText("0");
+        holder.tips.getText().clear();
 
         if (MainActivity.allTipsSelected) {
             holder.tips.setEnabled(false);
@@ -106,6 +109,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         });
 
         holder.tips.removeTextChangedListener(holder.tw);
+        holder.tips.setText("0");
         holder.tips.getText().clear();
         holder.tw = new TextWatcher() {
             @Override
@@ -121,25 +125,67 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             @SuppressLint({"DefaultLocale", "SetTextI18n"})
             @Override
             public void afterTextChanged(Editable s) {
-                User u = MainActivity.usersList.get(MainActivity.usersList.indexOf(current));
-                if (!s.toString().isEmpty()) {
-                    current.setTips(Integer.parseInt(s.toString()));
-                    current.setTotal(MainActivity.indivTotal * (u.getTips()/100.0));
-                } else {
-                    current.setTips(0);
+                // getting the # of users sharing this dish, then adding current user's all shared dishes' prices together
+                int sharedNum = 0;
+                double rawDishesPriceTotal = 0.0;
+                for (Dish dish : current.getSharedDishes()) {
+                    sharedNum = dish.getNOfSharedUsers();
+                    rawDishesPriceTotal += Double.parseDouble(dish.getPrice());
                 }
-                MainActivity.indivTipTotal = updateTotal();
-                System.out.println(MainActivity.indivTipTotal);
-                totalTextView.setText("$ " + String.format("%.2f",MainActivity.indivTipTotal));
+
+                // setting user's # of shared users between this dish
+                current.setSharedNum(sharedNum);
+
+                // setting user's total price of all shared dishes
+                current.setDishesRawPriceTotal(rawDishesPriceTotal);
+
+                // setting user's updated raw tax amount (taxPercentage * total price of all of user's dishes)
+                try {
+                    current.setTax_total((rawDishesPriceTotal / sharedNum) * InternalFiles.getSavedTax());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if (!s.toString().isEmpty()) {
+                    int enteredTipPercentage = Integer.parseInt(s.toString());
+
+                    // setting user's updated tip percentage
+                    current.setTipsPercentage(enteredTipPercentage);
+
+                    // setting user's updated raw tip amount (tipPercentage * total price of all of user's dishes)
+                    current.setTips_times_total(((rawDishesPriceTotal / sharedNum) * enteredTipPercentage) / 100.0);
+                }
+                else {
+                    // setting user's updated tip percentage to 0
+                    current.setTipsPercentage(0);
+
+                    // setting user's updated raw tip amount to 0
+                    current.setTips_times_total(0);
+                }
+
+                // updating MainActivity's final tip total
+                MainActivity.finalTipTotal = updateTipsTotal();
+                // updating MainActivity's final tax total
+                MainActivity.finalTaxTotal = updateTaxTotal();
+
+                totalTextView.setText("$ " + String.format("%.2f",MainActivity.finalTipTotal));
             }
         };
         holder.tips.addTextChangedListener(holder.tw);
     }
 
-    public double updateTotal() {
+    public double updateTipsTotal() {
         double total = 0.0;
         for (User u : MainActivity.usersList) {
-            total += MainActivity.indivTotal * (u.getTips()/100.0);
+            total += u.getTips_times_total();
+        }
+        return total;
+    }
+
+    public double updateTaxTotal() {
+        double total = 0.0;
+        for (User u : MainActivity.usersList) {
+            total += u.getTax_total();
         }
         return total;
     }
@@ -185,7 +231,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         });
 
         zeroButton.setOnClickListener(v -> {
-            u.setTips(0);
+            u.setTipsPercentage(0);
 
             popupWindow.dismiss();
             popupShown = false;
@@ -193,21 +239,21 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         });
 
         tenButton.setOnClickListener(v -> {
-            u.setTips(10);
+            u.setTipsPercentage(10);
             popupWindow.dismiss();
             popupShown = false;
             CheckPopup();
         });
 
         twelveButton.setOnClickListener(v -> {
-            u.setTips(12);
+            u.setTipsPercentage(12);
             popupWindow.dismiss();
             popupShown = false;
             CheckPopup();
         });
 
         fifteenButton.setOnClickListener(v -> {
-            u.setTips(15);
+            u.setTipsPercentage(15);
             popupWindow.dismiss();
             popupShown = false;
             CheckPopup();
@@ -233,9 +279,9 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().isEmpty()) {
-                    u.setTips(Integer.parseInt(s.toString()));
+                    u.setTipsPercentage(Integer.parseInt(s.toString()));
                 } else {
-                    u.setTips(0);
+                    u.setTipsPercentage(0);
                 }
             }
         });

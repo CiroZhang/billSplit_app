@@ -6,25 +6,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.billsplit_app.Adapters.FinalAdapter;
-import com.example.billsplit_app.Adapters.ProfileAdapter;
-import com.example.billsplit_app.Adapters.TipAdapter;
+import com.example.billsplit_app.Dish;
 import com.example.billsplit_app.InternalFiles;
 import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
-import com.example.billsplit_app.User;
 
 import org.json.JSONException;
 
@@ -46,18 +37,22 @@ public class FinalScreen extends AppCompatActivity {
         TextView tax = findViewById(R.id.taxes_total);
         TextView tip = findViewById(R.id.tips_total);
 
+        double totalDishesPriceRaw = 0.0;
+        for (Dish d : MainActivity.dishList) {
+            totalDishesPriceRaw += Double.parseDouble(d.getPrice());
+        }
+
         try {
-            subtotal.setText("$ " + String.format("%.2f", MainActivity.indivTotal));
-            tax.setText("$ " + String.format("%.2f", MainActivity.indivTotal * InternalFiles.getSavedTax()));
-            tip.setText("$ " + String.format("%.2f", MainActivity.indivTipTotal));
+            subtotal.setText("$ " + String.format("%.2f", totalDishesPriceRaw));
+            tip.setText("$ " + String.format("%.2f", MainActivity.finalTipTotal));
+            tax.setText("$ " + String.format("%.2f", MainActivity.finalTaxTotal));
             if (MainActivity.check()){
                 subtotal.setText("$ " + String.format("%.2f", MainActivity.get_default_total()));
-                System.out.println(MainActivity.get_default_total());
-                tax.setText("$ " + String.format("%.2f", MainActivity.get_even_tax_total()));
                 tip.setText("$ " + String.format("%.2f", MainActivity.get_even_tip_total()));
-
+                tax.setText("$ " + String.format("%.2f", MainActivity.get_even_tax_total()));
+                total.setText("$ " + String.format("%.2f", (MainActivity.get_user_sum() + MainActivity.finalTaxTotal + MainActivity.finalTaxTotal * InternalFiles.getSavedTax())));
             }
-            total.setText("$ " + String.format("%.2f", (MainActivity.get_user_sum() + MainActivity.indivTotal + MainActivity.indivTotal * InternalFiles.getSavedTax()))) ;
+            total.setText("$ " + String.format("%.2f", (totalDishesPriceRaw + MainActivity.finalTaxTotal + MainActivity.finalTipTotal)));
 
         } catch (JSONException e) {
             e.printStackTrace();

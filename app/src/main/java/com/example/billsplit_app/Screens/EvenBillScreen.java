@@ -123,7 +123,6 @@ public class EvenBillScreen extends AppCompatActivity {
                 }
                 try {
                     current_total.setText("$ "+InternalFiles.getSavedCost());
-                    System.out.println(current_total);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -142,11 +141,8 @@ public class EvenBillScreen extends AppCompatActivity {
             public void onClick(View v) {
                 if (sameTipButton.isChecked()) {
                     for (User user : MainActivity.usersList) {
-                        user.setTips(allTip);
+                        user.setTipsPercentage(allTip);
                     }
-                }
-                for (User user : MainActivity.usersList) {
-                    System.out.println(user.getTips());
                 }
 
                 try {

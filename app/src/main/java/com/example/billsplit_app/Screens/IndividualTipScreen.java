@@ -4,29 +4,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.billsplit_app.Adapters.TipAdapter;
+import com.example.billsplit_app.Dish;
+import com.example.billsplit_app.InternalFiles;
 import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
-import com.example.billsplit_app.Screens.IndividualBillScreen;
 import com.example.billsplit_app.User;
+
+import org.json.JSONException;
 
 public class IndividualTipScreen extends AppCompatActivity {
 
@@ -78,7 +75,9 @@ public class IndividualTipScreen extends AppCompatActivity {
                     MainActivity.allTipsSelected = false;
                 }
                 allTip = 0;
-                updateTotal();
+                refreshPrereqs();
+                updateTipsPercentage();
+                MainActivity.finalTipTotal = 0.0;
                 currentTotalText.setText("$ 0.00");
                 TipAdapter.notifyDataSetChanged();
             }
@@ -100,27 +99,24 @@ public class IndividualTipScreen extends AppCompatActivity {
                 String s1 = s.toString();
                 if (!s1.isEmpty()) {
                     allTip = Integer.parseInt(s.toString());
-                    MainActivity.indivTipTotal = updateTotal();
                 }
                 else {
                     allTip = 0;
                 }
-                currentTotalText.setText("$ " + String.format("%.2f",MainActivity.indivTipTotal));
+                refreshPrereqs();
+                MainActivity.finalTipTotal = updateTipsPercentage();
+                currentTotalText.setText("$ " + String.format("%.2f",MainActivity.finalTipTotal));
+//                System.out.println(currentTotalText.getText().toString());
+                TipAdapter.notifyDataSetChanged();
             }
         });
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (sameTipButton.isChecked()) {
-                    for (User user : MainActivity.usersList) {
-                        user.setTips(allTip);
-                    }
-                }
                 for (User user : MainActivity.usersList) {
-                    System.out.println(user.getTips());
+                    user.refreshTotal();
                 }
-
                 open_final_screen();
             }
         });
@@ -128,12 +124,17 @@ public class IndividualTipScreen extends AppCompatActivity {
         setupRecyclerView(currentTotalText);
     }
 
-    public double updateTotal() {
+    public void refreshPrereqs() {
+        for (User u : MainActivity.usersList) {
+            u.setTipsPercentage(allTip);
+            u.refreshTotal();
+        }
+    }
+
+    public double updateTipsPercentage() {
         double total = 0.0;
         for (User u : MainActivity.usersList) {
-            u.setTips(allTip);
-            u.setTotal(MainActivity.indivTotal * (allTip/100.0));
-            total += MainActivity.indivTotal * (allTip/100.0);
+            total += u.getTips_times_total();
         }
         return total;
     }

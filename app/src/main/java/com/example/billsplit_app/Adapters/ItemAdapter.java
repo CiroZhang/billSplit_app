@@ -2,7 +2,6 @@ package com.example.billsplit_app.Adapters;
 
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,11 +25,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     private TextView indivTotal;
     private View thisView;
     private Context context;
+    private double indivTotalNum = 0.0;
     public com.example.billsplit_app.Adapters.SharedAdapter SharedAdapter = new SharedAdapter();
 
-    public ItemAdapter(TextView total, Context context) {
+    public ItemAdapter(Context context, TextView total, double indivTotalNum) {
         this.indivTotal = total;
         this.context = context;
+        this.indivTotalNum = indivTotalNum;
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -141,9 +142,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             @Override
             public void onClick(View v) {
                 MainActivity.dishList.remove(dishItem);
-                MainActivity.refreshIndivTotal();
+                updateIndivTotal();
+                indivTotal.setText("$ " + String.format("%.2f", indivTotalNum));
                 notifyDataSetChanged();
-                System.out.println(MainActivity.dishList.size());
             }
         });
 
@@ -167,7 +168,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 } else {
                     dishItem.setAlcoholic(false);
                 }
-                MainActivity.refreshIndivTotal();
+                updateIndivTotal();
                 notifyDataSetChanged();
             }
         });
@@ -186,7 +187,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             @Override
             public void afterTextChanged(Editable s) {
                 dishItem.setName(s.toString());
-                System.out.println(s.toString());
             }
         };
 
@@ -211,8 +211,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 else {
                     dishItem.setPrice("0.0");
                 }
-                MainActivity.refreshIndivTotal();
-                indivTotal.setText("$ " + String.format("%.2f", MainActivity.indivTotal));
+                updateIndivTotal();
+                indivTotal.setText("$ " + String.format("%.2f", indivTotalNum));
             }
         };
 
@@ -248,6 +248,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 holder.price_str.setText(s1.substring(0,s1.indexOf(".")+3));
                 Toast.makeText(context, "Please only enter up to two decimal places!", Toast.LENGTH_LONG).show();
                 closeKeyboard(view);
+            }
+        }
+    }
+
+    private void updateIndivTotal() {
+        indivTotalNum = 0;
+        for (Dish d : MainActivity.dishList) {
+            if (d.isAlcoholic()) {
+
+            }
+            if (!d.getPrice().isEmpty()) {
+                indivTotalNum += Double.parseDouble(d.getPrice());
             }
         }
     }
