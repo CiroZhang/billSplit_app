@@ -47,7 +47,9 @@ public class Dish {
     }
 
     public void addUser(User u) {
-        this.sharedUsers.add(u);
+        if (!this.sharedUsers.contains(u)) {
+            this.sharedUsers.add(u);
+        }
     }
 
     public void removeUser(User u) {

@@ -106,7 +106,7 @@ public class IndividualTipScreen extends AppCompatActivity {
                 refreshPrereqs();
                 MainActivity.finalTipTotal = updateTipsPercentage();
                 currentTotalText.setText("$ " + String.format("%.2f",MainActivity.finalTipTotal));
-//                System.out.println(currentTotalText.getText().toString());
+                System.out.println(currentTotalText.getText().toString());
                 TipAdapter.notifyDataSetChanged();
             }
         });

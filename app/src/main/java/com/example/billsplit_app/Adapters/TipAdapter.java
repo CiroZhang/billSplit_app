@@ -164,10 +164,10 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
                 }
 
                 // updating MainActivity's final tip total
-                MainActivity.finalTipTotal = updateTipsTotal();
+//                MainActivity.finalTipTotal = updateTipsTotal();
                 // updating MainActivity's final tax total
                 MainActivity.finalTaxTotal = updateTaxTotal();
-
+                System.out.println(MainActivity.finalTipTotal);
                 totalTextView.setText("$ " + String.format("%.2f",MainActivity.finalTipTotal));
             }
         };
