@@ -8,12 +8,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.billsplit_app.Adapters.TipAdapter;
@@ -30,6 +35,7 @@ public class IndividualTipScreen extends AppCompatActivity {
     com.example.billsplit_app.Adapters.TipAdapter TipAdapter;
     RecyclerView IndividualTipRecyclerView;
     int allTip = 0;
+    String customTip = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,14 @@ public class IndividualTipScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 open_individual_bill_screen();
+            }
+        });
+
+        tipTransit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowPopup(v,tipText);
+                refreshPrereqs();
             }
         });
 
@@ -136,6 +150,8 @@ public class IndividualTipScreen extends AppCompatActivity {
         return total;
     }
 
+
+
     private void open_individual_bill_screen() {
         Intent open_individual_bill_screen = new Intent(this, IndividualBillScreen.class);
         startActivity(open_individual_bill_screen);
@@ -151,6 +167,102 @@ public class IndividualTipScreen extends AppCompatActivity {
         IndividualTipRecyclerView = findViewById(R.id.individual_tip_list_view);
         IndividualTipRecyclerView.setAdapter(TipAdapter);
         IndividualTipRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+    }
+
+    public void ShowPopup(View view, EditText tipText) {
+        View popupView = LayoutInflater.from(view.getContext()).inflate(R.layout.open_tip_popup, null, false);
+        CheckPopup();
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                CheckPopup();
+                return true;
+            }
+        });
+
+        ImageView popupBackground = popupView.findViewById(R.id.popup_background);
+        ImageButton popupCloseButton = popupView.findViewById(R.id.back_button);
+        ImageView zeroButton = popupView.findViewById(R.id.tip_button1);
+        ImageView tenButton = popupView.findViewById(R.id.tip_button2);
+        ImageView twelveButton = popupView.findViewById(R.id.tip_button3);
+        ImageView fifteenButton = popupView.findViewById(R.id.tip_button4);
+        EditText popupTipText = popupView.findViewById(R.id.popup_tip_edit_text);
+        Button popupSubmitButton = popupView.findViewById(R.id.popup_submit_button);
+
+        popupBackground.setOnClickListener(v -> {
+            // This is just here to prevent popup from closing when clicking the background
+        });
+
+        popupCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+
+        zeroButton.setOnClickListener(v -> {
+            tipText.setText("0");
+            TipAdapter.notifyDataSetChanged();
+            popupWindow.dismiss();
+            CheckPopup();
+        });
+
+        tenButton.setOnClickListener(v -> {
+            tipText.setText("10");
+            TipAdapter.notifyDataSetChanged();
+            popupWindow.dismiss();
+            CheckPopup();
+        });
+
+        twelveButton.setOnClickListener(v -> {
+            tipText.setText("12");
+            TipAdapter.notifyDataSetChanged();
+            popupWindow.dismiss();
+            CheckPopup();
+        });
+
+        fifteenButton.setOnClickListener(v -> {
+            tipText.setText("15");
+            TipAdapter.notifyDataSetChanged();
+            popupWindow.dismiss();
+            CheckPopup();
+        });
+
+        popupSubmitButton.setOnClickListener(v -> {
+            tipText.setText(customTip);
+            TipAdapter.notifyDataSetChanged();
+            popupWindow.dismiss();
+            CheckPopup();
+        });
+
+        popupTipText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().isEmpty()) {
+                    customTip = s.toString();
+                }
+                else {
+                    customTip = "";
+                }
+            }
+        });
     }
 
     public void CheckPopup() {

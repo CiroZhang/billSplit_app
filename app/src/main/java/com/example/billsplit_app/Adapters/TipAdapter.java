@@ -29,9 +29,9 @@ import com.example.billsplit_app.User;
 import org.json.JSONException;
 
 public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
-    Boolean popupShown = false;
     Context context;
     TextView totalTextView;
+    String customTip = "";
 
     public TipAdapter(Context context) {
         this.context = context;
@@ -86,10 +86,10 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
     public void onBindViewHolder(@NonNull TipViewHolder holder, int position) {
         User current = MainActivity.usersList.get(position);
         holder.name_str.setText(current.getUsername());
-        holder.tips.setText("0");
-        holder.tips.getText().clear();
 
         if (MainActivity.allTipsSelected) {
+            holder.tips.setText("0");
+            holder.tips.getText().clear();
             holder.tips.setEnabled(false);
             holder.transitButton.setEnabled(false);
             holder.name_str.setTextColor(context.getResources().getColor(R.color.grey2));
@@ -104,13 +104,11 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         holder.transitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowPopup(v, current);
+                ShowPopup(v, current, holder);
             }
         });
 
         holder.tips.removeTextChangedListener(holder.tw);
-        holder.tips.setText("0");
-        holder.tips.getText().clear();
         holder.tw = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -228,9 +226,8 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         return total;
     }
 
-    public void ShowPopup(View view, User u) {
+    public void ShowPopup(View view, User u, TipViewHolder holder) {
         View popupView = LayoutInflater.from(view.getContext()).inflate(R.layout.open_tip_popup, null, false);
-        popupShown = true;
         CheckPopup();
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -242,7 +239,6 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 popupWindow.dismiss();
-                popupShown = false;
                 CheckPopup();
                 return true;
             }
@@ -269,37 +265,37 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         });
 
         zeroButton.setOnClickListener(v -> {
-            u.setTipsPercentage(0);
-
+            holder.tips.setText("0");
+            this.notifyDataSetChanged();
             popupWindow.dismiss();
-            popupShown = false;
             CheckPopup();
         });
 
         tenButton.setOnClickListener(v -> {
-            u.setTipsPercentage(10);
+            holder.tips.setText("10");
+            this.notifyDataSetChanged();
             popupWindow.dismiss();
-            popupShown = false;
             CheckPopup();
         });
 
         twelveButton.setOnClickListener(v -> {
-            u.setTipsPercentage(12);
+            holder.tips.setText("12");
+            this.notifyDataSetChanged();
             popupWindow.dismiss();
-            popupShown = false;
             CheckPopup();
         });
 
         fifteenButton.setOnClickListener(v -> {
-            u.setTipsPercentage(15);
+            holder.tips.setText("15");
+            this.notifyDataSetChanged();
             popupWindow.dismiss();
-            popupShown = false;
             CheckPopup();
         });
 
         popupSubmitButton.setOnClickListener(v -> {
+            holder.tips.setText(customTip);
+            this.notifyDataSetChanged();
             popupWindow.dismiss();
-            popupShown = false;
             CheckPopup();
         });
 
@@ -317,9 +313,10 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().isEmpty()) {
-                    u.setTipsPercentage(Integer.parseInt(s.toString()));
-                } else {
-                    u.setTipsPercentage(0);
+                    customTip = s.toString();
+                }
+                else {
+                    customTip = "";
                 }
             }
         });
