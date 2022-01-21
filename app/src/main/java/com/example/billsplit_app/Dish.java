@@ -59,4 +59,8 @@ public class Dish {
     public int getNOfSharedUsers() {
         return this.sharedUsers.size();
     }
+
+    public void clearSharedUsers() {
+        this.sharedUsers.clear();
+    }
 }

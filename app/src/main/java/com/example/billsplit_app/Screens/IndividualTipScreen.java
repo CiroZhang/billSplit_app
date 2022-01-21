@@ -36,6 +36,7 @@ public class IndividualTipScreen extends AppCompatActivity {
     RecyclerView IndividualTipRecyclerView;
     int allTip = 0;
     String customTip = "";
+    boolean tipsChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +126,28 @@ public class IndividualTipScreen extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!tipsChanged) {
+                    for (User user : MainActivity.usersList) {
+                        // getting the # of users sharing this dish, then adding current user's all shared dishes' prices together
+                        double rawDishesPriceTotal = 0.0;
+                        for (Dish dish : user.getSharedDishes()) {
+                            rawDishesPriceTotal += Double.parseDouble(dish.getPrice()) / (double)dish.getNOfSharedUsers();
+                        }
+
+                        // setting user's total price of all shared dishes
+                        user.setDishesRawPriceTotal(rawDishesPriceTotal);
+
+                        // setting user's updated raw tax amount (taxPercentage * total price of all of user's dishes)
+                        try {
+                            user.setTax_total(rawDishesPriceTotal * InternalFiles.getSavedTax());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        user.setTips_times_total(0);
+                    }
+                    MainActivity.finalTaxTotal = updateTaxTotal();
+                }
+
                 for (User user : MainActivity.usersList) {
                     user.refreshTotal();
                 }
@@ -150,7 +173,13 @@ public class IndividualTipScreen extends AppCompatActivity {
         return total;
     }
 
-
+    public double updateTaxTotal() {
+        double total = 0.0;
+        for (User u : MainActivity.usersList) {
+            total += u.getTax_total();
+        }
+        return total;
+    }
 
     private void open_individual_bill_screen() {
         Intent open_individual_bill_screen = new Intent(this, IndividualBillScreen.class);
@@ -162,7 +191,7 @@ public class IndividualTipScreen extends AppCompatActivity {
     }
 
     void setupRecyclerView(TextView currentTotalText) {
-        TipAdapter = new TipAdapter(this,currentTotalText);
+        TipAdapter = new TipAdapter(this,currentTotalText,tipsChanged);
 
         IndividualTipRecyclerView = findViewById(R.id.individual_tip_list_view);
         IndividualTipRecyclerView.setAdapter(TipAdapter);

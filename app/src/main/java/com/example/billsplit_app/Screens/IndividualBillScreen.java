@@ -88,11 +88,15 @@ public class IndividualBillScreen extends AppCompatActivity {
         });
 
         addDishButton.setOnClickListener(v -> {
-            MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1), ""));
+            Dish newDish = new Dish("New Dish " + (MainActivity.dishList.size()+1), "");
+            newDish.clearSharedUsers();
+            MainActivity.dishList.add(newDish);
             ItemViewAdapter.notifyDataSetChanged();
         });
         addDishButton2.setOnClickListener(v -> {
-            MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),""));
+            Dish newDish = new Dish("New Dish " + (MainActivity.dishList.size()+1), "");
+            newDish.clearSharedUsers();
+            MainActivity.dishList.add(newDish);
             ItemViewAdapter.notifyDataSetChanged();
         });
 
