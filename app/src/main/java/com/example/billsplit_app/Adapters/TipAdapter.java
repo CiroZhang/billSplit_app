@@ -126,7 +126,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             @Override
             public void afterTextChanged(Editable s) {
                 // getting the # of users sharing this dish, then adding current user's all shared dishes' prices together
-                int sharedNum = 0;
+                int sharedNum = 1;
                 double rawDishesPriceTotal = 0.0;
                 for (Dish dish : current.getSharedDishes()) {
                     sharedNum = dish.getNOfSharedUsers();

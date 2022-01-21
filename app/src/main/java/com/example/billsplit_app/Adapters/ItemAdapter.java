@@ -221,6 +221,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         SharedAdapter.adapterDish(dishItem);
         SharedAdapter.notifyDataSetChanged();
+
+        updateIndivTotal();
+        indivTotal.setText("$ " + String.format("%.2f", indivTotalNum));
     }
 
     @Override
