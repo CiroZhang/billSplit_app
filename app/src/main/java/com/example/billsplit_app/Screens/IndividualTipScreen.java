@@ -1,9 +1,13 @@
 package com.example.billsplit_app.Screens;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -36,6 +40,7 @@ public class IndividualTipScreen extends AppCompatActivity {
     RecyclerView IndividualTipRecyclerView;
     int allTip = 0;
     String customTip = "";
+    Activity activity = IndividualTipScreen.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +131,8 @@ public class IndividualTipScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!MainActivity.tipsChanged) {
+                    alertPopup(activity);
+
                     for (User user : MainActivity.usersList) {
                         // getting the # of users sharing this dish, then adding current user's all shared dishes' prices together
                         double rawDishesPriceTotal = 0.0;
@@ -145,12 +152,19 @@ public class IndividualTipScreen extends AppCompatActivity {
                         user.setTipsPercentage(0);
                     }
                     MainActivity.finalTipTotal = 0;
+                    MainActivity.finalTaxTotal = updateTaxTotal();
+                    for (User user : MainActivity.usersList) {
+                        user.refreshTotal();
+                    }
                 }
-                MainActivity.finalTaxTotal = updateTaxTotal();
-                for (User user : MainActivity.usersList) {
-                    user.refreshTotal();
+
+                else {
+                    MainActivity.finalTaxTotal = updateTaxTotal();
+                    for (User user : MainActivity.usersList) {
+                        user.refreshTotal();
+                    }
+                    open_final_screen();
                 }
-                open_final_screen();
             }
         });
 
@@ -195,6 +209,20 @@ public class IndividualTipScreen extends AppCompatActivity {
         IndividualTipRecyclerView = findViewById(R.id.individual_tip_list_view);
         IndividualTipRecyclerView.setAdapter(TipAdapter);
         IndividualTipRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+    }
+
+    private void alertPopup(Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("No tips entered!")
+                .setMessage("You haven't entered in any tips yet! Would you still like to continue?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        open_final_screen();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 
     public void ShowPopup(View view, EditText tipText) {

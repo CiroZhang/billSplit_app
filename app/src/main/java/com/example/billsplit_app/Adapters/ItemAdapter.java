@@ -204,6 +204,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             @SuppressLint({"DefaultLocale", "SetTextI18n"})
             @Override
             public void afterTextChanged(Editable s) {
+                MainActivity.pricesChanged = true;
                 checkEditCostTextValid(s,holder,thisView);
                 if (!s.toString().isEmpty()) {
                     dishItem.setPrice(s.toString());

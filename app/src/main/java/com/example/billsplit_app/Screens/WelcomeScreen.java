@@ -226,6 +226,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
 
     private void open_individual_split_screen() {
         if (individual_split_button.isActivated()) {
+            MainActivity.pricesChanged = false;
             MainActivity.is_ind();
             Intent open_individual_split_screen = new Intent(this, IndividualBillScreen.class);
             startActivity(open_individual_split_screen);

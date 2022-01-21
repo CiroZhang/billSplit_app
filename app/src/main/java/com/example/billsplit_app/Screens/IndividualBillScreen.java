@@ -1,10 +1,14 @@
 package com.example.billsplit_app.Screens;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -38,6 +42,7 @@ public class IndividualBillScreen extends AppCompatActivity {
     Boolean popupShown = false;
     TextView currentTotal;
     double indivTotalNum = 0.0;
+    Activity activity = IndividualBillScreen.this;
 
     @SuppressLint("ResourceType")
     @Override
@@ -104,7 +109,12 @@ public class IndividualBillScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.tipsChanged = false;
-                open_individual_tip_screen();
+                if (MainActivity.pricesChanged) {
+                    open_individual_tip_screen();
+                }
+                else {
+                    alertPopup(activity);
+                }
             }
         });
 
@@ -121,6 +131,14 @@ public class IndividualBillScreen extends AppCompatActivity {
         ItemViewAdapter = new ItemAdapter(this,currentTotal,indivTotalNum);
         ItemRecyclerView.setAdapter(ItemViewAdapter);
         ItemRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+    }
+
+    private void alertPopup(Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("No prices entered!")
+                .setMessage("You haven't entered in any prices yet!")
+                .setNegativeButton("OK", null)
+                .show();
     }
 
     public void ShowPopup(View view) {

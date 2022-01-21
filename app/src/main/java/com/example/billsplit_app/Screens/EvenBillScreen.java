@@ -1,10 +1,14 @@
 package com.example.billsplit_app.Screens;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -43,6 +47,7 @@ public class EvenBillScreen extends AppCompatActivity {
     TextView current_total;
     int allTip = 0;
     String customTip = "";
+    Activity activity = EvenBillScreen.this;
 
     @SuppressLint({"ResourceType", "SetTextI18n", "DefaultLocale"})
     @Override
@@ -170,20 +175,32 @@ public class EvenBillScreen extends AppCompatActivity {
                         user.setTipsPercentage(0);
                     }
                     MainActivity.finalTipTotal = 0;
+
+                    for (User user : MainActivity.usersList) {
+                        try {
+                            user.refreshTotalEven();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    alertPopup(activity);
                 }
 
-                for (User user : MainActivity.usersList) {
+                else {
+                    for (User user : MainActivity.usersList) {
+                        try {
+                            user.refreshTotalEven();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     try {
-                        user.refreshTotalEven();
+                        open_final_screen();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-
-                try {
-                    open_final_screen();
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
             }
         });
@@ -217,6 +234,24 @@ public class EvenBillScreen extends AppCompatActivity {
             total += u.getTips_times_total();
         }
         return total;
+    }
+
+    private void alertPopup(Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("No tips entered!")
+                .setMessage("You haven't entered in any tips yet! Would you still like to continue?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            open_final_screen();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 
     public void ShowPopup(View view) {

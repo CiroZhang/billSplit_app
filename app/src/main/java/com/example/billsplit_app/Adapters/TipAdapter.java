@@ -157,6 +157,12 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
                             current.setTips_times_total(0);
                         }
                     }
+                    try {
+                        MainActivity.finalTipTotal = updateTipsTotal();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    totalTextView.setText("$ " + String.format("%.2f",MainActivity.finalTipTotal));
                 }
 
                 // even screen
@@ -177,7 +183,8 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
 
                             // setting user's updated raw tip amount (tipPercentage * saved total cost)
                             try {
-                                current.setTips_times_total((InternalFiles.getSavedCost() * enteredTipPercentage) / 100.0);
+                                current.setTips_times_total(InternalFiles.getSavedCost() * (enteredTipPercentage / 100.0));
+                                System.out.println(current.getTips_times_total());
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -190,16 +197,18 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
                             current.setTips_times_total(0);
                         }
                     }
-                }
-
-                try {
-                    MainActivity.finalTipTotal = updateTipsTotal();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    try {
+                        MainActivity.finalTipTotal = updateTipsTotal();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        totalTextView.setText("$ " + String.format("%.2f",(InternalFiles.getSavedCost() + MainActivity.finalTipTotal)));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
                 MainActivity.finalTaxTotal = updateTaxTotal();
-
-                totalTextView.setText("$ " + String.format("%.2f",MainActivity.finalTipTotal));
             }
         };
         holder.tips.addTextChangedListener(holder.tw);

@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     public static double finalTipTotal = 0.0;
     private static boolean even = false;
     public static boolean tipsChanged = false;
+    public static boolean pricesChanged = false;
 
     public MainActivity() throws JSONException {
     }
