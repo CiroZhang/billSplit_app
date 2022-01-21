@@ -63,7 +63,8 @@ public class User {
         double tip = (double) tipsPercentage /100;
     }
 
-    public void setEvenTips(){
+    public void setEvenTips()
+    {
         double tip = (double) tipsPercentage /100;
         this.tip_total = this.default_total * tip;
     }

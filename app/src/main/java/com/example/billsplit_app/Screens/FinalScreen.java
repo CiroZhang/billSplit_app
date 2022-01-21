@@ -44,20 +44,17 @@ public class FinalScreen extends AppCompatActivity {
             }
         }
 
-        try {
+        if (MainActivity.check()){
+            subtotal.setText("$ " + String.format("%.2f", MainActivity.get_default_total()));
+            tip.setText("$ " + String.format("%.2f", MainActivity.get_even_tip_total()));
+            tax.setText("$ " + String.format("%.2f", MainActivity.get_even_tax_total()));
+            total.setText("$ " + String.format("%.2f", (MainActivity.get_even_tax_total() + MainActivity.get_default_total() + MainActivity.get_even_tip_total())));
+        }
+        else{
             subtotal.setText("$ " + String.format("%.2f", totalDishesPriceRaw));
             tip.setText("$ " + String.format("%.2f", MainActivity.finalTipTotal));
             tax.setText("$ " + String.format("%.2f", MainActivity.finalTaxTotal));
-            if (MainActivity.check()){
-                subtotal.setText("$ " + String.format("%.2f", MainActivity.get_default_total()));
-                tip.setText("$ " + String.format("%.2f", MainActivity.get_even_tip_total()));
-                tax.setText("$ " + String.format("%.2f", MainActivity.get_even_tax_total()));
-                total.setText("$ " + String.format("%.2f", (MainActivity.get_user_sum() + MainActivity.finalTaxTotal + MainActivity.finalTaxTotal * InternalFiles.getSavedTax())));
-            }
             total.setText("$ " + String.format("%.2f", (totalDishesPriceRaw + MainActivity.finalTaxTotal + MainActivity.finalTipTotal)));
-
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
 
 
