@@ -226,6 +226,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
 
     private void open_individual_split_screen() {
         if (individual_split_button.isActivated()) {
+            MainActivity.is_ind();
             Intent open_individual_split_screen = new Intent(this, IndividualBillScreen.class);
             startActivity(open_individual_split_screen);
         }
@@ -233,6 +234,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
 
     private void open_even_split_screen() {
         if (even_split_button.isActivated()) {
+            MainActivity.is_Even();
             Intent open_even_split_screen = new Intent(this, EvenBillScreen.class);
             startActivity(open_even_split_screen);
         }

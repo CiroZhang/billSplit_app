@@ -151,8 +151,13 @@ public class User {
     }
 
     public void refreshTotal() {
-        this.tips_times_total = ((double)this.tipsPercentage * (this.dishesRawPriceTotal/(double)this.sharedNum))/100.0;
+        this.tips_times_total = ((this.tipsPercentage * this.dishesRawPriceTotal)/100.0) / this.sharedNum;
         this.total = (this.tax_total + this.tips_times_total + (this.dishesRawPriceTotal/(double)this.sharedNum));
+    }
+
+    public void refreshTotalEven() throws JSONException {
+        this.tips_times_total = (this.tipsPercentage * InternalFiles.getSavedCost())/100.0;
+        this.total = (this.tax_total + this.tips_times_total + InternalFiles.getSavedCost()/MainActivity.nOfUsers);
     }
 
     public double getDishesRawPriceTotal() {

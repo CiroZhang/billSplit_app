@@ -125,61 +125,99 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             @SuppressLint({"DefaultLocale", "SetTextI18n"})
             @Override
             public void afterTextChanged(Editable s) {
-                // getting the # of users sharing this dish, then adding current user's all shared dishes' prices together
-                int sharedNum = 1;
-                double rawDishesPriceTotal = 0.0;
-                for (Dish dish : current.getSharedDishes()) {
-                    sharedNum = dish.getNOfSharedUsers();
-                    rawDishesPriceTotal += Double.parseDouble(dish.getPrice());
+                // indiv screen
+                if (!MainActivity.check()) {
+                    // getting the # of users sharing this dish, then adding current user's all shared dishes' prices together
+                    double rawDishesPriceTotal = 0.0;
+                    for (Dish dish : current.getSharedDishes()) {
+                        rawDishesPriceTotal += Double.parseDouble(dish.getPrice()) / (double)dish.getNOfSharedUsers();
+                    }
+
+                    // setting user's total price of all shared dishes
+                    current.setDishesRawPriceTotal(rawDishesPriceTotal);
+
+                    // setting user's updated raw tax amount (taxPercentage * total price of all of user's dishes)
+                    try {
+                        current.setTax_total(rawDishesPriceTotal * InternalFiles.getSavedTax());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (!MainActivity.allTipsSelected) {
+                        if (!s.toString().isEmpty()) {
+                            int enteredTipPercentage = Integer.parseInt(s.toString());
+
+                            // setting user's updated tip percentage
+                            current.setTipsPercentage(enteredTipPercentage);
+
+                            // setting user's updated raw tip amount (tipPercentage * total price of all of user's dishes)
+                            current.setTips_times_total((rawDishesPriceTotal * enteredTipPercentage) / 100.0);
+                        }
+                        else {
+                            // setting user's updated tip percentage to 0
+                            current.setTipsPercentage(0);
+
+                            // setting user's updated raw tip amount to 0
+                            current.setTips_times_total(0);
+                        }
+                    }
                 }
 
-                // setting user's # of shared users between this dish
-                current.setSharedNum(sharedNum);
+                // even screen
+                else {
+                    // setting user's tax total
+                    try {
+                        current.setTax_total(((InternalFiles.getSavedCost() * InternalFiles.getSavedTax()) / (double)MainActivity.nOfUsers));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
-                // setting user's total price of all shared dishes
-                current.setDishesRawPriceTotal(rawDishesPriceTotal);
+                    if (!MainActivity.allTipsSelected) {
+                        if (!s.toString().isEmpty()) {
+                            int enteredTipPercentage = Integer.parseInt(s.toString());
 
-                // setting user's updated raw tax amount (taxPercentage * total price of all of user's dishes)
+                            // setting user's updated tip percentage
+                            current.setTipsPercentage(enteredTipPercentage);
+
+                            // setting user's updated raw tip amount (tipPercentage * saved total cost)
+                            try {
+                                current.setTips_times_total((InternalFiles.getSavedCost() * enteredTipPercentage) / 100.0);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else {
+                            // setting user's updated tip percentage to 0
+                            current.setTipsPercentage(0);
+
+                            // setting user's updated raw tip amount to 0
+                            current.setTips_times_total(0);
+                        }
+                    }
+                }
+
                 try {
-                    current.setTax_total((rawDishesPriceTotal / sharedNum) * InternalFiles.getSavedTax());
+                    MainActivity.finalTipTotal = updateTipsTotal();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-                if (!s.toString().isEmpty()) {
-                    int enteredTipPercentage = Integer.parseInt(s.toString());
-
-                    // setting user's updated tip percentage
-                    current.setTipsPercentage(enteredTipPercentage);
-
-                    // setting user's updated raw tip amount (tipPercentage * total price of all of user's dishes)
-                    current.setTips_times_total(((rawDishesPriceTotal / sharedNum) * enteredTipPercentage) / 100.0);
-                }
-                else {
-                    // setting user's updated tip percentage to 0
-                    current.setTipsPercentage(0);
-
-                    // setting user's updated raw tip amount to 0
-                    current.setTips_times_total(0);
-                }
-
-                // updating MainActivity's final tip total
-//                MainActivity.finalTipTotal = updateTipsTotal();
-                // updating MainActivity's final tax total
                 MainActivity.finalTaxTotal = updateTaxTotal();
-                System.out.println(MainActivity.finalTipTotal);
+
                 totalTextView.setText("$ " + String.format("%.2f",MainActivity.finalTipTotal));
             }
         };
         holder.tips.addTextChangedListener(holder.tw);
     }
 
-    public double updateTipsTotal() {
+    public double updateTipsTotal() throws JSONException {
         double total = 0.0;
         for (User u : MainActivity.usersList) {
             total += u.getTips_times_total();
         }
-        return total;
+        if (!MainActivity.check()) {
+            return total;
+        }
+        return InternalFiles.getSavedCost() + total;
     }
 
     public double updateTaxTotal() {

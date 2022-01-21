@@ -40,7 +40,7 @@ public class EvenBillScreen extends AppCompatActivity {
     TextView current_total;
     int allTip = 0;
 
-    @SuppressLint({"ResourceType", "SetTextI18n"})
+    @SuppressLint({"ResourceType", "SetTextI18n", "DefaultLocale"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +65,7 @@ public class EvenBillScreen extends AppCompatActivity {
         ImageButton sameTipPopupButton = findViewById(R.id.even_transit_enter_exit);
 
         try {
-            current_total.setText("$ " + InternalFiles.getSavedCost());
+            current_total.setText("$ " + String.format("%.2f",InternalFiles.getSavedCost()));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -99,6 +99,18 @@ public class EvenBillScreen extends AppCompatActivity {
                     same_tip_selection.setVisibility(View.INVISIBLE);
                     MainActivity.allTipsSelected = false;
                 }
+                allTip = 0;
+                try {
+                    refreshPrereqs();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    MainActivity.finalTipTotal = InternalFiles.getSavedCost();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                current_total.setText("$ " + String.format("%.2f",MainActivity.finalTipTotal));
                 TipViewAdapter.notifyDataSetChanged();
             }
         });
@@ -121,11 +133,20 @@ public class EvenBillScreen extends AppCompatActivity {
                 } else {
                     allTip = 0;
                 }
+
                 try {
-                    current_total.setText("$ "+InternalFiles.getSavedCost());
+                    refreshPrereqs();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                try {
+                    MainActivity.finalTipTotal = InternalFiles.getSavedCost() + updateTipsPercentage();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                current_total.setText("$ " + String.format("%.2f",MainActivity.finalTipTotal));
+                TipViewAdapter.notifyDataSetChanged();
             }
         });
 
@@ -139,9 +160,11 @@ public class EvenBillScreen extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (sameTipButton.isChecked()) {
-                    for (User user : MainActivity.usersList) {
-                        user.setTipsPercentage(allTip);
+                for (User user : MainActivity.usersList) {
+                    try {
+                        user.refreshTotalEven();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 }
 
@@ -167,6 +190,21 @@ public class EvenBillScreen extends AppCompatActivity {
         EvenTipRecyclerView = findViewById(R.id.even_tip_list_view);
         EvenTipRecyclerView.setAdapter(TipViewAdapter);
         EvenTipRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+    }
+
+    public void refreshPrereqs() throws JSONException {
+        for (User u : MainActivity.usersList) {
+            u.setTipsPercentage(allTip);
+            u.refreshTotalEven();
+        }
+    }
+
+    public double updateTipsPercentage() {
+        double total = 0.0;
+        for (User u : MainActivity.usersList) {
+            total += u.getTips_times_total();
+        }
+        return total;
     }
 
     public void ShowPopup(View view) {
@@ -214,13 +252,13 @@ public class EvenBillScreen extends AppCompatActivity {
     }
 
     private void open_final_screen() throws JSONException {
-        for (User i : MainActivity.usersList) {
-            i.set_default_total();
-            i.setEvenTotal();
-            i.setEvenTax();
-            i.setEvenTips();
-        }
-        MainActivity.is_Even();
+//        for (User i : MainActivity.usersList) {
+//            i.set_default_total();
+//            i.setEvenTotal();
+//            i.setEvenTax();
+//            i.setEvenTips();
+//        }
+//        MainActivity.is_Even();
         Intent open_even_final_screen = new Intent(this, FinalScreen.class);
         startActivity(open_even_final_screen);
     }

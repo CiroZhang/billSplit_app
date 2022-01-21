@@ -37,27 +37,63 @@ public class FinalScreen extends AppCompatActivity {
         TextView tax = findViewById(R.id.taxes_total);
         TextView tip = findViewById(R.id.tips_total);
 
-        double totalDishesPriceRaw = 0.0;
-        for (Dish d : MainActivity.dishList) {
-            if (!d.getPrice().isEmpty()) {
-                totalDishesPriceRaw += Double.parseDouble(d.getPrice());
+        // even screen
+        if (MainActivity.check()){
+            // setting subtotal text
+            try {
+                subtotal.setText("$ " + String.format("%.2f", InternalFiles.getSavedCost()));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            // setting tax text
+            try {
+                MainActivity.finalTaxTotal = InternalFiles.getSavedCost() * InternalFiles.getSavedTax();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            tax.setText("$ " + String.format("%.2f", MainActivity.finalTaxTotal));
+
+            // setting tip text
+            try {
+                if (MainActivity.finalTipTotal != 0) {
+                    MainActivity.finalTipTotal -= InternalFiles.getSavedCost();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            tip.setText("$ " + String.format("%.2f", MainActivity.finalTipTotal));
+
+            // setting final total text
+            try {
+                total.setText("$ " + String.format("%.2f", (InternalFiles.getSavedCost() + MainActivity.finalTipTotal + MainActivity.finalTaxTotal)));
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
 
-        if (MainActivity.check()){
-            subtotal.setText("$ " + String.format("%.2f", MainActivity.get_default_total()));
-            tip.setText("$ " + String.format("%.2f", MainActivity.get_even_tip_total()));
-            tax.setText("$ " + String.format("%.2f", MainActivity.get_even_tax_total()));
-            total.setText("$ " + String.format("%.2f", (MainActivity.get_even_tax_total() + MainActivity.get_default_total() + MainActivity.get_even_tip_total())));
-        }
-        else{
+        // indiv screen
+        else {
+            // getting total price of all dishes
+            double totalDishesPriceRaw = 0.0;
+            for (Dish d : MainActivity.dishList) {
+                if (!d.getPrice().isEmpty()) {
+                    totalDishesPriceRaw += Double.parseDouble(d.getPrice());
+                }
+            }
+
+            // setting subtotal text
             subtotal.setText("$ " + String.format("%.2f", totalDishesPriceRaw));
-            tip.setText("$ " + String.format("%.2f", MainActivity.finalTipTotal));
+
+            // setting tax text
             tax.setText("$ " + String.format("%.2f", MainActivity.finalTaxTotal));
+
+            // setting tip text
+            tip.setText("$ " + String.format("%.2f", MainActivity.finalTipTotal));
+
+            // setting final total text
             total.setText("$ " + String.format("%.2f", (totalDishesPriceRaw + MainActivity.finalTaxTotal + MainActivity.finalTipTotal)));
         }
-
-
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,13 +102,10 @@ public class FinalScreen extends AppCompatActivity {
             }
         });
 
-
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 open_welcome_screen();
-
-
             }
         });
 

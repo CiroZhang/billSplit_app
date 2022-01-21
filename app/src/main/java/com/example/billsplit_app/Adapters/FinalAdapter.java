@@ -53,12 +53,10 @@ public class FinalAdapter extends RecyclerView.Adapter<FinalAdapter.finalViewHol
     @Override
     public void onBindViewHolder(@NonNull FinalAdapter.finalViewHolder holder, int position) {
         User u1 = userList.get(position);
-        u1.refreshTotal();
         holder.name_str.setText(u1.getUsername());
         holder.profile_background.getBackground().setTint(userList.get(position).getColor());
         holder.profile_short_user_name.setText(u1.getUsername().substring(0,1));
         holder.profile_price.setText("$ " + String.format("%.2f", userList.get(position).getTotal()));
-
     }
 
     @Override
