@@ -156,7 +156,7 @@ public class User {
     }
 
     public void refreshTotalEven() throws JSONException {
-        this.tips_times_total = (this.tipsPercentage * InternalFiles.getSavedCost())/100.0;
+        this.tips_times_total = (this.tipsPercentage * InternalFiles.getSavedCost())/100.0 / MainActivity.nOfUsers;
         this.total = (this.tax_total + this.tips_times_total + InternalFiles.getSavedCost()/MainActivity.nOfUsers);
     }
 
