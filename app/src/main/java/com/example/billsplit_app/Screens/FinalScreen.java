@@ -55,13 +55,6 @@ public class FinalScreen extends AppCompatActivity {
             tax.setText("$ " + String.format("%.2f", MainActivity.finalTaxTotal));
 
             // setting tip text
-            try {
-                if (MainActivity.finalTipTotal != 0) {
-                    MainActivity.finalTipTotal -= InternalFiles.getSavedCost();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
             tip.setText("$ " + String.format("%.2f", MainActivity.finalTipTotal));
 
             // setting final total text

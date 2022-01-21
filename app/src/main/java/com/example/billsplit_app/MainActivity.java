@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     public static double finalTaxTotal = 0.0;
     public static double finalTipTotal = 0.0;
     private static boolean even = false;
+    public static boolean tipsChanged = false;
 
     public MainActivity() throws JSONException {
     }

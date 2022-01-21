@@ -24,12 +24,15 @@ import android.widget.TextView;
 
 import com.example.billsplit_app.Adapters.ProfileAdapter;
 import com.example.billsplit_app.Adapters.TipAdapter;
+import com.example.billsplit_app.Dish;
 import com.example.billsplit_app.InternalFiles;
 import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
 import com.example.billsplit_app.User;
 
 import org.json.JSONException;
+
+import java.time.chrono.MinguoChronology;
 
 public class EvenBillScreen extends AppCompatActivity {
 
@@ -46,6 +49,7 @@ public class EvenBillScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.even_bill_screen);
+        MainActivity.tipsChanged = false;
 
         MainActivity.allTipsSelected = false;
         MainActivity.usersList.add(new User("Me"));
@@ -161,6 +165,13 @@ public class EvenBillScreen extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!MainActivity.tipsChanged) {
+                    for (User user : MainActivity.usersList) {
+                        user.setTipsPercentage(0);
+                    }
+                    MainActivity.finalTipTotal = 0;
+                }
+
                 for (User user : MainActivity.usersList) {
                     try {
                         user.refreshTotalEven();

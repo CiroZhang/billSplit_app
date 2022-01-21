@@ -103,6 +103,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         submitBillButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.tipsChanged = false;
                 open_individual_tip_screen();
             }
         });

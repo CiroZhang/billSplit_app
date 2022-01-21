@@ -36,7 +36,6 @@ public class IndividualTipScreen extends AppCompatActivity {
     RecyclerView IndividualTipRecyclerView;
     int allTip = 0;
     String customTip = "";
-    boolean tipsChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +90,7 @@ public class IndividualTipScreen extends AppCompatActivity {
                 }
                 allTip = 0;
                 refreshPrereqs();
-                updateTipsPercentage();
+                updateTipsTotal();
                 MainActivity.finalTipTotal = 0.0;
                 currentTotalText.setText("$ 0.00");
                 TipAdapter.notifyDataSetChanged();
@@ -126,7 +125,7 @@ public class IndividualTipScreen extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!tipsChanged) {
+                if (!MainActivity.tipsChanged) {
                     for (User user : MainActivity.usersList) {
                         // getting the # of users sharing this dish, then adding current user's all shared dishes' prices together
                         double rawDishesPriceTotal = 0.0;
@@ -143,11 +142,11 @@ public class IndividualTipScreen extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        user.setTips_times_total(0);
+                        user.setTipsPercentage(0);
                     }
-                    MainActivity.finalTaxTotal = updateTaxTotal();
+                    MainActivity.finalTipTotal = 0;
                 }
-
+                MainActivity.finalTaxTotal = updateTaxTotal();
                 for (User user : MainActivity.usersList) {
                     user.refreshTotal();
                 }
@@ -165,7 +164,7 @@ public class IndividualTipScreen extends AppCompatActivity {
         }
     }
 
-    public double updateTipsPercentage() {
+    public double updateTipsTotal() {
         double total = 0.0;
         for (User u : MainActivity.usersList) {
             total += u.getTips_times_total();
@@ -191,7 +190,7 @@ public class IndividualTipScreen extends AppCompatActivity {
     }
 
     void setupRecyclerView(TextView currentTotalText) {
-        TipAdapter = new TipAdapter(this,currentTotalText,tipsChanged);
+        TipAdapter = new TipAdapter(this,currentTotalText);
 
         IndividualTipRecyclerView = findViewById(R.id.individual_tip_list_view);
         IndividualTipRecyclerView.setAdapter(TipAdapter);

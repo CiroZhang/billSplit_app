@@ -32,16 +32,10 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
     Context context;
     TextView totalTextView;
     String customTip = "";
-    boolean tipsChanged = false;
 
     public TipAdapter(Context context, TextView currentTotalText) {
         this.context = context;
         this.totalTextView = currentTotalText;
-    }
-    public TipAdapter(Context context, TextView currentTotalText, boolean tipsChanged) {
-        this.context = context;
-        this.totalTextView = currentTotalText;
-        this.tipsChanged = tipsChanged;
     }
 
     public class TipViewHolder extends RecyclerView.ViewHolder {
@@ -126,9 +120,9 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
             @SuppressLint({"DefaultLocale", "SetTextI18n"})
             @Override
             public void afterTextChanged(Editable s) {
+                MainActivity.tipsChanged = true;
                 // indiv screen
                 if (!MainActivity.check()) {
-                    tipsChanged = true;
                     // getting the # of users sharing this dish, then adding current user's all shared dishes' prices together
                     double rawDishesPriceTotal = 0.0;
                     for (Dish dish : current.getSharedDishes()) {
@@ -216,10 +210,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
         for (User u : MainActivity.usersList) {
             total += u.getTips_times_total();
         }
-        if (!MainActivity.check()) {
-            return total;
-        }
-        return InternalFiles.getSavedCost() + total;
+        return total;
     }
 
     public double updateTaxTotal() {
