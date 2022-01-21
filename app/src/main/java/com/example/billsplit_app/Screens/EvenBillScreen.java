@@ -84,7 +84,8 @@ public class EvenBillScreen extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                open_welcome_screen();
+                activity.finish();
+//                open_welcome_screen();
             }
         });
 

@@ -61,7 +61,8 @@ public class IndividualTipScreen extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                open_individual_bill_screen();
+                activity.finish();
+//                open_individual_bill_screen();
             }
         });
 

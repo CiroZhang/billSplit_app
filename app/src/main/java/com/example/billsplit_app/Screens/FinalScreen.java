@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ public class FinalScreen extends AppCompatActivity {
 
     FinalAdapter FinalViewAdapter;
     RecyclerView FinalRecyclerView;
+    Activity activity = FinalScreen.this;
 
     @SuppressLint({"ResourceType", "SetTextI18n", "DefaultLocale"})
     @Override
@@ -91,7 +93,8 @@ public class FinalScreen extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                open_welcome_screen();
+                activity.finish();
+//                open_welcome_screen();
             }
         });
 
