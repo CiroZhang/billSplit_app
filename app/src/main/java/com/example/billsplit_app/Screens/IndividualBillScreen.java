@@ -122,14 +122,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         });
 
         setupRecyclerView();
-//        OCRPopup(activity.getCurrentFocus());
     }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        OCRPopup();
-//    }
 
     void setupRecyclerView() {
         ProfileRecyclerView = findViewById(R.id.profile_list_view);
@@ -148,15 +141,6 @@ public class IndividualBillScreen extends AppCompatActivity {
                 .setTitle("No prices entered!")
                 .setMessage("You haven't entered in any prices yet!")
                 .setNegativeButton("OK", null)
-                .show();
-    }
-
-    private void alertPopup2(Context context) {
-        new AlertDialog.Builder(context)
-                .setTitle("No prices entered!")
-                .setMessage("Your totals don't match! Do you want to adjust them?")
-                .setPositiveButton("Yes", null)
-                .setNegativeButton("No", null)
                 .show();
     }
 
@@ -214,11 +198,6 @@ public class IndividualBillScreen extends AppCompatActivity {
         startActivity(open_ocr_screen);
     }
 
-    private void open_welcome_screen() {
-        Intent open_welcome_screen = new Intent(this, WelcomeScreen.class);
-        startActivity(open_welcome_screen);
-    }
-
     private void open_individual_tip_screen() {
         Intent open_individual_tip_screen = new Intent(this, IndividualTipScreen.class);
         startActivity(open_individual_tip_screen);
@@ -242,7 +221,6 @@ public class IndividualBillScreen extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
-
     }
 
     public void refreshAdapters() {

@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
+import com.example.billsplit_app.Screens.EvenBillScreen;
 import com.example.billsplit_app.Screens.IndividualBillScreen;
 import com.example.billsplit_app.User;
 
@@ -61,13 +62,14 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
         String name = currentUser.getUsername();
         holder.name_str.setText(name);
         holder.profile_background.getBackground().setTint(currentUser.getColor());
-        holder.profile_short_user_name.setText(name.substring(0,1));
+        if (!name.isEmpty()) {
+            holder.profile_short_user_name.setText(name.substring(0,1));
+        }
 
         holder.profile_background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ShowPopup(v,currentUser);
-                CheckPopup();
             }
         });
     }
@@ -80,7 +82,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
     public void ShowPopup(View view, User user) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View popupView = inflater.inflate(R.layout.change_remove_profile_popup, null, false);
-        CheckPopup();
 
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -92,7 +93,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 popupWindow.dismiss();
-                CheckPopup();
                 return true;
             }
         });
@@ -123,9 +123,13 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
             public void onClick(View v) {
                 MainActivity.usersList.remove(user);
                 notifyDataSetChanged();
-                ((IndividualBillScreen)context).refreshAdapters();
+                if (MainActivity.check()) {
+                    ((EvenBillScreen)context).refreshAdapters();
+                }
+                else {
+                    ((IndividualBillScreen)context).refreshAdapters();
+                }
                 popupWindow.dismiss();
-                CheckPopup();
             }
         });
 
@@ -134,13 +138,14 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
             public void onClick(View v) {
                 MainActivity.usersList.get(MainActivity.usersList.indexOf(user)).setUsername(editName.getText().toString());
                 notifyDataSetChanged();
-                ((IndividualBillScreen)context).refreshAdapters();
+                if (MainActivity.check()) {
+                    ((EvenBillScreen)context).refreshAdapters();
+                }
+                else {
+                    ((IndividualBillScreen)context).refreshAdapters();
+                }
                 popupWindow.dismiss();
-                CheckPopup();
             }
         });
-    }
-
-    private void CheckPopup() {
     }
 }

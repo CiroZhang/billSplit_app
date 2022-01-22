@@ -305,6 +305,11 @@ public class EvenBillScreen extends AppCompatActivity {
         startActivity(open_even_final_screen);
     }
 
+    public void refreshAdapters() {
+        ProfileViewAdapter.notifyDataSetChanged();
+        TipViewAdapter.notifyDataSetChanged();
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     public void ShowTipAllPopup(View view, EditText tipText) {
         View popupView = LayoutInflater.from(view.getContext()).inflate(R.layout.open_tip_popup, null, false);
