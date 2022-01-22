@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
     public static ArrayList<User> usersList = new ArrayList<>();
     public static ArrayList<Dish> dishList = new ArrayList<>();
-    public static ArrayList<Integer> colorList = new ArrayList<>(Arrays.asList(-16731781,-2706168,-15503959,-7533027));
+    public static ArrayList<Integer> colorList;
     public static int nOfUsers = 1;
     public static boolean allTipsSelected = false;
 
@@ -31,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+
+    public static void setColorList(){
+        colorList = new ArrayList<>(Arrays.asList(-16731781,-2706168,-15503959,-7533027));
+        System.out.println(colorList);
     }
 
 

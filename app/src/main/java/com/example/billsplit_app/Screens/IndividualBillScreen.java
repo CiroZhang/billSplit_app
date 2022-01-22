@@ -49,6 +49,7 @@ public class IndividualBillScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MainActivity.is_ind();
+        MainActivity.setColorList();
         setContentView(R.layout.individual_bill_screen);
 
         Button ocrButton = findViewById(R.id.ocr_button);

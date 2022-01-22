@@ -55,6 +55,7 @@ public class EvenBillScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.even_bill_screen);
         MainActivity.tipsChanged = false;
+        MainActivity.setColorList();
 
         MainActivity.allTipsSelected = false;
         MainActivity.usersList.add(new User("Me"));

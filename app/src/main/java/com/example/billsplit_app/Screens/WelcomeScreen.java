@@ -63,6 +63,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_screen);
+        MainActivity.setColorList();
 
         editPeopleText = findViewById(R.id.people_edit_text);
         editCostText = findViewById(R.id.cost_edit_text);

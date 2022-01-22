@@ -47,6 +47,7 @@ public class IndividualTipScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.individual_bill_tip);
 
+
         MainActivity.allTipsSelected = false;
 
         ImageButton backButton = findViewById(R.id.back_button);
