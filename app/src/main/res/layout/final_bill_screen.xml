@@ -19,7 +19,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="68dp"
-                android:background="@drawable/rectangle2" />
+                android:background="@drawable/rectangle4" />
 
             <ImageButton
                 android:id="@+id/back_button"
@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
                     android:layout_marginTop="24dp"
-                    android:fontFamily="@font/avenir_medium"
+                    android:fontFamily="@font/avenir_light"
                     android:text="Final Bill"
                     android:textAlignment="center"
                     android:textColor="@color/black"
@@ -61,8 +61,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/even_final_list_view"
             android:layout_width="match_parent"
-            android:layout_height="395dp"
-            android:layout_marginTop="65dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="92dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>
@@ -70,83 +70,83 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="455dp">
+        android:layout_marginTop="424dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="0dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_marginStart="18dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/avenir_book"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/avenir_light"
                 android:text="Subtotal"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/subtotal"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginEnd="53dp"
-                android:fontFamily="@font/avenir_book"
+                android:fontFamily="@font/avenir_light"
                 android:text="$ 00.00"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_marginStart="363dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/avenir_book"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/avenir_light"
                 android:text="CA"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="25dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_marginStart="18.5dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/avenir_book"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/avenir_light"
                 android:text="Taxes"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/taxes_total"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginEnd="53dp"
-                android:fontFamily="@font/avenir_book"
+                android:fontFamily="@font/avenir_light"
                 android:text="$ 00.00"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_marginStart="363dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/avenir_book"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/avenir_light"
                 android:text="CA"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
         </RelativeLayout>
 
@@ -159,33 +159,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_marginStart="18.5dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/avenir_book"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/avenir_light"
                 android:text="Tips"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tips_total"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginEnd="53dp"
-                android:fontFamily="@font/avenir_book"
+                android:fontFamily="@font/avenir_light"
                 android:text="$ 00.00"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_marginStart="363dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/avenir_book"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/avenir_light"
                 android:text="CA"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
         </RelativeLayout>
 
@@ -196,10 +196,10 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
-                android:layout_marginTop="35dp"
-                android:fontFamily="@font/avenir_medium"
+                android:layout_marginTop="33dp"
+                android:fontFamily="@font/avenir_heavy"
                 android:text="Total"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
@@ -211,7 +211,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="34dp"
                 android:layout_marginEnd="63dp"
-                android:fontFamily="@font/avenir_medium"
+                android:fontFamily="@font/avenir_heavy"
                 android:text="$ 00.00"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
@@ -221,7 +221,7 @@
                 android:layout_height="35dp"
                 android:layout_marginStart="355dp"
                 android:layout_marginTop="34dp"
-                android:fontFamily="@font/avenir_medium"
+                android:fontFamily="@font/avenir_heavy"
                 android:text="CA"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
@@ -233,13 +233,13 @@
             android:layout_width="379dp"
             android:layout_height="52dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="126dp"
+            android:layout_marginTop="160dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/rounded_rectangle3"
-            android:fontFamily="@font/avenir_book"
+            android:background="@drawable/rounded_rectangle8"
+            android:fontFamily="@font/avenir_light"
             android:text="Start a New Bill"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="#00815a"
             android:textSize="16sp"
             android:visibility="visible"
             app:layout_constraintLeft_toLeftOf="parent"

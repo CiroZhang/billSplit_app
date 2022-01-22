@@ -35,10 +35,10 @@
 
         <ImageButton
             android:id="@+id/back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="11dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
             android:background="@drawable/delete_button"
             android:visibility="visible"
             app:layout_constraintStart_toStartOf="@id/popup_background"

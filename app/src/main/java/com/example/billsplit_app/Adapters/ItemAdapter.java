@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         private ImageButton expand_collapse_button;
         private TextView shared_with_text;
         private ImageButton alcohol_image;
+        private ImageButton alcohol_checkmark;
         private RecyclerView SharedRecyclerView;
         private Boolean IsCollapsed = false;
         private Boolean alcoholImageClicked = false;
@@ -91,6 +93,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             expand_collapse_button = view.findViewById(R.id.expand_collapse_button);
             shared_with_text = view.findViewById(R.id.shared_with_text);
             alcohol_image = view.findViewById(R.id.alcohol_image);
+            alcohol_checkmark = view.findViewById(R.id.alcohol_check);
             SharedRecyclerView = view.findViewById(R.id.shared_profile_list_view);
 
             setupRecyclerView(view.getContext(), SharedRecyclerView);
@@ -130,11 +133,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         if (dishItem.isAlcoholic()) {
             holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_checked);
+            holder.alcohol_checkmark.setVisibility(View.VISIBLE);
             holder.alcoholImageClicked = true;
             holder.alcoholTaxApplicable = true;
         }
         else {
             holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_unchecked);
+            holder.alcohol_checkmark.setVisibility(View.GONE);
             holder.alcoholImageClicked = false;
         }
 

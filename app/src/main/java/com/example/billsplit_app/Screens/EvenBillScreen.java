@@ -62,6 +62,8 @@ public class EvenBillScreen extends AppCompatActivity {
             }
         }
 
+        ImageView transparentGreenBackground = findViewById(R.id.background_green);
+        ImageView transparentGreyBackground = findViewById(R.id.background_grey);
         ImageButton backButton = findViewById(R.id.back_button);
         ImageButton addUserButton = findViewById(R.id.add_user_button);
         Button submitButton = findViewById(R.id.submit_button);
@@ -102,10 +104,14 @@ public class EvenBillScreen extends AppCompatActivity {
                 sameTipEditText.getText().clear();
                 if (sameTipButton.isChecked()) {
                     same_tip_selection.setVisibility(View.VISIBLE);
+                    transparentGreenBackground.setVisibility(View.VISIBLE);
+                    transparentGreyBackground.setVisibility(View.INVISIBLE);
 
                     MainActivity.allTipsSelected = true;
                 } else {
                     same_tip_selection.setVisibility(View.INVISIBLE);
+                    transparentGreenBackground.setVisibility(View.INVISIBLE);
+                    transparentGreyBackground.setVisibility(View.VISIBLE);
                     MainActivity.allTipsSelected = false;
                 }
                 allTip = 0;

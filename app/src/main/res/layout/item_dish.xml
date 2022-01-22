@@ -1,11 +1,10 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="#FFf6f6f6">
+    android:background="#FFf9f9f9"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -32,8 +31,8 @@
                 android:layout_marginTop="16dp"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/avenir_semi_bold"
-                android:minEms="1"
                 android:maxLength="17"
+                android:minEms="1"
                 android:text="New Dish"
                 android:textAlignment="center"
                 android:textColor="#FF000000"
@@ -98,7 +97,7 @@
             android:layout_marginStart="52dp"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/avenir_book"
-            android:text="Shared with"
+            android:text="Tap to assign"
             android:textAlignment="center"
             android:textColor="#FF000000"
             android:textSize="16sp"
@@ -113,21 +112,42 @@
             android:orientation="horizontal"
             android:visibility="visible" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/alcohol_image"
+                android:layout_width="139dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="136dp"
+                android:layout_marginTop="20dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/alcohol_unchecked"
+                android:cropToPadding="true"
+                android:padding="10dp"
+                android:visibility="visible" />
+
         <ImageButton
-            android:id="@+id/alcohol_image"
-            android:layout_width="139dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="136dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/alcohol_unchecked"
-            android:visibility="visible" />
+            android:id="@+id/alcohol_check"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="260dp"
+            android:layout_marginTop="60dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/checkmark"
+            android:cropToPadding="true"
+            android:padding="10dp"
+            android:visibility="gone" />
+
+        </RelativeLayout>
 
         <ImageButton
             android:id="@+id/line"
             android:layout_width="379dp"
             android:layout_height="1dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="23dp"
+            android:layout_marginTop="27dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/rectangle3"
             android:visibility="visible" />
