@@ -28,15 +28,12 @@ import android.widget.TextView;
 
 import com.example.billsplit_app.Adapters.ProfileAdapter;
 import com.example.billsplit_app.Adapters.TipAdapter;
-import com.example.billsplit_app.Dish;
 import com.example.billsplit_app.InternalFiles;
 import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
 import com.example.billsplit_app.User;
 
 import org.json.JSONException;
-
-import java.time.chrono.MinguoChronology;
 
 public class EvenBillScreen extends AppCompatActivity {
 
@@ -65,7 +62,8 @@ public class EvenBillScreen extends AppCompatActivity {
             }
         }
 
-        ImageView transparentGreenBackground = findViewById(R.id.background);
+        ImageView transparentGreenBackground = findViewById(R.id.background_green);
+        ImageView transparentGreyBackground = findViewById(R.id.background_grey);
         ImageButton backButton = findViewById(R.id.back_button);
         ImageButton addUserButton = findViewById(R.id.add_user_button);
         Button submitButton = findViewById(R.id.submit_button);
@@ -107,11 +105,13 @@ public class EvenBillScreen extends AppCompatActivity {
                 if (sameTipButton.isChecked()) {
                     same_tip_selection.setVisibility(View.VISIBLE);
                     transparentGreenBackground.setVisibility(View.VISIBLE);
+                    transparentGreyBackground.setVisibility(View.INVISIBLE);
 
                     MainActivity.allTipsSelected = true;
                 } else {
                     same_tip_selection.setVisibility(View.INVISIBLE);
                     transparentGreenBackground.setVisibility(View.INVISIBLE);
+                    transparentGreyBackground.setVisibility(View.VISIBLE);
                     MainActivity.allTipsSelected = false;
                 }
                 allTip = 0;
