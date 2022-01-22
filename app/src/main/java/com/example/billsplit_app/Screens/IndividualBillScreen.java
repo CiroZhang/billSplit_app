@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -29,9 +28,6 @@ import com.example.billsplit_app.Dish;
 import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
 import com.example.billsplit_app.User;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class IndividualBillScreen extends AppCompatActivity {
 
@@ -166,8 +162,8 @@ public class IndividualBillScreen extends AppCompatActivity {
 
         ImageView addProfileBackground = popupView.findViewById(R.id.popup_background);
         ImageButton addProfileCloseButton = popupView.findViewById(R.id.popup_close_button);
-        EditText addProfileNameEditText = popupView.findViewById(R.id.add_profile_name_edit_text);
-        Button addProfileNameSubmitButton = popupView.findViewById(R.id.add_profile_name_submit_button);
+        EditText addProfileNameEditText = popupView.findViewById(R.id.new_name);
+        Button addProfileNameSubmitButton = popupView.findViewById(R.id.delete);
 
         addProfileBackground.setOnClickListener(v -> {
             // This is just here to prevent popup from closing when clicking the background

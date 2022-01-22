@@ -2,6 +2,7 @@ package com.example.billsplit_app.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.media.MediaTimestamp;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -36,19 +37,81 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
     }
 
     public class ProfileViewHolder extends RecyclerView.ViewHolder{
-        private ImageButton profile_delete_button;
         private TextView name_str;
-        private ImageView profile_background;
+        private ImageButton profile_background;
         private TextView profile_short_user_name;
 
         public ProfileViewHolder(@NonNull View itemView) {
             super(itemView);
-//            profile_delete_button = itemView.findViewById(R.id.profile_delete_button);
-            name_str = itemView.findViewById(R.id.profile_user_name);
             profile_background = itemView.findViewById(R.id.profile_background);
+            name_str = itemView.findViewById(R.id.profile_user_name);
             profile_short_user_name = itemView.findViewById(R.id.profile_short_user_name);
+            profile_background.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ShowPopup(v,name_str.getText().toString());
+                    CheckPopup();
+                }
+            });
         }
     }
+    public void ShowPopup(View view, String name) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View popupView = inflater.inflate(R.layout.change_remove_profile_popup, null, false);
+        CheckPopup();
+
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                CheckPopup();
+                return true;
+            }
+        });
+        Button delete = popupView.findViewById(R.id.delete);
+        Button edit = popupView.findViewById(R.id.edit);
+        EditText editName = popupView.findViewById(R.id.new_name);
+
+        ArrayList<String> stuff = new ArrayList<String>();
+        for(User i:MainActivity.usersList){
+            stuff.add(i.getUsername());
+        }
+
+
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onClick(View v) {
+                System.out.println(name);
+                MainActivity.usersList.remove(stuff.indexOf(name));
+                notifyDataSetChanged();
+                popupWindow.dismiss();
+                CheckPopup();
+            }
+        });
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                MainActivity.usersList.get(stuff.indexOf(name)).setUsername(editName.getText().toString());
+                notifyDataSetChanged();
+
+                CheckPopup();
+            }
+        });
+    }
+
+    private void CheckPopup() {
+    }
+
 
     @NonNull
     @Override
@@ -67,8 +130,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
 //        holder.profile_delete_button.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                MainActivity.usersList.remove();
-//                ProfileAdapter.notifyDataSetChanged();
+
 //            }
 //        });
 

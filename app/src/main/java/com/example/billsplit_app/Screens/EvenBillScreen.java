@@ -28,15 +28,12 @@ import android.widget.TextView;
 
 import com.example.billsplit_app.Adapters.ProfileAdapter;
 import com.example.billsplit_app.Adapters.TipAdapter;
-import com.example.billsplit_app.Dish;
 import com.example.billsplit_app.InternalFiles;
 import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
 import com.example.billsplit_app.User;
 
 import org.json.JSONException;
-
-import java.time.chrono.MinguoChronology;
 
 public class EvenBillScreen extends AppCompatActivity {
 
@@ -276,8 +273,8 @@ public class EvenBillScreen extends AppCompatActivity {
             }
         });
 
-        EditText addProfileNameEditText = popupView.findViewById(R.id.add_profile_name_edit_text);
-        Button addProfileNameSubmitButton = popupView.findViewById(R.id.add_profile_name_submit_button);
+        EditText addProfileNameEditText = popupView.findViewById(R.id.new_name);
+        Button addProfileNameSubmitButton = popupView.findViewById(R.id.delete);
 
         addProfileNameSubmitButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NotifyDataSetChanged")
