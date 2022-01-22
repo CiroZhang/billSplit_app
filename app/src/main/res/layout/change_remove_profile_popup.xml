@@ -39,13 +39,12 @@
             app:layout_constraintTop_toTopOf="@id/popup_background" />
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="25dp"
             android:layout_marginStart="25dp"
             android:layout_marginTop="50dp"
             android:fontFamily="@font/avenir_light"
             android:text="Change name"
-            android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/popup_background"

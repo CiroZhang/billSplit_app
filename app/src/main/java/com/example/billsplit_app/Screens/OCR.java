@@ -15,9 +15,11 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -27,6 +29,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewOverlay;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.billsplit_app.Dish;
@@ -55,8 +58,11 @@ public class OCR extends AppCompatActivity {
     static ArrayList<String> copiedTexts = new ArrayList<>();
     static ArrayList<Dish> tempDishes = new ArrayList<>();
 
-    private Button cameraCaptureButton;
+    private ImageButton cameraCaptureButton;
+    private Button cameraRetakeButton;
     private Button cameraCopyButton;
+
+    Activity activity = OCR.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,7 @@ public class OCR extends AppCompatActivity {
         setContentView(R.layout.ocr_layout);
         previewView = findViewById(R.id.view_finder);
         cameraCaptureButton = findViewById(R.id.camera_capture_button);
+        cameraRetakeButton = findViewById(R.id.camera_retake_button);
         cameraCopyButton = findViewById(R.id.camera_copy_button);
 
         if (allPermissionsGranted()) {
@@ -75,21 +82,23 @@ public class OCR extends AppCompatActivity {
         cameraCaptureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!photoTaken) {
-                    takePhoto();
-                    photoTaken = true;
-                } else {
-                    copiedTexts.clear();
-                    ViewOverlay overlay = previewView.getOverlay();
-                    overlay.clear();
-                    cameraProvider.unbindAll();
-                    startCamera();
-                    photoTaken = false;
-                    cameraCaptureButton.setText("TAKE PHOTO");
-                    cameraCaptureButton.animate().translationXBy(250f);
-                    cameraCopyButton.setVisibility(View.GONE);
-                    cameraCopyButton.animate().translationXBy(-250f);
-                }
+                takePhoto();
+                photoTaken = true;
+            }
+        });
+        cameraRetakeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                copiedTexts.clear();
+                ViewOverlay overlay = previewView.getOverlay();
+                overlay.clear();
+                cameraProvider.unbindAll();
+                startCamera();
+                photoTaken = false;
+                cameraRetakeButton.animate().translationXBy(250f);
+                cameraCopyButton.setVisibility(View.GONE);
+                cameraCopyButton.animate().translationXBy(-250f);
+                cameraRetakeButton.setVisibility(View.GONE);
             }
         });
 
@@ -106,6 +115,7 @@ public class OCR extends AppCompatActivity {
                 ClipData clip = ClipData.newPlainText(clipText, String.join("\n", copiedTexts));
                 clipboard.setPrimaryClip(clip);
                 alertPopup(OCR.this);
+                finish();
             }
         });
     }
@@ -120,6 +130,7 @@ public class OCR extends AppCompatActivity {
     }
 
     private void startCamera() {
+        cameraCaptureButton.setVisibility(View.VISIBLE);
         ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         cameraProviderFuture.addListener(() -> {
             try {
@@ -187,9 +198,10 @@ public class OCR extends AppCompatActivity {
                 drawable.setBounds((int) (blockFrame.left * width_ratio), (int) (blockFrame.top * height_ratio), (int) (blockFrame.right * width_ratio), (int) (blockFrame.bottom * height_ratio));
                 drawable.setStroke(5, Color.WHITE);
                 overlay.add(drawable);
-                cameraCaptureButton.animate().translationXBy(-250f);
+                cameraRetakeButton.animate().translationXBy(-250f);
                 cameraCopyButton.animate().translationXBy(250f);
-                cameraCaptureButton.setText("RETAKE PHOTO");
+                cameraCaptureButton.setVisibility(View.GONE);
+                cameraRetakeButton.setVisibility(View.VISIBLE);
                 cameraCopyButton.setVisibility(View.VISIBLE);
                 copiedText = blockText;
             }
@@ -200,15 +212,14 @@ public class OCR extends AppCompatActivity {
                 String str1 = copiedTexts.get(i);
                 if (str1.startsWith("$") || Character.isDigit(str1.charAt(0))) {
                     prices.add(str1.substring(1));
-                }
-                else {
+                } else {
                     names.add(str1);
                 }
             }
             System.out.println(prices.size());
             System.out.println(names.size());
             for (int i = 0; i < names.size(); i++) {
-                tempDishes.add(new Dish(names.get(i),prices.get(i)));
+                tempDishes.add(new Dish(names.get(i), prices.get(i)));
             }
         });
     }

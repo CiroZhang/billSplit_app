@@ -49,8 +49,8 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
         User u1 = MainActivity.usersList.get(position);
         String name = u1.getUsername();
         holder.shared_profile_user_name.setText(name);
-        if (!name.isEmpty()) { holder.shared_profile_short_user_name.setText(name.substring(0,1)); }
         holder.shared_profile_background.getBackground().setTint(u1.getColor());
+        if (!name.isEmpty()) { holder.shared_profile_short_user_name.setText(name.substring(0,1)); }
 
         holder.shared_profile_background.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,16 +60,14 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
                     MainActivity.dishList.get(MainActivity.dishList.indexOf(adapterDish)).removeUser(u1);
                     u1.removeDish(adapterDish);
 //                    updateUserTaxes(u1);
-                    u1.refreshTotal();
                 }
                 else {
                     holder.shared_checkmark.setVisibility(View.VISIBLE);
-
                     MainActivity.dishList.get(MainActivity.dishList.indexOf(adapterDish)).addUser(u1);
                     u1.addDish(adapterDish);
 //                    updateUserTaxes(u1);
-                    u1.refreshTotal();
                 }
+                u1.refreshTotal();
             }
         });
     }

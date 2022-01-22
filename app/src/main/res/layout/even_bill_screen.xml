@@ -213,7 +213,7 @@
                         android:id="@+id/same_tip_selection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="118dp"
+                        android:layout_marginStart="115dp"
                         android:layout_marginTop="15dp"
                         android:visibility="invisible"
                         app:layout_constraintStart_toEndOf="@id/text"

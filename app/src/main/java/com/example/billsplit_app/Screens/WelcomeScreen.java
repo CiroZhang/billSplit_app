@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -59,7 +58,6 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     boolean editCostTextFilled = false;
     boolean editCostTextValid = false;
     boolean locationSpinFilled = false;
-    boolean OCRPopup;
     InternalFiles internalFiles = new InternalFiles();
     ArrayList<String> list = new ArrayList<>();
 
@@ -71,7 +69,6 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_screen);
         MainActivity.setColorList();
-        OCRPopup = false;
 
         editPeopleText = findViewById(R.id.people_edit_text);
         editCostText = findViewById(R.id.cost_edit_text);
@@ -109,43 +106,18 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         locationSpin.setAdapter(myAdapter);
         locationSpin.setOnItemSelectedListener(this);
 
-//        individual_split_button.setActivated(false);
-//        even_split_button.setActivated(false);
-
-//        scan_button.setOnClickListener(new View.OnClickListener() {
-//            @SuppressLint("UseCompatLoadingForDrawables")
-//            @Override
-//            public void onClick(View v) {
-//                scan_cancel_button.setVisibility(View.VISIBLE);
-//                scan_button.setBackground(getDrawable(R.drawable.scan_bill_clicked));
-//            }
-//        });
-//
-//        scan_cancel_button.setOnClickListener(new View.OnClickListener() {
-//            @SuppressLint("UseCompatLoadingForDrawables")
-//            @Override
-//            public void onClick(View v) {
-//                scan_cancel_button.setVisibility(View.GONE);
-//                scan_button.setBackground(getDrawable(R.drawable.scan_bill_unclicked));
-//            }
-//        });
-
         individual_split_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                if (!editCostTextValid) {
 //                    resetEditCostInputField();
 //                } else {
-                    MainActivity.usersList.clear();
-                    MainActivity.dishList.clear();
-                    people = editPeopleText.getText().toString();
-                    cost = editCostText.getText().toString();
-                    update_Internal();
-                    OCRPopup(view);
-                    if (OCRPopup) {
-                        open_individual_split_screen();
-                    }
-//                }
+                MainActivity.usersList.clear();
+                MainActivity.dishList.clear();
+                people = editPeopleText.getText().toString();
+                cost = editCostText.getText().toString();
+                update_Internal();
+                open_individual_split_screen();
 
             }
         });
@@ -156,13 +128,12 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
 //                if (!editCostTextValid) {
 //                    resetEditCostInputField();
 //                } else {
-                    MainActivity.usersList.clear();
-                    MainActivity.dishList.clear();
-                    people = editPeopleText.getText().toString();
-                    cost = editCostText.getText().toString();
-                    update_Internal();
-                    open_even_split_screen();
-//                }
+                MainActivity.usersList.clear();
+                MainActivity.dishList.clear();
+                people = editPeopleText.getText().toString();
+                cost = editCostText.getText().toString();
+                update_Internal();
+                open_even_split_screen();
 
             }
         });
@@ -260,7 +231,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         if (s1.contains(".")) {
 //            count = s1.substring(s1.indexOf(".") + 1).length();
             if (s1.substring(s1.indexOf(".")).length() > 3) {
-                String s2 = s1.substring(0,s1.indexOf(".")+3);
+                String s2 = s1.substring(0, s1.indexOf(".") + 3);
                 totalBillCost = Double.parseDouble(s2);
                 editCostText.setText(s2);
                 Toast.makeText(this, "Please only enter up to two decimal places!", Toast.LENGTH_LONG).show();
@@ -333,47 +304,5 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    private void open_ocr_screen() {
-        Intent open_ocr_screen = new Intent(this, OCR.class);
-        startActivity(open_ocr_screen);
-    }
-
-    public void OCRPopup(View view) {
-        View popupView = LayoutInflater.from(view.getContext()).inflate(R.layout.ocr_popup, null, false);
-
-        int width = LinearLayout.LayoutParams.MATCH_PARENT;
-        int height = LinearLayout.LayoutParams.MATCH_PARENT;
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
-        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-
-        popupView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                popupWindow.dismiss();
-                return true;
-            }
-        });
-
-        ImageView scanBillButton = popupView.findViewById(R.id.scan_bill_button);
-        TextView manualExitButton = popupView.findViewById(R.id.manual_exit);
-
-        scanBillButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                open_ocr_screen();
-                OCRPopup = true;
-                popupWindow.dismiss();
-            }
-        });
-
-        manualExitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                open_individual_split_screen();
-                popupWindow.dismiss();
-            }
-        });
     }
 }

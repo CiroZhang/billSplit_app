@@ -53,7 +53,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         MainActivity.setColorList();
         setContentView(R.layout.individual_bill_screen);
 
-        Button ocrButton = findViewById(R.id.ocr_button);
+        ImageButton ocrButton = findViewById(R.id.ocr_button);
 
         ImageButton backButton = findViewById(R.id.back_button);
         ImageButton addUserButton = findViewById(R.id.add_user_button);
@@ -100,6 +100,7 @@ public class IndividualBillScreen extends AppCompatActivity {
             MainActivity.dishList.add(newDish);
             ItemViewAdapter.notifyDataSetChanged();
         });
+
         addDishButton2.setOnClickListener(v -> {
             Dish newDish = new Dish("New Dish " + (MainActivity.dishList.size()+1), "");
             newDish.clearSharedUsers();
@@ -147,6 +148,15 @@ public class IndividualBillScreen extends AppCompatActivity {
                 .setTitle("No prices entered!")
                 .setMessage("You haven't entered in any prices yet!")
                 .setNegativeButton("OK", null)
+                .show();
+    }
+
+    private void alertPopup2(Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("No prices entered!")
+                .setMessage("Your totals don't match! Do you want to adjust them?")
+                .setPositiveButton("Yes", null)
+                .setNegativeButton("No", null)
                 .show();
     }
 
@@ -247,35 +257,32 @@ public class IndividualBillScreen extends AppCompatActivity {
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.MATCH_PARENT;
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
-        System.out.println(popupWindow);
-
-//        popupView.post(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//
-//            }
-//        });
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
         popupView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 popupWindow.dismiss();
-                CheckPopup();
                 return true;
             }
         });
 
+        ImageView popupBackground = popupView.findViewById(R.id.popup_background);
         ImageView scanBillButton = popupView.findViewById(R.id.scan_bill_button);
         TextView manualExitButton = popupView.findViewById(R.id.manual_exit);
+
+        popupBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // This is just here to prevent the popup from closing when clicking the popup
+            }
+        });
 
         scanBillButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 open_ocr_screen();
                 popupWindow.dismiss();
-                CheckPopup();
             }
         });
 
@@ -283,7 +290,6 @@ public class IndividualBillScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
-                CheckPopup();
             }
         });
     }

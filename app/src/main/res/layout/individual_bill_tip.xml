@@ -1,11 +1,10 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="#ffffff"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <ScrollView
@@ -40,21 +39,29 @@
                         android:background="@drawable/back_button"
                         android:visibility="visible" />
 
-                    <TextView
-                        android:layout_width="95dp"
-                        android:layout_height="25dp"
-                        android:layout_marginStart="160dp"
-                        android:layout_marginTop="24dp"
-                        android:fontFamily="@font/avenir_book"
-                        android:text="Individual Bill"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="110dp"
+                            android:layout_height="25dp"
+                            android:layout_marginTop="24dp"
+                            android:fontFamily="@font/avenir_book"
+                            android:text="Individual Bill"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </RelativeLayout>
 
                 <TextView
-                    android:layout_width="328dp"
+                    android:layout_width="375dp"
                     android:layout_height="53dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="10dp"
@@ -88,7 +95,7 @@
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="17dp"
                             android:fontFamily="@font/avenir_book"
-                            android:text="All tip same"
+                            android:text="Same tip"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 
@@ -132,12 +139,21 @@
                         android:textSize="14sp"
                         android:visibility="invisible" />
 
-                    <ImageButton
-                        android:id="@+id/indiv_transit_enter_exit"
+                    <ImageView
+                        android:id="@+id/indiv_line"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="345dp"
+                        android:layout_marginTop="17dp"
+                        android:background="@drawable/line1"
+                        android:visibility="invisible" />
+
+                    <ImageButton
+                        android:id="@+id/indiv_transit_enter_exit"
+                        android:layout_width="21dp"
+                        android:layout_height="21dp"
                         android:layout_marginStart="355dp"
-                        android:layout_marginTop="18dp"
+                        android:layout_marginTop="20dp"
                         android:background="@drawable/transit_enter_exit"
                         android:visibility="invisible" />
 
@@ -179,27 +195,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
             android:layout_marginStart="31dp"
-            android:text="Total Tip Paying:"
+            android:layout_marginTop="26dp"
             android:fontFamily="@font/avenir_book"
+            android:text="Total Tip Paying:"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/individual_tip_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="314dp"
             android:layout_marginTop="24dp"
-            android:layout_marginStart="315dp"
+            android:fontFamily="@font/avenir_heavy"
             android:text="$ 00.00"
-            android:fontFamily="@font/avenir_medium"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/submit_button"

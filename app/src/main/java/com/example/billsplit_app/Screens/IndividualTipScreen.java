@@ -56,6 +56,7 @@ public class IndividualTipScreen extends AppCompatActivity {
         ImageView tipFrame = findViewById(R.id.indiv_tip_frame);
         EditText tipText = findViewById(R.id.indiv_tip_edit_text);
         TextView tipPercentage = findViewById(R.id.indiv_tip_percentage_sign);
+        ImageView tipLine = findViewById(R.id.indiv_line);
         ImageButton tipTransit = findViewById(R.id.indiv_transit_enter_exit);
         TextView currentTotalText = findViewById(R.id.individual_tip_total);
 
@@ -83,6 +84,7 @@ public class IndividualTipScreen extends AppCompatActivity {
                     tipFrame.setVisibility(View.VISIBLE);
                     tipText.setVisibility(View.VISIBLE);
                     tipPercentage.setVisibility(View.VISIBLE);
+                    tipLine.setVisibility(View.VISIBLE);
                     tipTransit.setVisibility(View.VISIBLE);
 
                     MainActivity.allTipsSelected = true;
@@ -91,6 +93,7 @@ public class IndividualTipScreen extends AppCompatActivity {
                     tipFrame.setVisibility(View.INVISIBLE);
                     tipText.setVisibility(View.INVISIBLE);
                     tipPercentage.setVisibility(View.INVISIBLE);
+                    tipLine.setVisibility(View.INVISIBLE);
                     tipTransit.setVisibility(View.INVISIBLE);
 
                     MainActivity.allTipsSelected = false;

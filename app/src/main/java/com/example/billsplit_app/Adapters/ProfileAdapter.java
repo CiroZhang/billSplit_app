@@ -96,9 +96,26 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
                 return true;
             }
         });
+
+        ImageView background = popupView.findViewById(R.id.popup_background);
+        ImageButton closePopup = popupView.findViewById(R.id.popup_close_button);
         Button delete = popupView.findViewById(R.id.delete);
         Button edit = popupView.findViewById(R.id.edit);
         EditText editName = popupView.findViewById(R.id.new_name);
+
+        background.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // This is just here to prevent the popup from closing when clicking the background
+            }
+        });
+
+        closePopup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
 
         delete.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NotifyDataSetChanged")

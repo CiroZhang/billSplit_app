@@ -46,8 +46,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="347dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginStart="344dp"
+            android:layout_marginTop="7dp"
             android:background="@drawable/line1"
             android:visibility="visible" />
 
@@ -76,8 +76,8 @@
 
         <ImageView
             android:id="@+id/tip_layout_greyed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="144dp"
+            android:layout_height="42dp"
             android:layout_marginStart="245dp"
             android:layout_marginTop="0dp"
             android:background="@drawable/even_tip_frame_greyed"
