@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/popup_transparent_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/transparent_background"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/popup_background"
+            android:layout_width="411dp"
+            android:layout_height="319dp"
+            android:background="@drawable/rectangle2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/avenir_light"
+            android:text="Want an easier way to split?"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/popup_background"
+            app:layout_constraintEnd_toEndOf="@id/popup_background"
+            app:layout_constraintTop_toTopOf="@id/popup_background" />
+
+        <ImageView
+            android:id="@+id/scan_bill_button"
+            android:layout_width="378dp"
+            android:layout_height="118dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="74dp"
+            android:background="@drawable/scan_bill_button"
+            app:layout_constraintEnd_toEndOf="@id/popup_background"
+            app:layout_constraintStart_toStartOf="@id/popup_background"
+            app:layout_constraintTop_toTopOf="@id/popup_background" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/avenir_light"
+            android:text="No thanks, enter manually"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/popup_background"
+            app:layout_constraintEnd_toEndOf="@id/popup_background"
+            app:layout_constraintTop_toBottomOf="@id/scan_bill_button" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

@@ -38,6 +38,7 @@
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/item_shared_profile.xml" value="0.67" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/item_tip.xml" value="0.5" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/ocr_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/ocr_popup.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/open_tip_popup.xml" value="0.5" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/rounded_rectangle1.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/JasonL/AndroidStudioProjects/BillSplitApp/app/src/main/res/layout/test_screen.xml" value="0.36666666666666664" />
@@ -61,7 +62,6 @@
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/drawable/transparent_background.xml" value="0.2682291666666667" />
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/layout/activity_main.xml" value="0.1716485507246377" />
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/layout/add_profile_popup.xml" value="0.16394927536231885" />
-        <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/layout/change_remove_profile_popup.xml" value="0.1" />
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/layout/even_bill_screen.xml" value="0.25" />
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/layout/even_final__bill_screen.xml" value="0.24791666666666667" />
         <entry key="..\:/Users/ciroz/OneDrive/Documents/Hi/app/src/main/res/layout/final_bill_screen.xml" value="0.20520833333333333" />
