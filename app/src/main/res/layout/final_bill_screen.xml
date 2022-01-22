@@ -75,7 +75,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp">
+            android:layout_marginTop="2dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -114,7 +114,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp">
+            android:layout_marginTop="27dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -153,7 +153,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="51dp">
+            android:layout_marginTop="53dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -192,7 +192,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="46dp">
+            android:layout_marginTop="48dp">
 
             <TextView
                 android:layout_width="wrap_content"

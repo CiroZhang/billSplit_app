@@ -69,7 +69,8 @@
                     android:layout_marginStart="200dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/rounded_rectangle3"
-                    android:text="OCR" />
+                    android:text="OCR"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

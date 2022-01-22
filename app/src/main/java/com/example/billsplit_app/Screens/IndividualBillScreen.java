@@ -40,7 +40,6 @@ public class IndividualBillScreen extends AppCompatActivity {
     RecyclerView ProfileRecyclerView;
     static ItemAdapter ItemViewAdapter;
     RecyclerView ItemRecyclerView;
-    Boolean popupShown = false;
     TextView currentTotal;
     double indivTotalNum = 0.0;
     double alcoholTax = 0.0;
@@ -122,7 +121,14 @@ public class IndividualBillScreen extends AppCompatActivity {
         });
 
         setupRecyclerView();
+//        OCRPopup(activity.getCurrentFocus());
     }
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        OCRPopup();
+//    }
 
     void setupRecyclerView() {
         ProfileRecyclerView = findViewById(R.id.profile_list_view);
@@ -147,7 +153,6 @@ public class IndividualBillScreen extends AppCompatActivity {
     public void ShowPopup(View view) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.add_profile_popup, null,false);
-        popupShown = true;
         CheckPopup();
 
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -160,7 +165,6 @@ public class IndividualBillScreen extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 popupWindow.dismiss();
-                popupShown = false;
                 CheckPopup();
                 return true;
             }
@@ -189,7 +193,6 @@ public class IndividualBillScreen extends AppCompatActivity {
                 MainActivity.usersList.add(new User(addProfileNameEditText.getText().toString()));
                 ProfileViewAdapter.notifyDataSetChanged();
                 popupWindow.dismiss();
-                popupShown = false;
                 CheckPopup();
                 ItemViewAdapter.SharedAdapter.notifyDataSetChanged();
             }
@@ -236,5 +239,52 @@ public class IndividualBillScreen extends AppCompatActivity {
         ProfileViewAdapter.notifyDataSetChanged();
         ItemViewAdapter.notifyDataSetChanged();
         ItemViewAdapter.SharedAdapter.notifyDataSetChanged();
+    }
+
+    public void OCRPopup(View view) {
+        View popupView = LayoutInflater.from(view.getContext()).inflate(R.layout.ocr_popup, null, false);
+
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+        System.out.println(popupWindow);
+
+//        popupView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//
+//            }
+//        });
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                CheckPopup();
+                return true;
+            }
+        });
+
+        ImageView scanBillButton = popupView.findViewById(R.id.scan_bill_button);
+        TextView manualExitButton = popupView.findViewById(R.id.manual_exit);
+
+        scanBillButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                open_ocr_screen();
+                popupWindow.dismiss();
+                CheckPopup();
+            }
+        });
+
+        manualExitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                CheckPopup();
+            }
+        });
     }
 }

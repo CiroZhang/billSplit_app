@@ -52,6 +52,7 @@
             app:layout_constraintTop_toTopOf="@id/popup_background" />
 
         <TextView
+            android:id="@+id/manual_exit"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginTop="50dp"

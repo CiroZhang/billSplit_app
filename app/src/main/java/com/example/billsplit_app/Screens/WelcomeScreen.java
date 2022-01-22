@@ -9,6 +9,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -16,6 +19,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +59,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
     boolean editCostTextFilled = false;
     boolean editCostTextValid = false;
     boolean locationSpinFilled = false;
+    boolean OCRPopup;
     InternalFiles internalFiles = new InternalFiles();
     ArrayList<String> list = new ArrayList<>();
 
@@ -64,6 +71,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_screen);
         MainActivity.setColorList();
+        OCRPopup = false;
 
         editPeopleText = findViewById(R.id.people_edit_text);
         editCostText = findViewById(R.id.cost_edit_text);
@@ -133,7 +141,10 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
                     people = editPeopleText.getText().toString();
                     cost = editCostText.getText().toString();
                     update_Internal();
-                    open_individual_split_screen();
+                    OCRPopup(view);
+                    if (OCRPopup) {
+                        open_individual_split_screen();
+                    }
 //                }
 
             }
@@ -324,5 +335,45 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
+    private void open_ocr_screen() {
+        Intent open_ocr_screen = new Intent(this, OCR.class);
+        startActivity(open_ocr_screen);
+    }
 
+    public void OCRPopup(View view) {
+        View popupView = LayoutInflater.from(view.getContext()).inflate(R.layout.ocr_popup, null, false);
+
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+
+        ImageView scanBillButton = popupView.findViewById(R.id.scan_bill_button);
+        TextView manualExitButton = popupView.findViewById(R.id.manual_exit);
+
+        scanBillButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                open_ocr_screen();
+                OCRPopup = true;
+                popupWindow.dismiss();
+            }
+        });
+
+        manualExitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                open_individual_split_screen();
+                popupWindow.dismiss();
+            }
+        });
+    }
 }
