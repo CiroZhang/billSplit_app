@@ -23,15 +23,15 @@
             android:id="@+id/shared_profile_short_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="20dp"
             android:fontFamily="@font/avenir_semi_bold"
             android:textAlignment="center"
             android:text="M"
             android:textColor="#FFFFFFFF"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@id/shared_profile_background"
-            app:layout_constraintTop_toTopOf="@id/shared_profile_background"/>
+            app:layout_constraintTop_toTopOf="@id/shared_profile_background"
+            app:layout_constraintEnd_toEndOf="@id/shared_profile_background"
+            app:layout_constraintBottom_toBottomOf="@id/shared_profile_background"/>
 
         <ImageView
             android:id="@+id/shared_checkmark"

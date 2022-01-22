@@ -1,10 +1,13 @@
 package com.example.billsplit_app;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class Dish {
     private String name;
     private String price = "0.0";
+    private String priceWithLiquor = "0.0";
     private boolean collapsed = false;
     private boolean alcoholic = false;
     private ArrayList<User> sharedUsers = new ArrayList<>();
@@ -62,5 +65,17 @@ public class Dish {
 
     public void clearSharedUsers() {
         this.sharedUsers.clear();
+    }
+
+    public void addLiquorTax() throws JSONException {
+        this.priceWithLiquor = String.valueOf(InternalFiles.getLiquorTax(Double.parseDouble(this.price)));
+    }
+
+    public void removeLiquorTax() {
+        this.priceWithLiquor = this.price;
+    }
+
+    public double getLiquorTax() {
+        return Double.parseDouble(this.priceWithLiquor);
     }
 }

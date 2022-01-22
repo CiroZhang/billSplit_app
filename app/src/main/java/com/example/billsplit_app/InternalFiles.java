@@ -28,32 +28,39 @@ public class InternalFiles extends AppCompatActivity {
         data = readDataFile();
         System.out.println(data);
     }
+
     public static JSONObject getDefault() throws JSONException {
         JSONObject tax = new JSONObject();
         tax.put("PST",0);
         tax.put("GST",0);
         tax.put("HST",0);
 
+        JSONObject liquorTax = new JSONObject();
+        liquorTax.put("liquorPercent",0);
+        liquorTax.put("liquorFlat",0);
+        liquorTax.put("NWTExcept",0);
+
         JSONObject res = new JSONObject();
         res.put("people",0);
         res.put("cost",0);
         res.put("location","Choose Category");
         res.put("tax", tax);
+        res.put("liquorTax",liquorTax);
 
         return res;
     }
+
     public static JSONObject getData(){
         return data;
     }
 
-
     public static String getSavedLocation() throws JSONException {
         return data.getString("location");
     }
-    public static int getSavedPeople()throws JSONException {
+    public static int getSavedPeople() throws JSONException {
         return data.getInt("people");
     }
-    public static double getSavedCost()throws JSONException {
+    public static double getSavedCost() throws JSONException {
         return data.getDouble("cost");
     }
     public static double getSavedTax() throws JSONException {
@@ -63,7 +70,15 @@ public class InternalFiles extends AppCompatActivity {
         double hst = current.getInt("HST");
 
         return (pst + gst + hst)/100;
+    }
 
+    public static double getLiquorTax(double price) throws JSONException {
+        JSONObject current = data.getJSONObject("tax");
+        double liquorPercent = current.getDouble("liquorPercent");
+        double liquorFlat = current.getDouble("liquorFlat");
+        double NWTExcept = current.getDouble("NWTExcept");
+
+        return (price*liquorPercent/100.0) + liquorFlat + (price*NWTExcept);
     }
 
     public static void setSomething(String item, int content) throws JSONException {
@@ -88,8 +103,6 @@ public class InternalFiles extends AppCompatActivity {
             writer.write(data.toString().getBytes());
             writer.flush();
             writer.close();
-
-
         }
         catch (IOException e) {
             e.printStackTrace();

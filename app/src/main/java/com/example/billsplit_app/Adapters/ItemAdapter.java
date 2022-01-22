@@ -242,13 +242,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         SharedRecyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
     }
 
-    public void UpdateSharedAdapter() {
-        if (SharedAdapter == null) {
-            return;
-        }
-        SharedAdapter.notifyDataSetChanged();
-    }
-
     private void checkEditCostTextValid(Editable s, ItemViewHolder holder, View view) {
         String s1 = s.toString();
 
@@ -264,9 +257,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     private void updateIndivTotal() {
         indivTotalNum = 0;
         for (Dish d : MainActivity.dishList) {
-            if (d.isAlcoholic()) {
-
-            }
             if (!d.getPrice().isEmpty()) {
                 indivTotalNum += Double.parseDouble(d.getPrice());
             }

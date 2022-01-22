@@ -1,6 +1,7 @@
 package com.example.billsplit_app.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.media.MediaTimestamp;
 import android.view.Gravity;
@@ -29,11 +30,9 @@ import java.util.ArrayList;
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder>{
 
     private Context context;
-    private ArrayList<User> userList;
 
-    public ProfileAdapter(@NonNull Context context, @NonNull ArrayList<User> userList){
+    public ProfileAdapter(@NonNull Context context){
         this.context = context;
-        this.userList = userList;
     }
 
     public class ProfileViewHolder extends RecyclerView.ViewHolder{
@@ -46,16 +45,39 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
             profile_background = itemView.findViewById(R.id.profile_background);
             name_str = itemView.findViewById(R.id.profile_user_name);
             profile_short_user_name = itemView.findViewById(R.id.profile_short_user_name);
-            profile_background.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ShowPopup(v,name_str.getText().toString());
-                    CheckPopup();
-                }
-            });
         }
     }
-    public void ShowPopup(View view, String name) {
+
+    @NonNull
+    @Override
+    public ProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(context).inflate(R.layout.item_profile, parent,false);
+        return new ProfileViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ProfileViewHolder holder, int position) {
+        User currentUser = MainActivity.usersList.get(position);
+        String name = currentUser.getUsername();
+        holder.name_str.setText(name);
+        holder.profile_background.getBackground().setTint(currentUser.getColor());
+        holder.profile_short_user_name.setText(name.substring(0,1));
+
+        holder.profile_background.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowPopup(v,currentUser);
+                CheckPopup();
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return MainActivity.usersList.size();
+    }
+
+    public void ShowPopup(View view, User user) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View popupView = inflater.inflate(R.layout.change_remove_profile_popup, null, false);
         CheckPopup();
@@ -78,20 +100,13 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
         Button edit = popupView.findViewById(R.id.edit);
         EditText editName = popupView.findViewById(R.id.new_name);
 
-        ArrayList<String> stuff = new ArrayList<String>();
-        for(User i:MainActivity.usersList){
-            stuff.add(i.getUsername());
-        }
-
-
-
         delete.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View v) {
-                System.out.println(name);
-                MainActivity.usersList.remove(stuff.indexOf(name));
+                MainActivity.usersList.remove(user);
                 notifyDataSetChanged();
+                ((IndividualBillScreen)context).refreshAdapters();
                 popupWindow.dismiss();
                 CheckPopup();
             }
@@ -100,10 +115,10 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupWindow.dismiss();
-                MainActivity.usersList.get(stuff.indexOf(name)).setUsername(editName.getText().toString());
+                MainActivity.usersList.get(MainActivity.usersList.indexOf(user)).setUsername(editName.getText().toString());
                 notifyDataSetChanged();
-
+                ((IndividualBillScreen)context).refreshAdapters();
+                popupWindow.dismiss();
                 CheckPopup();
             }
         });
@@ -111,40 +126,4 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
 
     private void CheckPopup() {
     }
-
-
-    @NonNull
-    @Override
-    public ProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.item_profile, parent,false);
-        return new ProfileViewHolder(itemView);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ProfileViewHolder holder, int position) {
-        String name = userList.get(position).getUsername();
-        holder.name_str.setText(name);
-        holder.profile_background.getBackground().setTint(userList.get(position).getColor());
-        holder.profile_short_user_name.setText(name.substring(0,1));
-
-//        holder.profile_delete_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-
-//            }
-//        });
-
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                IndividualBillScreen.ShowPopup();
-//            }
-//        });
-    }
-
-    @Override
-    public int getItemCount() {
-        return userList.size();
-    }
-
 }

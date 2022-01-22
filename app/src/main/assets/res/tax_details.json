@@ -3,98 +3,140 @@
   {
     "PST" : 0,
     "GST" : 0,
-    "HST" : 0
+    "HST" : 0,
+    "liquorPercent" : 0,
+    "liquorFlat" : 0,
+    "NWTExcept" : 0
   },
 
   "Alberta" :
   {
     "PST" : 0,
     "GST" : 5,
-    "HST" : 0
+    "HST" : 0,
+    "liquorPercent" : 0,
+    "liquorFlat" : 4.51,
+    "NWTExcept" : 0
   },
 
   "British Columbia" :
   {
     "PST" : 7,
     "GST" : 5,
-    "HST" : 0
+    "HST" : 0,
+    "liquorPercent" : 10,
+    "liquorFlat" : 0,
+    "NWTExcept" : 0
   },
 
   "Manitoba" :
   {
     "PST" : 7,
     "GST" : 5,
-    "HST" : 0
+    "HST" : 0,
+    "liquorPercent" : 0,
+    "liquorFlat" : 0,
+    "NWTExcept" : 0
   },
 
   "New Brunswick" :
   {
     "PST" : 0,
     "GST" : 0,
-    "HST" : 15
+    "HST" : 15,
+    "liquorPercent" : 5,
+    "liquorFlat" : 0,
+    "NWTExcept" : 0
   },
 
   "Newfoundland and Labrador" :
   {
     "PST" : 0,
     "GST" : 0,
-    "HST" : 15
+    "HST" : 15,
+    "liquorPercent" : 0,
+    "liquorFlat" : 0,
+    "NWTExcept" : 0
   },
 
   "Northwest Territories" :
   {
     "PST" : 0,
     "GST" : 5,
-    "HST" : 0
+    "HST" : 0,
+    "liquorPercent" : 0,
+    "liquorFlat" : 0,
+    "NWTExcept" : 0.7
   },
 
   "Nova Scotia" :
   {
     "PST" : 0,
     "GST" : 0,
-    "HST" : 15
+    "HST" : 15,
+    "liquorPercent" : 0,
+    "liquorFlat" : 0,
+    "NWTExcept" : 0
   },
 
   "Nunavut" :
   {
     "PST" : 0,
     "GST" : 5,
-    "HST" : 0
+    "HST" : 0,
+    "liquorPercent" : 0,
+    "liquorFlat" : 0,
+    "NWTExcept" : 0
   },
 
   "Ontario" :
   {
     "PST" : 0,
     "GST" : 0,
-    "HST" : 13
+    "HST" : 13,
+    "liquorPercent" : 6.1,
+    "liquorFlat" : 0,
+    "NWTExcept" : 0
   },
 
   "Prince Edward Island" :
   {
     "PST" : 0,
     "GST" : 0,
-    "HST" : 15
+    "HST" : 15,
+    "liquorPercent" : 25,
+    "liquorFlat" : 0,
+    "NWTExcept" : 0
   },
 
   "Quebec" :
   {
     "PST" : 10,
     "GST" : 5,
-    "HST" : 0
+    "HST" : 0,
+    "liquorPercent" : 0,
+    "liquorFlat" : 0.72,
+    "NWTExcept" : 0
   },
 
   "Saskatchewan" :
   {
     "PST" : 6,
     "GST" : 5,
-    "HST" : 0
+    "HST" : 0,
+    "liquorPercent" : 10,
+    "liquorFlat" : 0,
+    "NWTExcept" : 0
   },
 
   "Yukon" :
   {
     "PST" : 0,
     "GST" : 5,
-    "HST" : 0
+    "HST" : 0,
+    "liquorPercent" : 12,
+    "liquorFlat" : 0,
+    "NWTExcept" : 0
   }
 
 }

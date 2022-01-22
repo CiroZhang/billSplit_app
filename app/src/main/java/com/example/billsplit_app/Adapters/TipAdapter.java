@@ -125,8 +125,13 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
                 if (!MainActivity.check()) {
                     // getting the # of users sharing this dish, then adding current user's all shared dishes' prices together
                     double rawDishesPriceTotal = 0.0;
+                    double liquorTax = 0.0;
+
                     for (Dish dish : current.getSharedDishes()) {
                         rawDishesPriceTotal += Double.parseDouble(dish.getPrice()) / (double)dish.getNOfSharedUsers();
+                        if (dish.isAlcoholic()) {
+                            liquorTax += dish.getLiquorTax();
+                        }
                     }
 
                     // setting user's total price of all shared dishes
@@ -134,7 +139,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.TipViewHolder> {
 
                     // setting user's updated raw tax amount (taxPercentage * total price of all of user's dishes)
                     try {
-                        current.setTax_total(rawDishesPriceTotal * InternalFiles.getSavedTax());
+                        current.setTax_total((rawDishesPriceTotal * InternalFiles.getSavedTax()) + liquorTax);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

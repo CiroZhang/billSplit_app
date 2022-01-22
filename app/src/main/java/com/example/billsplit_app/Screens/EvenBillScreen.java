@@ -214,7 +214,7 @@ public class EvenBillScreen extends AppCompatActivity {
     }
 
     void setupRecyclerView() {
-        ProfileViewAdapter = new ProfileAdapter(this, MainActivity.usersList);
+        ProfileViewAdapter = new ProfileAdapter(this);
         TipViewAdapter = new TipAdapter(this,current_total);
 
         ProfileRecyclerView = findViewById(R.id.profile_list_view);

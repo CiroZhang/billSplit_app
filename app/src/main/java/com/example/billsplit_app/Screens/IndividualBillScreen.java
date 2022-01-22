@@ -29,6 +29,11 @@ import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
 import com.example.billsplit_app.User;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class IndividualBillScreen extends AppCompatActivity {
 
     ProfileAdapter ProfileViewAdapter;
@@ -38,6 +43,7 @@ public class IndividualBillScreen extends AppCompatActivity {
     Boolean popupShown = false;
     TextView currentTotal;
     double indivTotalNum = 0.0;
+    double alcoholTax = 0.0;
     Activity activity = IndividualBillScreen.this;
 
     @SuppressLint("ResourceType")
@@ -120,7 +126,7 @@ public class IndividualBillScreen extends AppCompatActivity {
 
     void setupRecyclerView() {
         ProfileRecyclerView = findViewById(R.id.profile_list_view);
-        ProfileViewAdapter = new ProfileAdapter(this,MainActivity.usersList);
+        ProfileViewAdapter = new ProfileAdapter(this);
         ProfileRecyclerView.setAdapter(ProfileViewAdapter);
         ProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
@@ -182,7 +188,6 @@ public class IndividualBillScreen extends AppCompatActivity {
             public void onClick(View v) {
                 MainActivity.usersList.add(new User(addProfileNameEditText.getText().toString()));
                 ProfileViewAdapter.notifyDataSetChanged();
-                ItemViewAdapter.UpdateSharedAdapter();
                 popupWindow.dismiss();
                 popupShown = false;
                 CheckPopup();
@@ -207,5 +212,29 @@ public class IndividualBillScreen extends AppCompatActivity {
     }
 
     public void CheckPopup() {
+    }
+
+    public String readJson(String fileName) {
+        try {
+            InputStream is = getAssets().open(fileName);
+            BufferedReader streamReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            StringBuilder responseStrBuilder = new StringBuilder();
+
+            String inputStr;
+            while ((inputStr = streamReader.readLine()) != null)
+                responseStrBuilder.append(inputStr);
+
+            return responseStrBuilder.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public void refreshAdapters() {
+        ProfileViewAdapter.notifyDataSetChanged();
+        ItemViewAdapter.notifyDataSetChanged();
+        ItemViewAdapter.SharedAdapter.notifyDataSetChanged();
     }
 }
