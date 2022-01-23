@@ -77,11 +77,6 @@ public class User {
         return tax_total;
     }
 
-    public void setEvenTax() throws JSONException {
-        double tax =(double) InternalFiles.getSavedTax();
-        this.tax_total = default_total * tax;
-    }
-
     public double getTip_total(){
         return tip_total;
     }
@@ -138,6 +133,10 @@ public class User {
         this.tips_times_total = tips_times_total;
     }
 
+    public int getSharedNum() {
+        return this.sharedNum;
+    }
+
     public void setSharedNum(int sharedNum) {
         this.sharedNum = sharedNum;
     }
@@ -153,6 +152,11 @@ public class User {
     public void refreshTotal() {
         this.tips_times_total = ((this.tipsPercentage * this.dishesRawPriceTotal)/100.0) / this.sharedNum;
         this.total = (this.tax_total + this.tips_times_total + (this.dishesRawPriceTotal/(double)this.sharedNum));
+//        System.out.println("USER TIPS TOTAL: " + this.tips_times_total);
+//        System.out.println("USER TAX TOTAL: " + this.tax_total);
+//        System.out.println("USER RAW DISHES PRICE: " + this.dishesRawPriceTotal);
+//        System.out.println("USER MUMBLE JUMBLE: " + (this.dishesRawPriceTotal/(double)this.sharedNum));
+//        System.out.println("USER TOTAL: " + this.total);
     }
 
     public void refreshTotalEven() throws JSONException {

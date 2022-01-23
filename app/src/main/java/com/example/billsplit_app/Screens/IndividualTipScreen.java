@@ -141,8 +141,18 @@ public class IndividualTipScreen extends AppCompatActivity {
                     for (User user : MainActivity.usersList) {
                         // getting the # of users sharing this dish, then adding current user's all shared dishes' prices together
                         double rawDishesPriceTotal = 0.0;
+                        double liquorTax = 0.0;
+
                         for (Dish dish : user.getSharedDishes()) {
                             rawDishesPriceTotal += Double.parseDouble(dish.getPrice()) / (double)dish.getNOfSharedUsers();
+                            if (dish.isAlcoholic()) {
+                                try {
+                                    dish.setLiquorTax(InternalFiles.getLiquorTax(Double.parseDouble(dish.getPrice()) / (double)dish.getNOfSharedUsers()));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                liquorTax += dish.getLiquorTax() / (double)dish.getNOfSharedUsers();
+                            }
                         }
 
                         // setting user's total price of all shared dishes
@@ -150,12 +160,14 @@ public class IndividualTipScreen extends AppCompatActivity {
 
                         // setting user's updated raw tax amount (taxPercentage * total price of all of user's dishes)
                         try {
-                            user.setTax_total(rawDishesPriceTotal * InternalFiles.getSavedTax());
+                            user.setTax_total(rawDishesPriceTotal * InternalFiles.getSavedTax() + liquorTax);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                         user.setTipsPercentage(0);
                     }
+
                     MainActivity.finalTipTotal = 0;
                     MainActivity.finalTaxTotal = updateTaxTotal();
                     for (User user : MainActivity.usersList) {
@@ -164,6 +176,34 @@ public class IndividualTipScreen extends AppCompatActivity {
                 }
 
                 else {
+                    for (User user : MainActivity.usersList) {
+                        // getting the # of users sharing this dish, then adding current user's all shared dishes' prices together
+                        double rawDishesPriceTotal = 0.0;
+                        double liquorTax = 0.0;
+
+                        for (Dish dish : user.getSharedDishes()) {
+                            rawDishesPriceTotal += Double.parseDouble(dish.getPrice()) / (double)dish.getNOfSharedUsers();
+                            if (dish.isAlcoholic()) {
+                                try {
+                                    dish.setLiquorTax(InternalFiles.getLiquorTax(Double.parseDouble(dish.getPrice()) / (double)dish.getNOfSharedUsers()));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                liquorTax += dish.getLiquorTax() / (double)dish.getNOfSharedUsers();
+                            }
+                        }
+
+                        // setting user's total price of all shared dishes
+                        user.setDishesRawPriceTotal(rawDishesPriceTotal);
+
+                        // setting user's updated raw tax amount (taxPercentage * total price of all of user's dishes)
+                        try {
+                            user.setTax_total(rawDishesPriceTotal * InternalFiles.getSavedTax() + liquorTax);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     MainActivity.finalTaxTotal = updateTaxTotal();
                     for (User user : MainActivity.usersList) {
                         user.refreshTotal();

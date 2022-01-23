@@ -23,7 +23,6 @@ public class InternalFiles extends AppCompatActivity {
     private static JSONObject data;
 
     public InternalFiles() throws JSONException {
-
         fileName = "datas.json";
         data = readDataFile();
         System.out.println(data);
@@ -34,18 +33,15 @@ public class InternalFiles extends AppCompatActivity {
         tax.put("PST",0);
         tax.put("GST",0);
         tax.put("HST",0);
-
-        JSONObject liquorTax = new JSONObject();
-        liquorTax.put("liquorPercent",0);
-        liquorTax.put("liquorFlat",0);
-        liquorTax.put("NWTExcept",0);
+        tax.put("liquorPercent",0);
+        tax.put("liquorFlat",0);
+        tax.put("NWTExcept",0);
 
         JSONObject res = new JSONObject();
         res.put("people",0);
         res.put("cost",0);
         res.put("location","Choose Category");
         res.put("tax", tax);
-        res.put("liquorTax",liquorTax);
 
         return res;
     }
@@ -57,12 +53,15 @@ public class InternalFiles extends AppCompatActivity {
     public static String getSavedLocation() throws JSONException {
         return data.getString("location");
     }
+
     public static int getSavedPeople() throws JSONException {
         return data.getInt("people");
     }
+
     public static double getSavedCost() throws JSONException {
         return data.getDouble("cost");
     }
+
     public static double getSavedTax() throws JSONException {
         JSONObject current = data.getJSONObject("tax");
         double pst = current.getInt("PST");
@@ -78,6 +77,10 @@ public class InternalFiles extends AppCompatActivity {
         double liquorFlat = current.getDouble("liquorFlat");
         double NWTExcept = current.getDouble("NWTExcept");
 
+        System.out.println("liquorPercent: " + liquorPercent);
+        System.out.println("liquorFlat: " + liquorFlat);
+        System.out.println("NWTExcept: " + NWTExcept);
+
         return (price*liquorPercent/100.0) + liquorFlat + (price*NWTExcept);
     }
 
@@ -85,10 +88,12 @@ public class InternalFiles extends AppCompatActivity {
         data.remove(item);
         data.put(item, content);
     }
+
     public static void setSomething(String item, String content) throws JSONException {
         data.remove(item);
         data.put(item, content);
     }
+
     public static void setSomething(String item, JSONObject content) throws JSONException {
         data.remove(item);
         data.put(item, content);
