@@ -134,17 +134,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             holder.alcohol_image.setVisibility(View.VISIBLE);
         }
 
-        if (dishItem.isAlcoholic()) {
-            holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_checked);
-            holder.alcohol_checkmark.setVisibility(View.VISIBLE);
-            holder.alcoholImageClicked = true;
-            holder.alcoholTaxApplicable = true;
-        }
-        else {
-            holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_unchecked);
-            holder.alcohol_checkmark.setVisibility(View.GONE);
-            holder.alcoholImageClicked = false;
-        }
+//        if (dishItem.isAlcoholic()) {
+//            holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_checked);
+//            holder.alcohol_checkmark.setVisibility(View.VISIBLE);
+//            holder.alcoholImageClicked = true;
+//            holder.alcoholTaxApplicable = true;
+//        }
+//        else {
+//            holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_unchecked);
+//            holder.alcohol_checkmark.setVisibility(View.GONE);
+//            holder.alcoholImageClicked = false;
+//        }
 
         holder.delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,8 +176,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 } else {
                     dishItem.setAlcoholic(false);
                 }
+
+                if (dishItem.isAlcoholic()) {
+                    holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_checked);
+                    holder.alcohol_checkmark.setVisibility(View.VISIBLE);
+                    holder.alcoholImageClicked = true;
+                    holder.alcoholTaxApplicable = true;
+                }
+                else {
+                    holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_unchecked);
+                    holder.alcohol_checkmark.setVisibility(View.GONE);
+                    holder.alcoholImageClicked = false;
+                }
                 updateIndivTotal();
-                notifyDataSetChanged();
+//                notifyDataSetChanged();
             }
         });
 

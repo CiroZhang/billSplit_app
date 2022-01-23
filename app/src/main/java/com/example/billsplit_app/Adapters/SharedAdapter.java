@@ -97,4 +97,14 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
     public void adapterDish(Dish dish) {
         adapterDish = dish;
     }
+
+    public void setAllColour(SharedViewHolder holder) {
+        GradientDrawable gd = new GradientDrawable();
+        gd.setColor(Color.parseColor("#f9f9f9"));
+        gd.setShape(GradientDrawable.OVAL);
+        gd.setStroke(2,Color.parseColor("#D1D1D1"));
+        holder.shared_profile_background.setBackground(gd);
+        holder.shared_profile_short_user_name.setTextColor(Color.BLACK);
+        holder.shared_checkmark.setVisibility(View.INVISIBLE);
+    }
 }
