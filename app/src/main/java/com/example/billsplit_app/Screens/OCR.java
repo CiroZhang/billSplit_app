@@ -109,6 +109,7 @@ public class OCR extends AppCompatActivity {
                 for (Dish d : tempDishes) {
                     System.out.println("Name: " + d.getName() + ", price: " + d.getPrice());
                     MainActivity.dishList.add(d);
+                    MainActivity.doStuff();
                 }
                 IndividualBillScreen.ItemViewAdapter.notifyDataSetChanged();
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);

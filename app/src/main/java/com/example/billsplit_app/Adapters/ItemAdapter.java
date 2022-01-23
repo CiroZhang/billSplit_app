@@ -50,6 +50,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         private Boolean IsCollapsed = false;
         private Boolean alcoholImageClicked = false;
         private Boolean alcoholTaxApplicable = false;
+        public RecyclerView sharedRecyclerView;
+
 
         private TextWatcher textWatcherName = new TextWatcher() {
 
@@ -87,6 +89,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             }
         };
 
+        @SuppressLint("ResourceType")
         public ItemViewHolder(final View view) {
             super(view);
             thisView = view;
@@ -100,6 +103,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             SharedRecyclerView = view.findViewById(R.id.shared_profile_list_view);
 
             setupRecyclerView(view.getContext(), SharedRecyclerView);
+            sharedRecyclerView = view.findViewById(R.layout.item_shared_profile);
+
+
         }
     }
 
@@ -121,6 +127,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.name_str.setText(name);
         holder.price_str.setText(price);
 
+
         if (dishItem.isCollapsed()) {
             holder.expand_collapse_button.setBackgroundResource(R.drawable.expand_button);
             holder.SharedRecyclerView.setVisibility(View.GONE);
@@ -135,6 +142,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         }
 
         if (dishItem.isAlcoholic()) {
+            System.out.println(position);
             holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_checked);
             holder.alcohol_checkmark.setVisibility(View.VISIBLE);
             holder.alcoholImageClicked = true;

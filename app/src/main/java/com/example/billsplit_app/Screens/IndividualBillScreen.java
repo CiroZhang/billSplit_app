@@ -74,6 +74,7 @@ public class IndividualBillScreen extends AppCompatActivity {
         }
         MainActivity.dishList.clear();
         MainActivity.dishList.add(new Dish("New Dish " + (MainActivity.dishList.size()+1),""));
+        MainActivity.doStuff();
 
         ocrButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,8 +100,11 @@ public class IndividualBillScreen extends AppCompatActivity {
 
         addDishButton.setOnClickListener(v -> {
             Dish newDish = new Dish("New Dish " + (MainActivity.dishList.size()+1), "");
+
             newDish.clearSharedUsers();
             MainActivity.dishList.add(newDish);
+            MainActivity.doStuff();
+            MainActivity.ind_cost.add(0.0);
             ItemViewAdapter.notifyDataSetChanged();
         });
 
@@ -108,6 +112,7 @@ public class IndividualBillScreen extends AppCompatActivity {
             Dish newDish = new Dish("New Dish " + (MainActivity.dishList.size()+1), "");
             newDish.clearSharedUsers();
             MainActivity.dishList.add(newDish);
+            MainActivity.doStuff();
             ItemViewAdapter.notifyDataSetChanged();
         });
 

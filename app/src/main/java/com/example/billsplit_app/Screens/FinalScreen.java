@@ -31,6 +31,17 @@ public class FinalScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.final_bill_screen);
+        for(Dish i : MainActivity.dishList){
+            System.out.println("-----------------");
+            System.out.println(i.getName());
+            System.out.println(i.stuff2());
+
+            System.out.println(i.stuff3());
+        }
+        System.out.println("-----------------");
+        for (String i : MainActivity.stuff){
+            System.out.println(i);
+        }
 
         ImageButton backButton = findViewById(R.id.back_button);
         Button submitButton = findViewById(R.id.return_button);

@@ -10,10 +10,24 @@ public class Dish {
     private boolean alcoholic = false;
     private ArrayList<User> sharedUsers = new ArrayList<>();
 
+    public static ArrayList<String> names = new ArrayList<>();
+    public static int num;
+
+
     public Dish (String name, String price) {
         this.name = name;
         this.price = price;
     }
+    public ArrayList<String> stuff1(){
+        return names;
+    }
+    public int stuff2(){
+        return num;
+    }
+    public ArrayList<User> stuff3() {
+        return sharedUsers;
+    }
+
 
     public String getName() {
         return name;
@@ -49,11 +63,14 @@ public class Dish {
 
     public void addUser(User u) {
         if (!this.sharedUsers.contains(u)) {
+            names.add(u.getUsername());
             this.sharedUsers.add(u);
         }
     }
 
     public void removeUser(User u) {
+        System.out.println("yayayfusufbsua");
+        names.remove(u.getUsername());
         this.sharedUsers.remove(u);
     }
 

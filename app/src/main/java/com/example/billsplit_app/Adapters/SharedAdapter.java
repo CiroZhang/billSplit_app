@@ -1,5 +1,6 @@
 package com.example.billsplit_app.Adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import org.json.JSONException;
 
 public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedViewHolder>{
     private Dish adapterDish;
+    public int num;
 
     public SharedAdapter(){}
 
@@ -27,6 +29,7 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
         private ImageView shared_profile_background;
         private TextView shared_profile_short_user_name;
         private ImageView shared_checkmark;
+        private TextView stuff;
 
         public SharedViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -34,6 +37,8 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
             shared_profile_user_name = itemView.findViewById(R.id.shared_profile_user_name);
             shared_profile_short_user_name = itemView.findViewById(R.id.shared_profile_short_user_name);
             shared_checkmark = itemView.findViewById(R.id.shared_checkmark);
+            stuff = itemView.findViewById(R.id.stuff);
+            stuff.setText(Integer.toString(MainActivity.dishList.size()-1));
         }
     }
 
@@ -44,8 +49,10 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
         return new SharedViewHolder(itemView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull SharedViewHolder holder, int position) {
+
         User u1 = MainActivity.usersList.get(position);
         String name = u1.getUsername();
         holder.shared_profile_user_name.setText(name);
@@ -56,14 +63,16 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
             @Override
             public void onClick(View v) {
                 if (holder.shared_checkmark.getVisibility() == View.VISIBLE) {
+                    System.out.println(holder.stuff.getText().toString());
                     holder.shared_checkmark.setVisibility(View.INVISIBLE);
-                    MainActivity.dishList.get(MainActivity.dishList.indexOf(adapterDish)).removeUser(u1);
+                    MainActivity.dishList.get(Integer.parseInt(holder.stuff.getText().toString())).removeUser(u1);
                     u1.removeDish(adapterDish);
 //                    updateUserTaxes(u1);
                 }
                 else {
+                    System.out.println(holder.stuff.getText().toString());
                     holder.shared_checkmark.setVisibility(View.VISIBLE);
-                    MainActivity.dishList.get(MainActivity.dishList.indexOf(adapterDish)).addUser(u1);
+                    MainActivity.dishList.get(Integer.parseInt(holder.stuff.getText().toString())).addUser(u1);
                     u1.addDish(adapterDish);
 //                    updateUserTaxes(u1);
                 }
@@ -79,6 +88,7 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
 
     public void adapterDish(Dish dish) {
         adapterDish = dish;
+        System.out.println(dish);
     }
 
     public void updateUserTaxes(User u1) {

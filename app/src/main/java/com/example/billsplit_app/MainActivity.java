@@ -13,6 +13,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
     public static ArrayList<User> usersList = new ArrayList<>();
     public static ArrayList<Dish> dishList = new ArrayList<>();
+    public static ArrayList<String> stuff = new ArrayList<>();
     public static ArrayList<Integer> colorList;
     public static int nOfUsers = 1;
     public static boolean allTipsSelected = false;
@@ -22,9 +23,18 @@ public class MainActivity extends AppCompatActivity {
     private static boolean even = false;
     public static boolean tipsChanged = false;
     public static boolean pricesChanged = false;
+    public static int num = 0;
+
+
+
+    public static ArrayList<Double> ind_cost = new ArrayList<>();
+
+
 
     public MainActivity() throws JSONException {
     }
+
+
 
 
     @Override
@@ -33,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public static void doStuff(){
+        stuff.clear();
+        for (Dish i :dishList){
+            stuff.add(i.getName());
+        }
+    }
+    public static int yes(){
+        return num++;
+    }
 
     public static void setColorList(){
         colorList = new ArrayList<>(Arrays.asList(-16731781,-2706168,-15503959,-7533027));

@@ -130,6 +130,7 @@ public class WelcomeScreen extends AppCompatActivity implements AdapterView.OnIt
 //                } else {
                 MainActivity.usersList.clear();
                 MainActivity.dishList.clear();
+                MainActivity.stuff.clear();
                 people = editPeopleText.getText().toString();
                 cost = editCostText.getText().toString();
                 update_Internal();
