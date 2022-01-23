@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     public static boolean tipsChanged = false;
     public static boolean pricesChanged = false;
 
+    public static ArrayList<Integer> generatedUsersTotal = new ArrayList<>();
+
     public MainActivity() throws JSONException {
     }
 
