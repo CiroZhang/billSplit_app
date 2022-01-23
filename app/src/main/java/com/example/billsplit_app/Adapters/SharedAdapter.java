@@ -1,5 +1,8 @@
 package com.example.billsplit_app.Adapters;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +23,8 @@ import org.json.JSONException;
 public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedViewHolder>{
     private Dish adapterDish;
 
-    public SharedAdapter(){}
+    public SharedAdapter(){
+    }
 
     public class SharedViewHolder extends RecyclerView.ViewHolder{
         private TextView shared_profile_user_name;
@@ -49,23 +53,36 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
         User u1 = MainActivity.usersList.get(position);
         String name = u1.getUsername();
         holder.shared_profile_user_name.setText(name);
-        holder.shared_profile_background.getBackground().setTint(u1.getColor());
+
+        GradientDrawable gd = new GradientDrawable();
+        gd.setColor(Color.parseColor("#f9f9f9"));
+        gd.setShape(GradientDrawable.OVAL);
+        gd.setStroke(2,Color.parseColor("#D1D1D1"));
+        holder.shared_profile_background.setBackground(gd);
+        holder.shared_profile_short_user_name.setTextColor(Color.BLACK);
+
         if (!name.isEmpty()) { holder.shared_profile_short_user_name.setText(name.substring(0,1)); }
 
         holder.shared_profile_background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (holder.shared_checkmark.getVisibility() == View.VISIBLE) {
+                    GradientDrawable gd = new GradientDrawable();
+                    gd.setColor(Color.parseColor("#f9f9f9"));
+                    gd.setShape(GradientDrawable.OVAL);
+                    gd.setStroke(2,Color.parseColor("#D1D1D1"));
+                    holder.shared_profile_background.setBackground(gd);
+                    holder.shared_profile_short_user_name.setTextColor(Color.BLACK);
                     holder.shared_checkmark.setVisibility(View.INVISIBLE);
                     MainActivity.dishList.get(MainActivity.dishList.indexOf(adapterDish)).removeUser(u1);
                     u1.removeDish(adapterDish);
-//                    updateUserTaxes(u1);
                 }
                 else {
+                    holder.shared_profile_background.getBackground().setTint(u1.getColor());
+                    holder.shared_profile_short_user_name.setTextColor(Color.WHITE);
                     holder.shared_checkmark.setVisibility(View.VISIBLE);
                     MainActivity.dishList.get(MainActivity.dishList.indexOf(adapterDish)).addUser(u1);
                     u1.addDish(adapterDish);
-//                    updateUserTaxes(u1);
                 }
                 u1.refreshTotal();
             }
@@ -79,28 +96,5 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
 
     public void adapterDish(Dish dish) {
         adapterDish = dish;
-    }
-
-    public void updateUserTaxes(User u1) {
-        // getting the # of users sharing this dish, then adding current user's all shared dishes' prices together
-        int sharedNum = 0;
-        double rawDishesPriceTotal = 0.0;
-        for (Dish dish : u1.getSharedDishes()) {
-            sharedNum = dish.getNOfSharedUsers();
-            rawDishesPriceTotal += Double.parseDouble(dish.getPrice());
-        }
-
-        // setting user's # of shared users between this dish
-        u1.setSharedNum(sharedNum);
-
-        // setting user's total price of all shared dishes
-        u1.setDishesRawPriceTotal(rawDishesPriceTotal);
-
-        // setting user's updated raw tax amount (taxPercentage * total price of all of user's dishes)
-        try {
-            u1.setTax_total((rawDishesPriceTotal / sharedNum) * InternalFiles.getSavedTax());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -29,7 +29,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     private TextView indivTotal;
     private View thisView;
     private Context context;
-    private double indivTotalNum = 0.0;
+    private double indivTotalNum;
     public com.example.billsplit_app.Adapters.SharedAdapter SharedAdapter = new SharedAdapter();
 
     public ItemAdapter(Context context, TextView total, double indivTotalNum) {
