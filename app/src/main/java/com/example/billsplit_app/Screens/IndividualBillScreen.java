@@ -67,9 +67,12 @@ public class IndividualBillScreen extends AppCompatActivity {
 
         MainActivity.usersList.clear();
         MainActivity.usersList.add(new User("Me"));
+        MainActivity.generatedUsersTotal.clear();
+        MainActivity.generatedUsersTotal.add(0);
         if (MainActivity.nOfUsers > 1) {
             for (int i = 1; i < MainActivity.nOfUsers; i++) {
                 MainActivity.usersList.add(new User("Person " + i));
+                MainActivity.generatedUsersTotal.add(0);
             }
         }
         MainActivity.dishList.clear();

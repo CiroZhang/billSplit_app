@@ -29,7 +29,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     private TextView indivTotal;
     private View thisView;
     private Context context;
-    private double indivTotalNum = 0.0;
+    private double indivTotalNum;
     public com.example.billsplit_app.Adapters.SharedAdapter SharedAdapter = new SharedAdapter();
 
     public ItemAdapter(Context context, TextView total, double indivTotalNum) {
@@ -133,14 +133,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             holder.SharedRecyclerView.setVisibility(View.GONE);
             holder.shared_with_text.setVisibility(View.GONE);
             holder.alcohol_image.setVisibility(View.GONE);
+            holder.alcohol_checkmark.setVisibility(View.GONE);
         }
         else {
             holder.expand_collapse_button.setBackgroundResource(R.drawable.collapse_button);
             holder.SharedRecyclerView.setVisibility(View.VISIBLE);
             holder.shared_with_text.setVisibility(View.VISIBLE);
             holder.alcohol_image.setVisibility(View.VISIBLE);
+            if (dishItem.isAlcoholic()) {
+                holder.alcohol_checkmark.setVisibility(View.VISIBLE);
+            }
         }
 
+<<<<<<< HEAD
         if (dishItem.isAlcoholic()) {
             System.out.println(position);
             holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_checked);
@@ -153,6 +158,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             holder.alcohol_checkmark.setVisibility(View.GONE);
             holder.alcoholImageClicked = false;
         }
+=======
+//        if (dishItem.isAlcoholic()) {
+//            holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_checked);
+//            holder.alcohol_checkmark.setVisibility(View.VISIBLE);
+//            holder.alcoholImageClicked = true;
+//            holder.alcoholTaxApplicable = true;
+//        }
+//        else {
+//            holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_unchecked);
+//            holder.alcohol_checkmark.setVisibility(View.GONE);
+//            holder.alcoholImageClicked = false;
+//        }
+>>>>>>> 99d5c924caf4132165fe11b4a8db7394960a5b1a
 
         holder.delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,8 +202,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 } else {
                     dishItem.setAlcoholic(false);
                 }
+
+                if (dishItem.isAlcoholic()) {
+                    holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_checked);
+                    holder.alcohol_checkmark.setVisibility(View.VISIBLE);
+                    holder.alcoholImageClicked = true;
+                    holder.alcoholTaxApplicable = true;
+                }
+                else {
+                    holder.alcohol_image.setBackgroundResource(R.drawable.alcohol_unchecked);
+                    holder.alcohol_checkmark.setVisibility(View.GONE);
+                    holder.alcoholImageClicked = false;
+                }
                 updateIndivTotal();
-                notifyDataSetChanged();
+//                notifyDataSetChanged();
             }
         });
 

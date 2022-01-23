@@ -16,7 +16,6 @@ public class User {
     private double tip_total = 0.0;
     private double tips_times_total = 0.0;
     private double total = 0.0;
-    private int sharedNum = 1;
     private ArrayList<Dish> sharedDishes = new ArrayList<>();
 
     public User(String name) {
@@ -133,14 +132,6 @@ public class User {
         this.tips_times_total = tips_times_total;
     }
 
-    public int getSharedNum() {
-        return this.sharedNum;
-    }
-
-    public void setSharedNum(int sharedNum) {
-        this.sharedNum = sharedNum;
-    }
-
     public void setDishesRawPriceTotal(Double n) {
         this.dishesRawPriceTotal = n;
     }
@@ -150,8 +141,8 @@ public class User {
     }
 
     public void refreshTotal() {
-        this.tips_times_total = ((this.tipsPercentage * this.dishesRawPriceTotal)/100.0) / this.sharedNum;
-        this.total = (this.tax_total + this.tips_times_total + (this.dishesRawPriceTotal/(double)this.sharedNum));
+        this.tips_times_total = (this.tipsPercentage * this.dishesRawPriceTotal)/100.0;
+        this.total = this.tax_total + this.tips_times_total + this.dishesRawPriceTotal;
 //        System.out.println("USER TIPS TOTAL: " + this.tips_times_total);
 //        System.out.println("USER TAX TOTAL: " + this.tax_total);
 //        System.out.println("USER RAW DISHES PRICE: " + this.dishesRawPriceTotal);

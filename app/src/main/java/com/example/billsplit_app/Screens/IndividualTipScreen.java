@@ -144,6 +144,9 @@ public class IndividualTipScreen extends AppCompatActivity {
                         double liquorTax = 0.0;
 
                         for (Dish dish : user.getSharedDishes()) {
+                            if (dish.getPrice().isEmpty()) {
+                                dish.setPrice("0");
+                            }
                             rawDishesPriceTotal += Double.parseDouble(dish.getPrice()) / (double)dish.getNOfSharedUsers();
                             if (dish.isAlcoholic()) {
                                 try {
