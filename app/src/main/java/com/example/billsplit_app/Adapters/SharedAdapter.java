@@ -54,11 +54,12 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
         String name = u1.getUsername();
         holder.shared_profile_user_name.setText(name);
 
-        GradientDrawable gd = new GradientDrawable();
-        gd.setColor(Color.parseColor("#f9f9f9"));
-        gd.setShape(GradientDrawable.OVAL);
-        gd.setStroke(2,Color.parseColor("#D1D1D1"));
-        holder.shared_profile_background.setBackground(gd);
+//        GradientDrawable gd = new GradientDrawable();
+//        gd.setColor(Color.parseColor("#f9f9f9"));
+//        gd.setShape(GradientDrawable.OVAL);
+//        gd.setStroke(2,Color.parseColor("#D1D1D1"));
+//        holder.shared_profile_background.setBackground(gd);
+        holder.shared_profile_background.getBackground().setTint(u1.getColor());
         holder.shared_profile_short_user_name.setTextColor(Color.BLACK);
 
         if (!name.isEmpty()) { holder.shared_profile_short_user_name.setText(name.substring(0,1)); }
@@ -67,19 +68,18 @@ public class SharedAdapter extends RecyclerView.Adapter<SharedAdapter.SharedView
             @Override
             public void onClick(View v) {
                 if (holder.shared_checkmark.getVisibility() == View.VISIBLE) {
-                    GradientDrawable gd = new GradientDrawable();
-                    gd.setColor(Color.parseColor("#f9f9f9"));
-                    gd.setShape(GradientDrawable.OVAL);
-                    gd.setStroke(2,Color.parseColor("#D1D1D1"));
-                    holder.shared_profile_background.setBackground(gd);
-                    holder.shared_profile_short_user_name.setTextColor(Color.BLACK);
+//                    GradientDrawable gd = new GradientDrawable();
+//                    gd.setColor(Color.parseColor("#f9f9f9"));
+//                    gd.setShape(GradientDrawable.OVAL);
+//                    gd.setStroke(2,Color.parseColor("#D1D1D1"));
+//                    holder.shared_profile_background.setBackground(gd);
+//                    holder.shared_profile_short_user_name.setTextColor(Color.BLACK);
                     holder.shared_checkmark.setVisibility(View.INVISIBLE);
                     MainActivity.dishList.get(MainActivity.dishList.indexOf(adapterDish)).removeUser(u1);
                     u1.removeDish(adapterDish);
                 }
                 else {
-                    holder.shared_profile_background.getBackground().setTint(u1.getColor());
-                    holder.shared_profile_short_user_name.setTextColor(Color.WHITE);
+//                    holder.shared_profile_short_user_name.setTextColor(Color.WHITE);
                     holder.shared_checkmark.setVisibility(View.VISIBLE);
                     MainActivity.dishList.get(MainActivity.dishList.indexOf(adapterDish)).addUser(u1);
                     u1.addDish(adapterDish);

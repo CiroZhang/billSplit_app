@@ -126,12 +126,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             holder.SharedRecyclerView.setVisibility(View.GONE);
             holder.shared_with_text.setVisibility(View.GONE);
             holder.alcohol_image.setVisibility(View.GONE);
+            holder.alcohol_checkmark.setVisibility(View.GONE);
         }
         else {
             holder.expand_collapse_button.setBackgroundResource(R.drawable.collapse_button);
             holder.SharedRecyclerView.setVisibility(View.VISIBLE);
             holder.shared_with_text.setVisibility(View.VISIBLE);
             holder.alcohol_image.setVisibility(View.VISIBLE);
+            if (dishItem.isAlcoholic()) {
+                holder.alcohol_checkmark.setVisibility(View.VISIBLE);
+            }
         }
 
 //        if (dishItem.isAlcoholic()) {
