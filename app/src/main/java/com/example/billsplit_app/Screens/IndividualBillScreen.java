@@ -25,9 +25,12 @@ import android.widget.TextView;
 import com.example.billsplit_app.Adapters.ItemAdapter;
 import com.example.billsplit_app.Adapters.ProfileAdapter;
 import com.example.billsplit_app.Dish;
+import com.example.billsplit_app.InternalFiles;
 import com.example.billsplit_app.MainActivity;
 import com.example.billsplit_app.R;
 import com.example.billsplit_app.User;
+
+import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -112,11 +115,16 @@ public class IndividualBillScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.tipsChanged = false;
-                if (MainActivity.pricesChanged) {
-                    open_individual_tip_screen();
-                }
-                else {
-                    alertPopup(activity);
+                double num = Double.parseDouble(currentTotal.getText().toString().substring(2));
+                try {
+                    if (num == InternalFiles.getSavedCost()) {
+                        open_individual_tip_screen();
+                    }
+                    else {
+                        alertPopup(activity);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -138,8 +146,8 @@ public class IndividualBillScreen extends AppCompatActivity {
 
     private void alertPopup(Context context) {
         new AlertDialog.Builder(context)
-                .setTitle("No prices entered!")
-                .setMessage("You haven't entered in any prices yet!")
+                .setTitle("prices not match!")
+                .setMessage("The price you entered does not match with WelcomeScreen!")
                 .setNegativeButton("OK", null)
                 .show();
     }
